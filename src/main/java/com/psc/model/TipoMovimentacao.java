@@ -1,0 +1,4 @@
+package com.psc.model;
+
+public enum TipoMovimentacao {
+}
