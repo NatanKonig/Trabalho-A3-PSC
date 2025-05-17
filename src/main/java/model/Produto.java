@@ -89,6 +89,8 @@ public Produto() {}
         this.categoria = categoria;
     }
 
-
+   public String toString() {
+    return "Id:" + id + "Nome:" + nome + "Preço por unidade" + precoUnitario + unidade;
+   }
 
 }
