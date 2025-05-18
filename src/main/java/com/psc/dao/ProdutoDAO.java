@@ -1,10 +1,11 @@
-package dao;
+package com.psc.dao;
 
-import model.Produto;
+import com.psc.model.Produto;
 
 import java.util.ArrayList;
 
 public class ProdutoDAO {
+
     private ArrayList<Produto> lista = new ArrayList<Produto>();
 
     public void inserir(Produto produto) {
@@ -14,4 +15,5 @@ public class ProdutoDAO {
     public ArrayList<Produto> listar() {
         return lista;
     }
+
 }
