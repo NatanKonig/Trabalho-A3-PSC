@@ -12,6 +12,7 @@ int quantidadeMinima;
 int quantidadeMaxima;
 Categoria categoria;
 
+//Construtores
 public Produto() {}
 
     public Produto(int id, String nome, double precoUnitario, String unidade, int quantidadeEstoque, int quantidadeMinima, int quantidadeMaxima, Categoria categoria) {
@@ -25,6 +26,7 @@ public Produto() {}
         this.categoria = categoria;
     }
 
+    //Getters e Setters
     public int getId() {
         return id;
     }
@@ -89,8 +91,8 @@ public Produto() {}
         this.categoria = categoria;
     }
 
+    // Método para imprimir o produto como texto
    public String toString() {
     return "Id:" + id + "Nome:" + nome + "Preço por unidade" + precoUnitario + unidade;
    }
-
 }
