@@ -1,25 +1,25 @@
 package com.psc.dao;
 
-import model.Produto;
+import view.ProdutoView;
 
 import java.util.ArrayList;
 
 // Classe que simula o acesso a dados (banco falso usando ArrayList)
 public class ProdutoDAO {
-    private ArrayList<Produto> lista = new ArrayList<Produto>();
+    private ArrayList<ProdutoView> lista = new ArrayList<ProdutoView>();
 
     // Método para inserir um produto na lista
-    public void inserir(Produto produto) {
+    public void inserir(ProdutoView produto) {
         lista.add(produto);
     }
 
     // Método para retornar a lista de produtos
-    public ArrayList<Produto> listar() {
+    public ArrayList<ProdutoView> listar() {
         return lista;
     }
 
     // Método para atualizar um produto pelo ID
-    public boolean atualizar(int id, Produto novo) {
+    public boolean atualizar(int id, ProdutoView novo) {
         for (int i = 0; i < lista.size(); i++) {
             if (lista.get(i).getId() == id) {
                 lista.set(i, novo); // substitui o antigo pelo novo
