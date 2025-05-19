@@ -3,14 +3,14 @@ package com.psc.model;
 import com.psc.model.Categoria;
 
 public class Produto {
-    int id;
-    String nome;
-    double precoUnitario;
-    String unidade;
-    int quantidadeEstoque;
-    int quantidadeMinima;
-    int quantidadeMaxima;
-    Categoria categoria;
+    private int id;
+    private String nome;
+    private double precoUnitario;
+    private String unidade;
+    private int quantidadeEstoque;
+    private int quantidadeMinima;
+    private int quantidadeMaxima;
+    private Categoria categoria;
 
     //Construtores
     public Produto() {}
