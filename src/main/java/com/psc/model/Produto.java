@@ -10,12 +10,12 @@ public class Produto {
     private int quantidadeEstoque;
     private int quantidadeMinima;
     private int quantidadeMaxima;
-    private Categoria categoria;
+    private String categoria;
 
     //Construtores
     public Produto() {}
 
-    public Produto(int id, String nome, double precoUnitario, String unidade, int quantidadeEstoque, int quantidadeMinima, int quantidadeMaxima, Categoria categoria) {
+    public Produto(int id, String nome, double precoUnitario, String unidade, int quantidadeEstoque, int quantidadeMinima, int quantidadeMaxima, String categoria) {
         this.id = id;
         this.nome = nome;
         this.precoUnitario = precoUnitario;
@@ -83,11 +83,11 @@ public class Produto {
         this.quantidadeMaxima = quantidadeMaxima;
     }
 
-    public Categoria getCategoria() {
+    public String getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(Categoria categoria) {
+    public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
 
