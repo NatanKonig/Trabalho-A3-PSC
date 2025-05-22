@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 public class ProdutoDAO {
     private final String URL = "jdbc:mysql://localhost:3306/estoque";
-    private final String USER = "root"; // seu usuário do MySQL
-    private final String PASSWORD = "Amarelo007"; // sua senha do MySQL (se tiver)
+    private final String USER = "root"; // usuário do MySQL
+    private final String PASSWORD = "Amarelo007"; // senha do MySQL
 
     private Connection conectar() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
