@@ -1,7 +1,10 @@
 package com.psc;
 
+import com.psc.view.FrmPrincipal.FrmPrincipal;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        FrmPrincipal frmPrincipal = new FrmPrincipal();
+        frmPrincipal.setVisible(true);
     }
 }

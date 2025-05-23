@@ -36,7 +36,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         setTitle("Gerenciador de Estoque");
 
         jButton1.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/h32product.png.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/h32create_product.png"))); // NOI18N
         jButton1.setText("Gerenciar Produtos");
         jButton1.setMaximumSize(new java.awt.Dimension(243, 32));
         jButton1.setMinimumSize(new java.awt.Dimension(243, 32));
@@ -47,7 +47,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
 
         jButton2.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/h36category.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/h36create_category.png"))); // NOI18N
         jButton2.setText("Gerenciar Categorias");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -56,7 +56,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
 
         jButton3.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/h40movement.png"))); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/h40create_movement.png"))); // NOI18N
         jButton3.setText("Movimentar Estoque");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -65,7 +65,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
 
         jButton4.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FRAME.png"))); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/h42show_report.png"))); // NOI18N
         jButton4.setText("Vizualizar Relatórios");
 
         jLabel1.setFont(new java.awt.Font("DejaVu Sans", 0, 36)); // NOI18N
@@ -90,14 +90,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(108, 108, 108)
                         .addComponent(jLabel1)))
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(79, 79, 79)
                 .addComponent(jLabel1)
-                .addGap(95, 95, 95)
+                .addGap(90, 90, 90)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3))
@@ -105,7 +105,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4))
-                .addContainerGap(165, Short.MAX_VALUE))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
 
         pack();
