@@ -1,6 +1,8 @@
-package com.psc.view.FrmPrincipal;
+package com.psc.view.frmPrincipal;
 
-import com.psc.view.FrmProduto.FrmGerenciarProdutos;
+import com.psc.view.frmCategoria.FrmGerenciaCategoria;
+import com.psc.view.frmMovimentar.FrmMovimentarEstoque;
+import com.psc.view.frmProduto.FrmGerenciarProdutos;
 
 /**
  *
@@ -25,9 +27,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         JBProduto = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        JBCategoria = new javax.swing.JButton();
+        JBMovimentar = new javax.swing.JButton();
+        JBRelatorio = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -44,27 +46,27 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/h36create_category.png"))); // NOI18N
-        jButton2.setText("Gerenciar Categorias");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        JBCategoria.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
+        JBCategoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/h36create_category.png"))); // NOI18N
+        JBCategoria.setText("Gerenciar Categorias");
+        JBCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                JBCategoriaActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/h40create_movement.png"))); // NOI18N
-        jButton3.setText("Movimentar Estoque");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        JBMovimentar.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
+        JBMovimentar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/h40create_movement.png"))); // NOI18N
+        JBMovimentar.setText("Movimentar Estoque");
+        JBMovimentar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                JBMovimentarActionPerformed(evt);
             }
         });
 
-        jButton4.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/h42show_report.png"))); // NOI18N
-        jButton4.setText("Vizualizar Relatórios");
+        JBRelatorio.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
+        JBRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/h42show_report.png"))); // NOI18N
+        JBRelatorio.setText("Vizualizar Relatórios");
 
         jLabel1.setFont(new java.awt.Font("DejaVu Sans", 0, 36)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/h15management_stock.png"))); // NOI18N
@@ -80,11 +82,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
                         .addGap(100, 100, 100)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(JBProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(JBCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(42, 42, 42)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(JBMovimentar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(JBRelatorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(108, 108, 108)
                         .addComponent(jLabel1)))
@@ -98,11 +100,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addGap(90, 90, 90)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JBProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
+                    .addComponent(JBMovimentar))
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4))
+                    .addComponent(JBCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JBRelatorio))
                 .addContainerGap(150, Short.MAX_VALUE))
         );
 
@@ -114,13 +116,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
         janelaGerenciarProdutos.setVisible(true);
     }//GEN-LAST:event_JBProdutoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void JBCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCategoriaActionPerformed
+        FrmGerenciaCategoria janelaGerenciarCategorias = new FrmGerenciaCategoria();
+        janelaGerenciarCategorias.setVisible(true);
+    }//GEN-LAST:event_JBCategoriaActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void JBMovimentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBMovimentarActionPerformed
+        FrmMovimentarEstoque janelaMovimentarEstoque = new FrmMovimentarEstoque();
+        janelaMovimentarEstoque.setVisible(true);
+    }//GEN-LAST:event_JBMovimentarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,10 +162,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JBCategoria;
+    private javax.swing.JButton JBMovimentar;
     private javax.swing.JButton JBProduto;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton JBRelatorio;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

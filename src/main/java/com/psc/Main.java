@@ -1,6 +1,6 @@
 package com.psc;
 
-import com.psc.view.FrmPrincipal.FrmPrincipal;
+import com.psc.view.frmPrincipal.FrmPrincipal;
 
 public class Main {
     public static void main(String[] args) {
