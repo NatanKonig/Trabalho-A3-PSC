@@ -12,28 +12,39 @@ public class ProdutoDAO {
     private final String USER = "root"; // usuário do MySQL
     private final String PASSWORD = "Amarelo007"; // senha do MySQL
 
+    
     private Connection conectar() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
     // CREATE
     public void inserir(Produto p) {
-        String sql = "INSERT INTO produto (id, nome, preco_unitario, unidade, quantidade_estoque, quantidade_minima, quantidade_maxima, categoria) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO produto (nome, preco_unitario, unidade, quantidade_estoque, quantidade_minima, quantidade_maxima, categoria) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            stmt.setInt(1, p.getId());
-            stmt.setString(2, p.getNome());
-            stmt.setDouble(3, p.getPrecoUnitario());
-            stmt.setString(4, p.getUnidade());
-            stmt.setInt(5, p.getQuantidadeEstoque());
-            stmt.setInt(6, p.getQuantidadeMinima());
-            stmt.setInt(7, p.getQuantidadeMaxima());
-            stmt.setString(8, p.getCategoria());
+            // Preenche os parâmetros
+            stmt.setString(1, p.getNome());
+            stmt.setDouble(2, p.getPrecoUnitario());
+            stmt.setString(3, p.getUnidade());
+            stmt.setInt(4, p.getQuantidadeEstoque());
+            stmt.setInt(5, p.getQuantidadeMinima());
+            stmt.setInt(6, p.getQuantidadeMaxima());
+            stmt.setString(7, p.getCategoria());
 
+            // Executa o INSERT
             stmt.executeUpdate();
-            System.out.println("Produto inserido com sucesso!");
+
+            // Recupera o ID gerado automaticamente
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                int idGerado = rs.getInt(1);
+                p.setId(idGerado); // atualiza o objeto com o ID do banco
+            }
+
+            System.out.println("Produto inserido com sucesso. ID: " + p.getId());
+
         } catch (SQLException e) {
             System.out.println("Erro ao inserir: " + e.getMessage());
         }
