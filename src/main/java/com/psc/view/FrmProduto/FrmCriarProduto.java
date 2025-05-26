@@ -3,14 +3,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.psc.view.FrmProduto;
+
+import com.psc.dao.ProdutoDAO;
 import com.psc.model.Produto;
+
 import javax.swing.JOptionPane;
 
 /**
- *
  * @author Gabriel
  */
 public class FrmCriarProduto extends javax.swing.JFrame {
+
+    ProdutoDAO produtoDAO = new ProdutoDAO();
 
     /**
      * Creates new form FrmCriarProduto
@@ -148,78 +152,8 @@ public class FrmCriarProduto extends javax.swing.JFrame {
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(JTFId, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9)
-                    .addComponent(JTFminima, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JTFCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JTFmaxima, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JTFatual, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11)
-                    .addComponent(JTFUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(JTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel10)
-                    .addComponent(JTFpreco, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 283, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jToggleButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(JBcriar, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE))
-                .addGap(27, 27, 27))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(JTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(JBcriar))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(JTFId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jToggleButton3)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JTFpreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JTFUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JTFatual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JTFminima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JTFmaxima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JTFCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
-        );
+        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addGap(28, 28, 28).addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jLabel7).addComponent(JTFId, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jLabel9).addComponent(JTFminima, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(JTFCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(JTFmaxima, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(JTFatual, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jLabel11).addComponent(JTFUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jLabel8).addComponent(JTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jLabel5).addComponent(jLabel4).addComponent(jLabel10).addComponent(JTFpreco, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jLabel12)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 283, Short.MAX_VALUE).addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false).addComponent(jToggleButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(JBcriar, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)).addGap(27, 27, 27)));
+        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addGap(12, 12, 12).addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addGroup(layout.createSequentialGroup().addComponent(jLabel4).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(JTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addComponent(JBcriar)).addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(jLabel7).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(JTFId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addGroup(layout.createSequentialGroup().addGap(23, 23, 23).addComponent(jToggleButton3))).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(jLabel10).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(JTFpreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(jLabel8).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(JTFUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(jLabel9).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(JTFatual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(jLabel11).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(JTFminima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(jLabel12).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(JTFmaxima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(jLabel5).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(JTFCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap(15, Short.MAX_VALUE)));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -267,83 +201,80 @@ public class FrmCriarProduto extends javax.swing.JFrame {
 
     private void JBcriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBcriarActionPerformed
         // TODO add your handling code here: try {
-          try {
-    int id = 0;
-    String nome = "";
-    double precoUnitario = 0;
-    String unidade = "";
-    int quantidadeEstoque = 0;
-    int quantidadeMinima = 0;
-    int quantidadeMaxima = 0;
-    String categoria = "";
+        try {
+            int id = 0;
+            String nome = "";
+            double precoUnitario = 0;
+            String unidade = "";
+            int quantidadeEstoque = 0;
+            int quantidadeMinima = 0;
+            int quantidadeMaxima = 0;
+            String categoria = "";
 
-    // Verifica o nome
-    if (this.JTFNome.getText().length() < 2) {
-        throw new Exception("Nome deve conter ao menos 2 caracteres.");
-    }
-    nome = this.JTFNome.getText();
+            // Verifica o nome
+            if (this.JTFNome.getText().length() < 2) {
+                throw new Exception("Nome deve conter ao menos 2 caracteres.");
+            }
+            nome = this.JTFNome.getText();
 
-    // Verifica o preço unitário
-    if (this.JTFpreco.getText().isBlank()) {
-        throw new Exception("Preço unitário deve ser informado.");
-    }
-    precoUnitario = Double.parseDouble(this.JTFpreco.getText());
+            // Verifica o preço unitário
+            if (this.JTFpreco.getText().isBlank()) {
+                throw new Exception("Preço unitário deve ser informado.");
+            }
+            precoUnitario = Double.parseDouble(this.JTFpreco.getText());
 
-    // Verifica unidade
-    if (this.JTFUnidade.getText().length() < 1) {
-        throw new Exception("Unidade deve ser informada.");
-    }
-    unidade = this.JTFUnidade.getText();
+            // Verifica unidade
+            if (this.JTFUnidade.getText().length() < 1) {
+                throw new Exception("Unidade deve ser informada.");
+            }
+            unidade = this.JTFUnidade.getText();
 
-    // Verifica quantidade em estoque
-    if (this.JTFatual.getText().isBlank()) {
-        throw new Exception("Quantidade em estoque deve ser informada.");
-    }
-    quantidadeEstoque = Integer.parseInt(this.JTFatual.getText());
+            // Verifica quantidade em estoque
+            if (this.JTFatual.getText().isBlank()) {
+                throw new Exception("Quantidade em estoque deve ser informada.");
+            }
+            quantidadeEstoque = Integer.parseInt(this.JTFatual.getText());
 
-    // Verifica quantidade mínima
-    if (this.JTFminima.getText().isBlank()) {
-        throw new Exception("Quantidade mínima deve ser informada.");
-    }
-    quantidadeMinima = Integer.parseInt(this.JTFminima.getText());
+            // Verifica quantidade mínima
+            if (this.JTFminima.getText().isBlank()) {
+                throw new Exception("Quantidade mínima deve ser informada.");
+            }
+            quantidadeMinima = Integer.parseInt(this.JTFminima.getText());
 
-    // Verifica quantidade máxima
-    if (this.JTFmaxima.getText().isBlank()) {
-        throw new Exception("Quantidade máxima deve ser informada.");
-    }
-    quantidadeMaxima = Integer.parseInt(this.JTFmaxima.getText());
+            // Verifica quantidade máxima
+            if (this.JTFmaxima.getText().isBlank()) {
+                throw new Exception("Quantidade máxima deve ser informada.");
+            }
+            quantidadeMaxima = Integer.parseInt(this.JTFmaxima.getText());
 
-    // Verifica categoria
-    if (this.JTFCategoria.getText().length() < 2) {
-        throw new Exception("Categoria deve conter ao menos 2 caracteres.");
-    }
-    categoria = this.JTFCategoria.getText();
+            // Verifica categoria
+            if (this.JTFCategoria.getText().length() < 2) {
+                throw new Exception("Categoria deve conter ao menos 2 caracteres.");
+            }
+            categoria = this.JTFCategoria.getText();
 
-    // Envia para DAO
-    Produto novoProduto = new Produto(
-        id, nome, precoUnitario, unidade,
-        quantidadeEstoque, quantidadeMinima, quantidadeMaxima, categoria
-    );
+            // Envia para DAO
+            Produto novoProduto = new Produto(id, nome, precoUnitario, unidade, quantidadeEstoque, quantidadeMinima, quantidadeMaxima, categoria);
 
-    this.produtoDAO.inserir(novoProduto);
+            this.produtoDAO.inserir(novoProduto);
 
-    JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
 
-    // ✅ Limpar os campos
-    this.JTFId.setText("");
-    this.JTFNome.setText("");
-    this.JTFpreco.setText("");
-    this.JTFUnidade.setText("");
-    this.JTFatual.setText("");
-    this.JTFminima.setText("");
-    this.JTFmaxima.setText("");
-    this.JTFCategoria.setText("");
+            // ✅ Limpar os campos
+            this.JTFId.setText("");
+            this.JTFNome.setText("");
+            this.JTFpreco.setText("");
+            this.JTFUnidade.setText("");
+            this.JTFatual.setText("");
+            this.JTFminima.setText("");
+            this.JTFmaxima.setText("");
+            this.JTFCategoria.setText("");
 
-} catch (NumberFormatException erro) {
-    JOptionPane.showMessageDialog(null, "Informe valores numéricos válidos.");
-} catch (Exception erro) {
-    JOptionPane.showMessageDialog(null, erro.getMessage());
-}
+        } catch (NumberFormatException erro) {
+            JOptionPane.showMessageDialog(null, "Informe valores numéricos válidos.");
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, erro.getMessage());
+        }
     }//GEN-LAST:event_JBcriarActionPerformed
 
     /**
@@ -353,7 +284,7 @@ public class FrmCriarProduto extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -379,7 +310,8 @@ public class FrmCriarProduto extends javax.swing.JFrame {
                 new FrmCriarProduto().setVisible(true);
             }
         });
-    
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton JBcriar;

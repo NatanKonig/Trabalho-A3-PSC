@@ -1,5 +1,7 @@
 package com.psc.view.FrmPrincipal;
 
+import com.psc.view.FrmProduto.FrmGerenciarProdutos;
+
 /**
  *
  * @author natan
@@ -22,7 +24,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        JBProduto = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -31,14 +33,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerenciador de Estoque");
 
-        jButton1.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/h32create_product.png"))); // NOI18N
-        jButton1.setText("Gerenciar Produtos");
-        jButton1.setMaximumSize(new java.awt.Dimension(243, 32));
-        jButton1.setMinimumSize(new java.awt.Dimension(243, 32));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        JBProduto.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
+        JBProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/h32create_product.png"))); // NOI18N
+        JBProduto.setText("Gerenciar Produtos");
+        JBProduto.setMaximumSize(new java.awt.Dimension(243, 32));
+        JBProduto.setMinimumSize(new java.awt.Dimension(243, 32));
+        JBProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                JBProdutoActionPerformed(evt);
             }
         });
 
@@ -77,7 +79,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(100, 100, 100)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(JBProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(42, 42, 42)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -95,7 +97,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(90, 90, 90)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JBProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3))
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -107,9 +109,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void JBProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBProdutoActionPerformed
+        FrmGerenciarProdutos janelaGerenciarProdutos = new FrmGerenciarProdutos();
+        janelaGerenciarProdutos.setVisible(true);
+    }//GEN-LAST:event_JBProdutoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -155,7 +158,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton JBProduto;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

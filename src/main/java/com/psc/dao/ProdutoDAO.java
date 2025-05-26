@@ -92,7 +92,7 @@ public class ProdutoDAO {
     }
 
     // DELETE
-    public void deletar(int id) {
+    public boolean deletar(int id) {
         String sql = "DELETE FROM produto WHERE id=?";
 
         try (Connection conn = conectar();
@@ -101,8 +101,10 @@ public class ProdutoDAO {
             stmt.setInt(1, id);
             stmt.executeUpdate();
             System.out.println("Produto deletado com sucesso!");
+            return true;
         } catch (SQLException e) {
             System.out.println("Erro ao deletar: " + e.getMessage());
         }
+        return false;
     }
 }
