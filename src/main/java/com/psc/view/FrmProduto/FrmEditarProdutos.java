@@ -2,12 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.psc.view.FrmPrincipal;
+package com.psc.view.FrmProduto;
 
 import com.psc.model.Produto;
 import java.awt.Container;
 import javax.swing.JOptionPane;
-import com.psc.dao.ProdutoDAO;
 import javax.swing.table.DefaultTableModel;
 
 
