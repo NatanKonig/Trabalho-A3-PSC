@@ -27,9 +27,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
-                      <Component id="jToggleButton1" min="-2" pref="243" max="-2" attributes="0"/>
+                      <Component id="JBCriarproduto" min="-2" pref="243" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
-                      <Component id="jToggleButton4" min="-2" pref="243" max="-2" attributes="0"/>
+                      <Component id="JBEditarprodutos" min="-2" pref="243" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="312" max="-2" attributes="0"/>
@@ -45,8 +45,8 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="206" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jToggleButton1" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                  <Component id="jToggleButton4" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                  <Component id="JBCriarproduto" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                  <Component id="JBEditarprodutos" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="170" max="32767" attributes="0"/>
               <Component id="jToggleButton2" min="-2" pref="38" max="-2" attributes="0"/>
@@ -56,7 +56,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JToggleButton" name="jToggleButton1">
+    <Component class="javax.swing.JToggleButton" name="JBCriarproduto">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="DejaVu Sans" size="18" style="0"/>
@@ -64,10 +64,10 @@
         <Property name="text" type="java.lang.String" value="Criar Produto"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBCriarprodutoActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JToggleButton" name="jToggleButton4">
+    <Component class="javax.swing.JToggleButton" name="JBEditarprodutos">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="DejaVu Sans" size="18" style="0"/>
@@ -75,7 +75,7 @@
         <Property name="text" type="java.lang.String" value="Editar Produto"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton4ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBEditarprodutosActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JToggleButton" name="jToggleButton2">

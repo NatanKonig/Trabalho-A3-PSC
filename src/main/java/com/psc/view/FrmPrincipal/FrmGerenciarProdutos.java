@@ -26,25 +26,25 @@ public class FrmGerenciarProdutos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton4 = new javax.swing.JToggleButton();
+        JBCriarproduto = new javax.swing.JToggleButton();
+        JBEditarprodutos = new javax.swing.JToggleButton();
         jToggleButton2 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jToggleButton1.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
-        jToggleButton1.setText("Criar Produto");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        JBCriarproduto.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
+        JBCriarproduto.setText("Criar Produto");
+        JBCriarproduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                JBCriarprodutoActionPerformed(evt);
             }
         });
 
-        jToggleButton4.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
-        jToggleButton4.setText("Editar Produto");
-        jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
+        JBEditarprodutos.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
+        JBEditarprodutos.setText("Editar Produto");
+        JBEditarprodutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton4ActionPerformed(evt);
+                JBEditarprodutosActionPerformed(evt);
             }
         });
 
@@ -64,9 +64,9 @@ public class FrmGerenciarProdutos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(91, 91, 91)
-                        .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JBCriarproduto, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(85, 85, 85)
-                        .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(JBEditarprodutos, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(312, 312, 312)
                         .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -77,8 +77,8 @@ public class FrmGerenciarProdutos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(206, 206, 206)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JBCriarproduto, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JBEditarprodutos, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 170, Short.MAX_VALUE)
                 .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49))
@@ -87,16 +87,21 @@ public class FrmGerenciarProdutos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+    private void JBCriarprodutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCriarprodutoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+        FrmCriarProduto janelaCriarProduto = new FrmCriarProduto();
+        janelaCriarProduto.setVisible(true);
+    }//GEN-LAST:event_JBCriarprodutoActionPerformed
 
-    private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
+    private void JBEditarprodutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBEditarprodutosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton4ActionPerformed
+        FrmEditarProdutos janelaEditarProdutos = new FrmEditarProdutos();
+        janelaEditarProdutos.setVisible(true);
+    }//GEN-LAST:event_JBEditarprodutosActionPerformed
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
         // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     /**
@@ -135,8 +140,8 @@ public class FrmGerenciarProdutos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton JBCriarproduto;
+    private javax.swing.JToggleButton JBEditarprodutos;
     private javax.swing.JToggleButton jToggleButton2;
-    private javax.swing.JToggleButton jToggleButton4;
     // End of variables declaration//GEN-END:variables
 }

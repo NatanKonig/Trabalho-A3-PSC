@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.psc.view.FrmPrincipal;
-
+import com.psc.model.Produto;
+import javax.swing.JOptionPane;
+import com.psc.dao.ProdutoDAO;
 /**
  *
  * @author Gabriel
@@ -36,15 +38,15 @@ public class FrmCriarProduto extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         JTFNome = new javax.swing.JTextField();
-        JTFNome1 = new javax.swing.JTextField();
-        JTFNome2 = new javax.swing.JTextField();
-        JTFNome3 = new javax.swing.JTextField();
-        JTFNome4 = new javax.swing.JTextField();
-        JTFNome5 = new javax.swing.JTextField();
-        JTFNome6 = new javax.swing.JTextField();
-        JTFNome7 = new javax.swing.JTextField();
+        JTFId = new javax.swing.JTextField();
+        JTFUnidade = new javax.swing.JTextField();
+        JTFpreco = new javax.swing.JTextField();
+        JTFatual = new javax.swing.JTextField();
+        JTFmaxima = new javax.swing.JTextField();
+        JTFCategoria = new javax.swing.JTextField();
+        JTFminima = new javax.swing.JTextField();
         jToggleButton3 = new javax.swing.JToggleButton();
-        jToggleButton4 = new javax.swing.JToggleButton();
+        JBcriar = new javax.swing.JToggleButton();
 
         jToggleButton2.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
         jToggleButton2.setText("Sair");
@@ -86,45 +88,45 @@ public class FrmCriarProduto extends javax.swing.JFrame {
             }
         });
 
-        JTFNome1.addActionListener(new java.awt.event.ActionListener() {
+        JTFId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTFNome1ActionPerformed(evt);
+                JTFIdActionPerformed(evt);
             }
         });
 
-        JTFNome2.addActionListener(new java.awt.event.ActionListener() {
+        JTFUnidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTFNome2ActionPerformed(evt);
+                JTFUnidadeActionPerformed(evt);
             }
         });
 
-        JTFNome3.addActionListener(new java.awt.event.ActionListener() {
+        JTFpreco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTFNome3ActionPerformed(evt);
+                JTFprecoActionPerformed(evt);
             }
         });
 
-        JTFNome4.addActionListener(new java.awt.event.ActionListener() {
+        JTFatual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTFNome4ActionPerformed(evt);
+                JTFatualActionPerformed(evt);
             }
         });
 
-        JTFNome5.addActionListener(new java.awt.event.ActionListener() {
+        JTFmaxima.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTFNome5ActionPerformed(evt);
+                JTFmaximaActionPerformed(evt);
             }
         });
 
-        JTFNome6.addActionListener(new java.awt.event.ActionListener() {
+        JTFCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTFNome6ActionPerformed(evt);
+                JTFCategoriaActionPerformed(evt);
             }
         });
 
-        JTFNome7.addActionListener(new java.awt.event.ActionListener() {
+        JTFminima.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTFNome7ActionPerformed(evt);
+                JTFminimaActionPerformed(evt);
             }
         });
 
@@ -136,11 +138,11 @@ public class FrmCriarProduto extends javax.swing.JFrame {
             }
         });
 
-        jToggleButton4.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
-        jToggleButton4.setText("Criar");
-        jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
+        JBcriar.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
+        JBcriar.setText("Criar");
+        JBcriar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton4ActionPerformed(evt);
+                JBcriarActionPerformed(evt);
             }
         });
 
@@ -152,25 +154,25 @@ public class FrmCriarProduto extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
-                    .addComponent(JTFNome1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JTFId, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
-                    .addComponent(JTFNome7, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JTFNome6, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JTFNome5, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JTFNome4, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JTFminima, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JTFCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JTFmaxima, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JTFatual, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
-                    .addComponent(JTFNome2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JTFUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
                     .addComponent(JTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel4)
                     .addComponent(jLabel10)
-                    .addComponent(JTFNome3, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JTFpreco, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 283, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jToggleButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jToggleButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE))
+                    .addComponent(JBcriar, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE))
                 .addGap(27, 27, 27))
         );
         layout.setVerticalGroup(
@@ -182,40 +184,40 @@ public class FrmCriarProduto extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(JTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jToggleButton4))
+                    .addComponent(JBcriar))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(JTFNome1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(JTFId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addComponent(jToggleButton3)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JTFNome3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(JTFpreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JTFNome2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(JTFUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JTFNome4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(JTFatual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JTFNome7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(JTFminima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JTFNome5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(JTFmaxima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JTFNome6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(JTFCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -223,36 +225,36 @@ public class FrmCriarProduto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JTFNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFNomeActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:  
     }//GEN-LAST:event_JTFNomeActionPerformed
 
-    private void JTFNome1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFNome1ActionPerformed
+    private void JTFIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_JTFNome1ActionPerformed
+    }//GEN-LAST:event_JTFIdActionPerformed
 
-    private void JTFNome2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFNome2ActionPerformed
+    private void JTFUnidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFUnidadeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_JTFNome2ActionPerformed
+    }//GEN-LAST:event_JTFUnidadeActionPerformed
 
-    private void JTFNome3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFNome3ActionPerformed
+    private void JTFprecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFprecoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_JTFNome3ActionPerformed
+    }//GEN-LAST:event_JTFprecoActionPerformed
 
-    private void JTFNome4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFNome4ActionPerformed
+    private void JTFatualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFatualActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_JTFNome4ActionPerformed
+    }//GEN-LAST:event_JTFatualActionPerformed
 
-    private void JTFNome5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFNome5ActionPerformed
+    private void JTFmaximaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFmaximaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_JTFNome5ActionPerformed
+    }//GEN-LAST:event_JTFmaximaActionPerformed
 
-    private void JTFNome6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFNome6ActionPerformed
+    private void JTFCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFCategoriaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_JTFNome6ActionPerformed
+    }//GEN-LAST:event_JTFCategoriaActionPerformed
 
-    private void JTFNome7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFNome7ActionPerformed
+    private void JTFminimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFminimaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_JTFNome7ActionPerformed
+    }//GEN-LAST:event_JTFminimaActionPerformed
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
         // TODO add your handling code here:
@@ -260,11 +262,89 @@ public class FrmCriarProduto extends javax.swing.JFrame {
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
         // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
-    private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton4ActionPerformed
+    private void JBcriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBcriarActionPerformed
+        // TODO add your handling code here: try {
+          try {
+    int id = 0;
+    String nome = "";
+    double precoUnitario = 0;
+    String unidade = "";
+    int quantidadeEstoque = 0;
+    int quantidadeMinima = 0;
+    int quantidadeMaxima = 0;
+    String categoria = "";
+
+    // Verifica o nome
+    if (this.JTFNome.getText().length() < 2) {
+        throw new Exception("Nome deve conter ao menos 2 caracteres.");
+    }
+    nome = this.JTFNome.getText();
+
+    // Verifica o preço unitário
+    if (this.JTFpreco.getText().isBlank()) {
+        throw new Exception("Preço unitário deve ser informado.");
+    }
+    precoUnitario = Double.parseDouble(this.JTFpreco.getText());
+
+    // Verifica unidade
+    if (this.JTFUnidade.getText().length() < 1) {
+        throw new Exception("Unidade deve ser informada.");
+    }
+    unidade = this.JTFUnidade.getText();
+
+    // Verifica quantidade em estoque
+    if (this.JTFatual.getText().isBlank()) {
+        throw new Exception("Quantidade em estoque deve ser informada.");
+    }
+    quantidadeEstoque = Integer.parseInt(this.JTFatual.getText());
+
+    // Verifica quantidade mínima
+    if (this.JTFminima.getText().isBlank()) {
+        throw new Exception("Quantidade mínima deve ser informada.");
+    }
+    quantidadeMinima = Integer.parseInt(this.JTFminima.getText());
+
+    // Verifica quantidade máxima
+    if (this.JTFmaxima.getText().isBlank()) {
+        throw new Exception("Quantidade máxima deve ser informada.");
+    }
+    quantidadeMaxima = Integer.parseInt(this.JTFmaxima.getText());
+
+    // Verifica categoria
+    if (this.JTFCategoria.getText().length() < 2) {
+        throw new Exception("Categoria deve conter ao menos 2 caracteres.");
+    }
+    categoria = this.JTFCategoria.getText();
+
+    // Envia para DAO
+    Produto novoProduto = new Produto(
+        id, nome, precoUnitario, unidade,
+        quantidadeEstoque, quantidadeMinima, quantidadeMaxima, categoria
+    );
+
+    this.produtoDAO.inserir(novoProduto);
+
+    JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
+
+    // ✅ Limpar os campos
+    this.JTFId.setText("");
+    this.JTFNome.setText("");
+    this.JTFpreco.setText("");
+    this.JTFUnidade.setText("");
+    this.JTFatual.setText("");
+    this.JTFminima.setText("");
+    this.JTFmaxima.setText("");
+    this.JTFCategoria.setText("");
+
+} catch (NumberFormatException erro) {
+    JOptionPane.showMessageDialog(null, "Informe valores numéricos válidos.");
+} catch (Exception erro) {
+    JOptionPane.showMessageDialog(null, erro.getMessage());
+}
+    }//GEN-LAST:event_JBcriarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -299,17 +379,18 @@ public class FrmCriarProduto extends javax.swing.JFrame {
                 new FrmCriarProduto().setVisible(true);
             }
         });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton JBcriar;
+    private javax.swing.JTextField JTFCategoria;
+    private javax.swing.JTextField JTFId;
     private javax.swing.JTextField JTFNome;
-    private javax.swing.JTextField JTFNome1;
-    private javax.swing.JTextField JTFNome2;
-    private javax.swing.JTextField JTFNome3;
-    private javax.swing.JTextField JTFNome4;
-    private javax.swing.JTextField JTFNome5;
-    private javax.swing.JTextField JTFNome6;
-    private javax.swing.JTextField JTFNome7;
+    private javax.swing.JTextField JTFUnidade;
+    private javax.swing.JTextField JTFatual;
+    private javax.swing.JTextField JTFmaxima;
+    private javax.swing.JTextField JTFminima;
+    private javax.swing.JTextField JTFpreco;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -320,6 +401,5 @@ public class FrmCriarProduto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToggleButton jToggleButton3;
-    private javax.swing.JToggleButton jToggleButton4;
     // End of variables declaration//GEN-END:variables
 }
