@@ -288,6 +288,11 @@ public class FrmCriarProduto extends javax.swing.JFrame {
             String categoria = "";
 
             // Verifica o nome
+            if(this.JTFId.getText().length() < 1){
+            throw new Exception("O id deve conter no mínimo 1 dígito.");
+            }
+            id = Integer.parseInt(this.JTFId.getText());
+            
             if (this.JTFNome.getText().length() < 2) {
                 throw new Exception("Nome deve conter ao menos 2 caracteres.");
             }

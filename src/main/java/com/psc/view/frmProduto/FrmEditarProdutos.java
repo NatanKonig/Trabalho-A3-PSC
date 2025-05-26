@@ -23,6 +23,7 @@ public class FrmEditarProdutos extends javax.swing.JFrame {
      */
     public FrmEditarProdutos() {
         initComponents();
+        this.carregarTabela();
     }
 
     /**
@@ -86,9 +87,14 @@ public class FrmEditarProdutos extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nome", "Id", "Preço por unidade ", "Tipo de unidade", "Quantidade atual", "Quantidade mínima", "Quantidade máxima", "Categoria"
+                "Id", "Nome", "Preço por unidade ", "Tipo de unidade", "Quantidade atual", "Quantidade mínima", "Quantidade máxima", "Categoria"
             }
         ));
+        TableProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TableProdutosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TableProdutos);
 
         jLabel4.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
@@ -346,34 +352,12 @@ public class FrmEditarProdutos extends javax.swing.JFrame {
 
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Preencha os campos numéricos corretamente.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }finally {
+            carregarTabela(); // Recarrega a tabela com os dados atualizados
         }
     }//GEN-LAST:event_JBAlterarActionPerformed
 
-    private void JTableProdutosMouseClicked(java.awt.event.MouseEvent evt) {
-        if (this.TableProdutos.getSelectedRow() != -1) {
-            String id = this.TableProdutos.getValueAt(this.TableProdutos.getSelectedRow(), 0).toString();
-            String nome = this.TableProdutos.getValueAt(this.TableProdutos.getSelectedRow(), 1).toString();
-            String preco = this.TableProdutos.getValueAt(this.TableProdutos.getSelectedRow(), 2).toString();
-            String unidade = this.TableProdutos.getValueAt(this.TableProdutos.getSelectedRow(), 3).toString();
-            String qtdEstoque = this.TableProdutos.getValueAt(this.TableProdutos.getSelectedRow(), 4).toString();
-            String qtdMinima = this.TableProdutos.getValueAt(this.TableProdutos.getSelectedRow(), 5).toString();
-            String qtdMaxima = this.TableProdutos.getValueAt(this.TableProdutos.getSelectedRow(), 6).toString();
-            String categoria = this.TableProdutos.getValueAt(this.TableProdutos.getSelectedRow(), 7).toString();
-
-            // Preenche os campos da interface
-            this.JTFId.setText(id);
-            this.JTFNome.setText(nome);
-            this.JTFpreco.setText(preco);
-            this.JTFUnidade.setText(unidade);
-            this.JTFatual.setText(qtdEstoque);
-            this.JTFminima.setText(qtdMinima);
-            this.JTFmaxima.setText(qtdMaxima);
-            this.JTFCategoria.setText(categoria);
-        }
-
-    }
-
-
+   
     private void JBApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBApagarActionPerformed
         // TODO add your handling code here:
         try {
@@ -415,6 +399,29 @@ public class FrmEditarProdutos extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jToggleButton6ActionPerformed
+
+    private void TableProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableProdutosMouseClicked
+        // TODO add your handling code here:
+        if (this.TableProdutos.getSelectedRow() != -1) {
+    String id = this.TableProdutos.getValueAt(this.TableProdutos.getSelectedRow(), 1).toString();
+    String nome = this.TableProdutos.getValueAt(this.TableProdutos.getSelectedRow(), 1).toString();
+    String preco = this.TableProdutos.getValueAt(this.TableProdutos.getSelectedRow(), 2).toString();
+    String unidade = this.TableProdutos.getValueAt(this.TableProdutos.getSelectedRow(), 3).toString();
+    String estoque = this.TableProdutos.getValueAt(this.TableProdutos.getSelectedRow(), 4).toString();
+    String minima = this.TableProdutos.getValueAt(this.TableProdutos.getSelectedRow(), 5).toString();
+    String maxima = this.TableProdutos.getValueAt(this.TableProdutos.getSelectedRow(), 6).toString();
+    String categoria = this.TableProdutos.getValueAt(this.TableProdutos.getSelectedRow(), 7).toString();
+
+    this.JTFId.setText(id);
+    this.JTFNome.setText(nome);
+    this.JTFpreco.setText(preco);
+    this.JTFUnidade.setText(unidade);
+    this.JTFatual.setText(estoque);
+    this.JTFminima.setText(minima);
+    this.JTFmaxima.setText(maxima);
+    this.JTFCategoria.setText(categoria);
+        }
+    }//GEN-LAST:event_TableProdutosMouseClicked
 
     /**
      * @param args the command line arguments
