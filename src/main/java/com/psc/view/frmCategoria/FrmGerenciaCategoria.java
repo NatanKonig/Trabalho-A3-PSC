@@ -62,6 +62,15 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
             }
         ));
         jTableCategoria.setToolTipText("");
+        jTableCategoria.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jTableCategoriaAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         jScrollPane1.setViewportView(jTableCategoria);
 
         jLabel1.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
@@ -260,6 +269,13 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
         JCBEmbalagem.setSelectedIndex(0); // volta pro primeiro item (ex: "Plástico") 
 
     }//GEN-LAST:event_JBCancelarActionPerformed
+
+    private void jTableCategoriaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTableCategoriaAncestorAdded
+        // TODO add your handling code here:
+        //Instancia a tela de gerenciar de aluno
+        FrmGerenciaCategoria objeto = new FrmGerenciaCategoria();
+        objeto.setVisible(true);
+    }//GEN-LAST:event_jTableCategoriaAncestorAdded
 
     /**
      * @param args the command line arguments
