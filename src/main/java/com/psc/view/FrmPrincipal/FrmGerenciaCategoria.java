@@ -1,20 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.psc.view.FrmPrincipal;
 
-/**
- *
- * @author Fabricio de Aguiar
- */
+import com.psc.model.Categoria;
+
 public class FrmGerenciaCategoria extends javax.swing.JFrame {
 
     /**
      * Creates new form FrmCategorias
      */
+    private Categoria objetoCategoria; // cria o vínculo com Categoria.java
+
     public FrmGerenciaCategoria() {
         initComponents();
+        this.objetoCategoria = new Categoria(); // carrega o objeto de categoria
     }
 
     /**
@@ -27,14 +24,14 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableCategoria = new javax.swing.JTable();
+        JTableCategoria = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTFNome = new javax.swing.JTextField();
-        jTFTamanho = new javax.swing.JTextField();
-        jTFEmbalagem = new javax.swing.JTextField();
-        jBCancelar = new javax.swing.JButton();
+        jTFNome2 = new javax.swing.JTextField();
+        JTFTamanho2 = new javax.swing.JTextField();
+        JTFEmbalagem2 = new javax.swing.JTextField();
+        JBCancelar2 = new javax.swing.JButton();
         jBAlterar = new javax.swing.JButton();
         b_apagar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -50,8 +47,9 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
         JBCadastrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Categorias ");
 
-        jTableCategoria.setModel(new javax.swing.table.DefaultTableModel(
+        JTableCategoria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -62,8 +60,8 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
                 "Id", "Nome", "Tamanho", "Embalagem"
             }
         ));
-        jTableCategoria.setToolTipText("");
-        jScrollPane1.setViewportView(jTableCategoria);
+        JTableCategoria.setToolTipText("");
+        jScrollPane1.setViewportView(JTableCategoria);
 
         jLabel1.setText("Nome");
 
@@ -71,16 +69,16 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
 
         jLabel3.setText("Embalagem");
 
-        jTFNome.addActionListener(new java.awt.event.ActionListener() {
+        jTFNome2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFNomeActionPerformed(evt);
+                jTFNome2ActionPerformed(evt);
             }
         });
 
-        jBCancelar.setText("Cancelar");
-        jBCancelar.addActionListener(new java.awt.event.ActionListener() {
+        JBCancelar2.setText("Cancelar");
+        JBCancelar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBCancelarActionPerformed(evt);
+                JBCancelar2ActionPerformed(evt);
             }
         });
 
@@ -109,7 +107,7 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(JBCancelar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTFEmbalagem, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(JTFEmbalagem2, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,17 +134,17 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jBCancelar)
+                                .addComponent(JBCancelar2)
                                 .addGap(59, 59, 59)
                                 .addComponent(jBAlterar)
                                 .addGap(51, 51, 51)
                                 .addComponent(b_apagar)
                                 .addContainerGap())
-                            .addComponent(jTFNome, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTFNome2, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(147, 147, 147))
-                            .addComponent(jTFTamanho, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addComponent(JTFTamanho2, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -177,18 +175,16 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
                                 .addComponent(JTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel8)))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFNome2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JTFTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -196,14 +192,14 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTFTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JTFTamanho2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JTFEmbalagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addComponent(jLabel3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jTFEmbalagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(JTFEmbalagem2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -211,7 +207,7 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
                             .addComponent(JBCadastrar))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBCancelar)
+                    .addComponent(JBCancelar2)
                     .addComponent(jBAlterar)
                     .addComponent(b_apagar))
                 .addGap(21, 21, 21))
@@ -220,16 +216,16 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTFNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNomeActionPerformed
+    private void jTFNome2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNome2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTFNomeActionPerformed
+    }//GEN-LAST:event_jTFNome2ActionPerformed
 
-    private void jBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarActionPerformed
+    private void JBCancelar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCancelar2ActionPerformed
         // TODO add your handling code here:
         //Libera todos os recurso da interface gráfica
-this.dispose();
+        this.dispose();
 
-    }//GEN-LAST:event_jBCancelarActionPerformed
+    }//GEN-LAST:event_JBCancelar2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -240,8 +236,8 @@ this.dispose();
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        
-        /* Create and display the form */
+
+ /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new FrmGerenciaCategoria().setVisible(true);
@@ -252,12 +248,15 @@ this.dispose();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBCadastrar;
     private javax.swing.JButton JBCancelar;
+    private javax.swing.JButton JBCancelar2;
     private javax.swing.JTextField JTFEmbalagem;
+    private javax.swing.JTextField JTFEmbalagem2;
     private javax.swing.JTextField JTFNome;
     private javax.swing.JTextField JTFTamanho;
+    private javax.swing.JTextField JTFTamanho2;
+    private javax.swing.JTable JTableCategoria;
     private javax.swing.JButton b_apagar;
     private javax.swing.JButton jBAlterar;
-    private javax.swing.JButton jBCancelar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -267,10 +266,7 @@ this.dispose();
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTFEmbalagem;
-    private javax.swing.JTextField jTFNome;
-    private javax.swing.JTextField jTFTamanho;
+    private javax.swing.JTextField jTFNome2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTableCategoria;
     // End of variables declaration//GEN-END:variables
 }
