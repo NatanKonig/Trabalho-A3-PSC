@@ -2,17 +2,29 @@ package com.psc.model;
 
 public class Categoria {
 
-    private String nome;
-    private String tamanho;
-    private String embalagem;
+    public Categoria() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
-    public Categoria(String nome, String tamanho, String embalagem) {
+    public enum Tamanho {
+        PEQUENO, MEDIO, GRANDE
+    }
+
+    public enum Embalagem {
+        LATA, VIDRO, PLASTICO
+    }
+
+    private String nome;
+    private Tamanho tamanho;
+    private Embalagem embalagem;
+
+    public Categoria(String nome, Tamanho tamanho, Embalagem embalagem) {
         this.nome = nome;
         this.tamanho = tamanho;
         this.embalagem = embalagem;
     }
 
-    public String getnome() {
+    public String getNome() {
         return nome;
     }
 
@@ -20,19 +32,19 @@ public class Categoria {
         this.nome = nome;
     }
 
-    public String getTamanho() {
+    public Tamanho getTamanho() {
         return tamanho;
     }
 
-    public void setTamanho(String tamanho) {
+    public void setTamanho(Tamanho tamanho) {
         this.tamanho = tamanho;
     }
 
-    public String getEmbalagem() {
+    public Embalagem getEmbalagem() {
         return embalagem;
     }
 
-    public void setEmbalagem(String embalagem) {
+    public void setEmbalagem(Embalagem embalagem) {
         this.embalagem = embalagem;
     }
 
@@ -40,9 +52,8 @@ public class Categoria {
     public String toString() {
         return "Categoria{"
                 + "nome='" + nome + '\''
-                + ", tamanho='" + tamanho + '\''
-                + ", embalagem='" + embalagem + '\''
+                + ", tamanho=" + tamanho
+                + ", embalagem=" + embalagem
                 + '}';
     }
-
 }

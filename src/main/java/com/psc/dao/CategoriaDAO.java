@@ -14,7 +14,7 @@ public class CategoriaDAO {
     
     public Categoria buscarPorNome(String nome) {
         for (Categoria cat : categorias) {
-            if (cat.getnome().equalsIgnoreCase(nome)) {
+            if (cat.getNome().equalsIgnoreCase(nome)) {
                 return cat;
             
             }
