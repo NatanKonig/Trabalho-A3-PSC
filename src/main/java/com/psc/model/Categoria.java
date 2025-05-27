@@ -6,8 +6,7 @@ public class Categoria {
     private TamanhoProduto tamanho;
     private EmbalagemProduto embalagem;
 
-    public enum Embalagem {
-
+    public Categoria() {
     }
 
     public Categoria(String nome, TamanhoProduto tamanho, EmbalagemProduto embalagem) {
