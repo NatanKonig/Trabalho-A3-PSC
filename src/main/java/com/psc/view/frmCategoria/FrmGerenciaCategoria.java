@@ -119,9 +119,9 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
         JBCadastrar.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
         JBCadastrar.setText("Cadastrar");
 
-        JCBTamanho.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pequeno", "Médio", "Grande" }));
+        JCBTamanho.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Pequeno", "Médio", "Grande" }));
 
-        JCBEmbalagem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lata", "Vidro", "Plástico" }));
+        JCBEmbalagem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Lata", "Vidro", "Plástico" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
