@@ -11,7 +11,21 @@ public class ProdutoDAO {
     private final String URL = "jdbc:mysql://localhost:3306/estoque";
     private final String USER = "root"; // usuário do MySQL
     private final String PASSWORD = "Amarelo007"; // senha do MySQL
+    public  boolean reajustarPrecos(double percentual) {
+    String sql = "UPDATE produto SET preco_unitario = preco_unitario + (preco_unitario * ? / 100)";
 
+    try (Connection conn = conectar();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setDouble(1, percentual);
+        stmt.executeUpdate();
+        return true;
+
+    } catch (SQLException e) {
+        System.out.println("Erro ao reajustar preços: " + e.getMessage());
+        return false;
+    }
+}
     
     private Connection conectar() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);

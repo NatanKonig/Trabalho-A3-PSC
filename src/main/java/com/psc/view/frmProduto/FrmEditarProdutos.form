@@ -48,7 +48,8 @@
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jToggleButton6" max="32767" attributes="0"/>
                   <Component id="JBAlterar" alignment="0" max="32767" attributes="0"/>
-                  <Component id="JBApagar" alignment="0" pref="275" max="32767" attributes="0"/>
+                  <Component id="JBApagar" alignment="0" max="32767" attributes="0"/>
+                  <Component id="JBReajustarPrecos" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
           </Group>
@@ -98,7 +99,10 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="JTFmaxima" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="JTFmaxima" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="JBReajustarPrecos" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -330,6 +334,17 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JToggleButton" name="JBReajustarPrecos">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="DejaVu Sans" size="18" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Alterar o valor de todos os produtos"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBReajustarPrecosActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

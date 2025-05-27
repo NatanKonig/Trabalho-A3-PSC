@@ -33,6 +33,9 @@ public class FrmEditarProdutos extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
 
+   
+    
+    
     public void carregarTabela() {
         DefaultTableModel modelo = (DefaultTableModel) this.TableProdutos.getModel();
         modelo.setRowCount(0); // limpa as linhas da tabela
@@ -75,6 +78,7 @@ public class FrmEditarProdutos extends javax.swing.JFrame {
         JBApagar = new javax.swing.JToggleButton();
         jToggleButton6 = new javax.swing.JToggleButton();
         JTFUnidade = new javax.swing.JComboBox<>();
+        JBReajustarPrecos = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -188,6 +192,14 @@ public class FrmEditarProdutos extends javax.swing.JFrame {
 
         JTFUnidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kg", "g", "L", "ml" }));
 
+        JBReajustarPrecos.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
+        JBReajustarPrecos.setText("Alterar o valor de todos os produtos");
+        JBReajustarPrecos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBReajustarPrecosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -216,7 +228,8 @@ public class FrmEditarProdutos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jToggleButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(JBAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(JBApagar, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE))
+                    .addComponent(JBApagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(JBReajustarPrecos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(51, 51, 51))
         );
         layout.setVerticalGroup(
@@ -258,7 +271,9 @@ public class FrmEditarProdutos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JTFmaxima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JTFmaxima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JBReajustarPrecos))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -394,6 +409,32 @@ public class FrmEditarProdutos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_TableProdutosMouseClicked
 
+    private void JBReajustarPrecosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBReajustarPrecosActionPerformed
+        // TODO add your handling code here:
+          try {
+        String input = JOptionPane.showInputDialog("Digite o percentual de aumento (ex: 10 para 10%):");
+        if (input == null || input.trim().isEmpty()) {
+            return; // Cancelado
+        }
+
+        double percentual = Double.parseDouble(input);
+
+        // Chama o DAO para atualizar os preços no banco
+        ProdutoDAO dao = new ProdutoDAO();
+        boolean ok = dao.reajustarPrecos(percentual);
+
+        if (ok) {
+            JOptionPane.showMessageDialog(null, "Preços reajustados com sucesso!");
+            this.carregarTabela(); // Atualiza a tabela se tiver esse método
+        } else {
+            JOptionPane.showMessageDialog(null, "Erro ao reajustar preços.");
+        }
+
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "Digite um número válido para o percentual.");
+        }
+    }//GEN-LAST:event_JBReajustarPrecosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -432,6 +473,7 @@ public class FrmEditarProdutos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton JBAlterar;
     private javax.swing.JToggleButton JBApagar;
+    private javax.swing.JToggleButton JBReajustarPrecos;
     private javax.swing.JTextField JTFCategoria;
     private javax.swing.JTextField JTFId;
     private javax.swing.JTextField JTFNome;
