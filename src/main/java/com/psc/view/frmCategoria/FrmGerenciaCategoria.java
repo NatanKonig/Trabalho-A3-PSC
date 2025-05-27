@@ -42,11 +42,11 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        JTFEmbalagem = new javax.swing.JTextField();
-        JTFTamanho = new javax.swing.JTextField();
         JTFNome = new javax.swing.JTextField();
         JBCancelar = new javax.swing.JButton();
         JBCadastrar = new javax.swing.JButton();
+        JCBTamanho = new javax.swing.JComboBox<>();
+        JCBEmbalagem = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -108,17 +108,20 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
         jLabel9.setText("Embalagem");
 
-        JTFEmbalagem.addActionListener(new java.awt.event.ActionListener() {
+        JBCancelar.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
+        JBCancelar.setText("Limpar");
+        JBCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTFEmbalagemActionPerformed(evt);
+                JBCancelarActionPerformed(evt);
             }
         });
 
-        JBCancelar.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
-        JBCancelar.setText("Cancelar");
-
         JBCadastrar.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
         JBCadastrar.setText("Cadastrar");
+
+        JCBTamanho.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pequeno", "Médio", "Grande" }));
+
+        JCBEmbalagem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lata", "Vidro", "Plástico" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -149,17 +152,18 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(JTFTamanho, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(JTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(JTFEmbalagem, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(197, 197, 197)))
+                            .addComponent(JCBTamanho, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(JCBEmbalagem, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(197, 197, 197))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -183,8 +187,8 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
@@ -192,17 +196,16 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(JTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
-                        .addComponent(jLabel8))
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel8)
+                        .addGap(8, 8, 8))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(JTFTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40)
@@ -210,10 +213,12 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addComponent(jTFTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(JCBTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(JTFEmbalagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)))
+                        .addComponent(JCBEmbalagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(40, 40, 40)
@@ -225,7 +230,7 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(JBCancelar)
                             .addComponent(JBCadastrar))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBCancelar)
                     .addComponent(jBAlterar)
@@ -243,13 +248,17 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
     private void jBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarActionPerformed
         // TODO add your handling code here:
         //Libera todos os recurso da interface gráfica
-this.dispose();
+        this.dispose();
 
     }//GEN-LAST:event_jBCancelarActionPerformed
 
-    private void JTFEmbalagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFEmbalagemActionPerformed
+    private void JBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCancelarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_JTFEmbalagemActionPerformed
+        JTFNome.setText("");
+        JCBTamanho.setSelectedIndex(0); // volta pro primeiro item (ex: "Pequeno")
+        JCBEmbalagem.setSelectedIndex(0); // volta pro primeiro item (ex: "Plástico") 
+
+    }//GEN-LAST:event_JBCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -260,8 +269,8 @@ this.dispose();
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        
-        /* Create and display the form */
+
+ /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new FrmGerenciaCategoria().setVisible(true);
@@ -272,9 +281,9 @@ this.dispose();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBCadastrar;
     private javax.swing.JButton JBCancelar;
-    private javax.swing.JTextField JTFEmbalagem;
+    private javax.swing.JComboBox<String> JCBEmbalagem;
+    private javax.swing.JComboBox<String> JCBTamanho;
     private javax.swing.JTextField JTFNome;
-    private javax.swing.JTextField JTFTamanho;
     private javax.swing.JButton b_apagar;
     private javax.swing.JButton jBAlterar;
     private javax.swing.JButton jBCancelar;

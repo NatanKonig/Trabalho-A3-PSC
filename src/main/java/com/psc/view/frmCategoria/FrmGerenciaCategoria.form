@@ -52,21 +52,22 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel8" min="-2" pref="77" max="-2" attributes="0"/>
-                          <Component id="jLabel7" alignment="0" min="-2" pref="54" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="JTFTamanho" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Component id="JTFNome" min="-2" pref="242" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="JTFEmbalagem" alignment="0" max="32767" attributes="0"/>
+                          <Component id="JCBTamanho" alignment="0" max="32767" attributes="0"/>
+                          <Component id="JCBEmbalagem" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="jLabel7" min="-2" pref="54" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace min="197" pref="197" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLabel8" min="-2" pref="77" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -98,9 +99,9 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
               </Group>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
@@ -108,8 +109,9 @@
                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="JTFNome" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -117,12 +119,9 @@
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="JTFTamanho" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jTFNome" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
@@ -131,10 +130,12 @@
                       <Component id="jTFTamanho" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
+                      <Component id="JCBTamanho" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="JTFEmbalagem" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                      <Component id="JCBEmbalagem" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -152,7 +153,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="35" max="32767" attributes="0"/>
+              <EmptySpace pref="38" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jBCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jBAlterar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -286,13 +287,6 @@
         <Property name="text" type="java.lang.String" value="Embalagem"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="JTFEmbalagem">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JTFEmbalagemActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="JTFTamanho">
-    </Component>
     <Component class="javax.swing.JTextField" name="JTFNome">
     </Component>
     <Component class="javax.swing.JButton" name="JBCancelar">
@@ -300,8 +294,11 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="DejaVu Sans" size="18" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Cancelar"/>
+        <Property name="text" type="java.lang.String" value="Limpar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBCancelarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="JBCadastrar">
       <Properties>
@@ -310,6 +307,34 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Cadastrar"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="JCBTamanho">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="3">
+            <StringItem index="0" value="Pequeno"/>
+            <StringItem index="1" value="M&#xe9;dio"/>
+            <StringItem index="2" value="Grande"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="JCBEmbalagem">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="3">
+            <StringItem index="0" value="Lata"/>
+            <StringItem index="1" value="Vidro"/>
+            <StringItem index="2" value="Pl&#xe1;stico"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>
