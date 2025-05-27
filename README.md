@@ -1,5 +1,6 @@
 # Trabalho-A3-PSC
-https://mediacdns3.ulife.com.br/PAT/Upload/2855451/A3_UC_PSC_2025A_DIB_MATUTINOControleEstoque_20250408083749.pdf/
+https://mediacdns3.ulife.com.br/PAT/Upload/2855451/A3_UC_PSC_2025A_DIB_MATUTINOControleEstoque_20250408083749.pdf
+
 https://mediacdns3.ulife.com.br/PAT/Upload/2855451/14_A3_Desenvolvimento_ControleEstoque_2025_1_20250527075904.pdf
 
 ## Alunos: 
