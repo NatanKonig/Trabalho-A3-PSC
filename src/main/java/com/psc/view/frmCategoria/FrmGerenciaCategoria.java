@@ -45,12 +45,12 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         JTFNome = new javax.swing.JTextField();
-        JBCancelar = new javax.swing.JButton();
+        JBLimpar = new javax.swing.JButton();
         JBCadastrar = new javax.swing.JButton();
         JCBTamanho = new javax.swing.JComboBox<>();
         JCBEmbalagem = new javax.swing.JComboBox<>();
-        jCBEmbalagem = new javax.swing.JComboBox<>();
-        jCBTamanho = new javax.swing.JComboBox<>();
+        jCBEmbalagem2 = new javax.swing.JComboBox<>();
+        jCBTamanho2 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -121,11 +121,11 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
         jLabel9.setText("Embalagem");
 
-        JBCancelar.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
-        JBCancelar.setText("Limpar");
-        JBCancelar.addActionListener(new java.awt.event.ActionListener() {
+        JBLimpar.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
+        JBLimpar.setText("Limpar");
+        JBLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JBCancelarActionPerformed(evt);
+                JBLimparActionPerformed(evt);
             }
         });
 
@@ -137,13 +137,22 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
             }
         });
 
+        JCBTamanho.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
         JCBTamanho.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Pequeno", "Médio", "Grande" }));
+        JCBTamanho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JCBTamanhoActionPerformed(evt);
+            }
+        });
 
+        JCBEmbalagem.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
         JCBEmbalagem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Lata", "Vidro", "Plástico" }));
 
-        jCBEmbalagem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Lata", "Vidro", "Plástico" }));
+        jCBEmbalagem2.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
+        jCBEmbalagem2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Lata", "Vidro", "Plástico" }));
 
-        jCBTamanho.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Pequeno", "Médio", "Grande", " " }));
+        jCBTamanho2.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
+        jCBTamanho2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Pequeno", "Médio", "Grande", " " }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -176,7 +185,7 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
                                         .addGap(0, 0, Short.MAX_VALUE)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addComponent(JBCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(JBLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(JBCadastrar))
                                             .addComponent(JTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -201,9 +210,9 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jCBTamanho, 0, 456, Short.MAX_VALUE)
+                    .addComponent(jCBTamanho2, 0, 456, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCBEmbalagem, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jCBEmbalagem2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -234,7 +243,7 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
                         .addGap(40, 40, 40)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCBTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jCBTamanho2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(JCBTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(44, 44, 44)
@@ -246,7 +255,7 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(47, 47, 47)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(JBCancelar)
+                            .addComponent(JBLimpar)
                             .addComponent(JBCadastrar))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -255,10 +264,10 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
                             .addComponent(b_apagar))
                         .addGap(38, 38, 38))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
+                        .addGap(40, 40, 40)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCBEmbalagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCBEmbalagem2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -276,23 +285,25 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jBCancelarActionPerformed
 
-    private void JBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCancelarActionPerformed
+    private void JBLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBLimparActionPerformed
         // TODO add your handling code here:
         JTFNome.setText("");
         JCBTamanho.setSelectedIndex(0); // volta pro primeiro item (ex: "Pequeno")
         JCBEmbalagem.setSelectedIndex(0); // volta pro primeiro item (ex: "Plástico") 
 
-    }//GEN-LAST:event_JBCancelarActionPerformed
+    }//GEN-LAST:event_JBLimparActionPerformed
 
     private void jTableCategoriaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTableCategoriaAncestorAdded
         // TODO add your handling code here:
-        FrmGerenciaCategoria objeto = new FrmGerenciaCategoria();
-        objeto.setVisible(true);
     }//GEN-LAST:event_jTableCategoriaAncestorAdded
 
     private void JBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCadastrarActionPerformed
 
     }//GEN-LAST:event_JBCadastrarActionPerformed
+
+    private void JCBTamanhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBTamanhoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JCBTamanhoActionPerformed
 
 /**
  * @param args the command line arguments
@@ -314,15 +325,15 @@ public static void main(String args[]) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBCadastrar;
-    private javax.swing.JButton JBCancelar;
+    private javax.swing.JButton JBLimpar;
     private javax.swing.JComboBox<String> JCBEmbalagem;
     private javax.swing.JComboBox<String> JCBTamanho;
     private javax.swing.JTextField JTFNome;
     private javax.swing.JButton b_apagar;
     private javax.swing.JButton jBAlterar;
     private javax.swing.JButton jBCancelar;
-    private javax.swing.JComboBox<String> jCBEmbalagem;
-    private javax.swing.JComboBox<String> jCBTamanho;
+    private javax.swing.JComboBox<String> jCBEmbalagem2;
+    private javax.swing.JComboBox<String> jCBTamanho2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
