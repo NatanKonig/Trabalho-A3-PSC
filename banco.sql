@@ -1,3 +1,5 @@
+CREATE DATABASE controle_estoque;
+
 CREATE TABLE categoria (
     id_categoria INT NOT NULL AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,
