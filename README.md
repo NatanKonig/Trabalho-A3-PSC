@@ -12,3 +12,7 @@ Fabrício Valdemar de Aguiar filho - AguiarFabricio 10725115451
 
 ## Banco de Dados
 Execute o arquivo `banco.sql` para criar o banco de dados e suas tabelas.
+
+## Usuario e senha bd:
+user: root
+senha: !Mario0712
