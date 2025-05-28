@@ -20,8 +20,8 @@ public class FrmCriarProduto extends javax.swing.JFrame {
      * Creates new form FrmCriarProduto
      */
     public FrmCriarProduto() {
-        initComponents();
-    }
+        initComponents();    
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -311,6 +311,7 @@ public class FrmCriarProduto extends javax.swing.JFrame {
             this.JTFNome.setText("");
             this.JTFpreco.setText("");
             this.JTFatual.setText("");
+            this.JTFUnidade.setSelectedItem("");
             this.JTFminima.setText("");
             this.JTFmaxima.setText("");
             this.JTFCategoria.setText("");
@@ -324,6 +325,7 @@ public class FrmCriarProduto extends javax.swing.JFrame {
 
     private void JTFUnidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFUnidadeActionPerformed
         // TODO add your handling code here:
+       JTFUnidade.getSelectedItem();
     }//GEN-LAST:event_JTFUnidadeActionPerformed
 
     /**

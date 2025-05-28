@@ -11,7 +11,7 @@ public class Produto {
     private String categoria;
 
     //Construtores
-    public Produto(int id, String nome, double precoUnitario, int quantidadeEstoque, int quantidadeMinima, int quantidadeMaxima, String categoria) {}
+    public Produto(int id, String nome, double precoUnitario, int quantidadeEstoque, int quantidadeMinima, int quantidadeMaxima1, String categoria) {}
 
     public Produto(int id, String nome, double precoUnitario, String unidade, int quantidadeEstoque, int quantidadeMinima, int quantidadeMaxima, String categoria) {
         this.id = id;
