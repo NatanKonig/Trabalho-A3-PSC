@@ -49,4 +49,8 @@ public class CategoriaDAO { // Define a classe p√∫blica 'CategoriaDAO', respons√
         return maiorID;
     }
 
+    public boolean atualizar(Categoria categoriaAtualizada) {
+        throw new UnsupportedOperationException("Not supported yet."); 
+    }
+
 }

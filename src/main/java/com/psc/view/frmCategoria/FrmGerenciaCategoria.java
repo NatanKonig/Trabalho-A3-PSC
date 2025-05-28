@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.psc.view.frmCategoria;
 
 import com.psc.dao.CategoriaDAO;
@@ -12,33 +8,59 @@ import com.psc.model.TamanhoProduto;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Fabricio de Aguiar
- */
 public class FrmGerenciaCategoria extends javax.swing.JFrame {
 
     CategoriaDAO categoriaDAO = new CategoriaDAO();
-    
+
     /**
      * Creates new form FrmCategorias
      */
     public FrmGerenciaCategoria() {
         initComponents();
         carregarTabela();
+        jBAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                int selectedRow = jTableCategoria.getSelectedRow();
+                if (selectedRow == -1) {
+                    JOptionPane.showMessageDialog(null, "Selecione uma categoria para alterar.");
+                    return;
+                }
+
+                // Pegando o ID da linha selecionada
+                int id = Integer.parseInt(jTableCategoria.getValueAt(selectedRow, 0).toString());
+
+                // Pegando os dados dos campos de edição
+                String nome = jTFNomeEditar.getText();
+                TamanhoProduto tamanho = (TamanhoProduto) jCBTamanho2.getSelectedItem();
+                EmbalagemProduto embalagem = (EmbalagemProduto) jCBEmbalagem2.getSelectedItem();
+
+                // Criando nova categoria com os dados atualizados
+                Categoria categoriaAtualizada = new Categoria(id, nome, tamanho, embalagem);
+
+                // Chamando DAO para atualizar
+                boolean sucesso = categoriaDAO.atualizar(categoriaAtualizada);
+
+                if (sucesso) {
+                    JOptionPane.showMessageDialog(null, "Categoria atualizada com sucesso!");
+                    carregarTabela(); // atualiza a tabela
+                } else {
+                    JOptionPane.showMessageDialog(null, "Erro ao atualizar categoria.");
+                }
+            }
+        });
+
     }
 
-    public void carregarTabela(){
+    public void carregarTabela() {
         DefaultTableModel modelo = (DefaultTableModel) jTableCategoria.getModel();
         modelo.setRowCount(0);
 
-        for (Categoria cat: categoriaDAO.listar()) {
+        for (Categoria cat : categoriaDAO.listar()) {
             modelo.addRow(new Object[]{
-                    cat.getId(),
-                    cat.getNome(),
-                    cat.getTamanho(),
-                    cat.getEmbalagem(),
-            });
+                cat.getId(),
+                cat.getNome(),
+                cat.getTamanho(),
+                cat.getEmbalagem(),});
         }
     }
 
@@ -68,10 +90,10 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
         JTFNomeCadastro = new javax.swing.JTextField();
         JBLimpar = new javax.swing.JButton();
         JBCadastrar = new javax.swing.JButton();
-        JCBTamanho = new javax.swing.JComboBox<TamanhoProduto>();
-        JCBEmbalagem = new javax.swing.JComboBox<EmbalagemProduto>();
-        jCBEmbalagem2 = new javax.swing.JComboBox<EmbalagemProduto>();
-        jCBTamanho2 = new javax.swing.JComboBox<TamanhoProduto>();
+        JCBTamanho = new javax.swing.JComboBox<>();
+        JCBEmbalagem = new javax.swing.JComboBox<>();
+        jCBEmbalagem2 = new javax.swing.JComboBox<>();
+        jCBTamanho2 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,6 +116,11 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        jTableCategoria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableCategoriaMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTableCategoria);
@@ -159,7 +186,7 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
         });
 
         JCBTamanho.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        JCBTamanho.setModel(new javax.swing.DefaultComboBoxModel<>(TamanhoProduto.values()));
+        JCBTamanho.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Pequeno", "Médio", "Grande" }));
         JCBTamanho.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JCBTamanhoActionPerformed(evt);
@@ -167,13 +194,13 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
         });
 
         JCBEmbalagem.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        JCBEmbalagem.setModel(new javax.swing.DefaultComboBoxModel<>(EmbalagemProduto.values()));
+        JCBEmbalagem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Lata", "Vidro", "Plástico" }));
 
         jCBEmbalagem2.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        jCBEmbalagem2.setModel(new javax.swing.DefaultComboBoxModel<>(EmbalagemProduto.values()));
+        jCBEmbalagem2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Lata", "Vidro", "Plástico" }));
 
         jCBTamanho2.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        jCBTamanho2.setModel(new javax.swing.DefaultComboBoxModel<>(TamanhoProduto.values()));
+        jCBTamanho2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Pequeno", "Médio", "Grande", " " }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -316,6 +343,18 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
 
     private void jTableCategoriaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTableCategoriaAncestorAdded
         // TODO add your handling code here:
+        int linhaSelecionada = jTableCategoria.getSelectedRow();
+
+        if (linhaSelecionada != -1) {
+            String nome = jTableCategoria.getValueAt(linhaSelecionada, 1).toString();
+            TamanhoProduto tamanho = (TamanhoProduto) jTableCategoria.getValueAt(linhaSelecionada, 2);
+            EmbalagemProduto embalagem = (EmbalagemProduto) jTableCategoria.getValueAt(linhaSelecionada, 3);
+
+            jTFNomeEditar.setText(nome);
+            jCBTamanho2.setSelectedItem(tamanho);
+            jCBEmbalagem2.setSelectedItem(embalagem);
+        }
+
     }//GEN-LAST:event_jTableCategoriaAncestorAdded
 
     private void JBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCadastrarActionPerformed
@@ -323,7 +362,7 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
         String nome = JTFNomeCadastro.getText();
         TamanhoProduto tamanhoSelecionado = (TamanhoProduto) JCBTamanho.getSelectedItem();
         EmbalagemProduto embalagemSelecionada = (EmbalagemProduto) JCBEmbalagem.getSelectedItem();
-        
+
         Categoria novaCategoria = new Categoria(id, nome, tamanhoSelecionado, embalagemSelecionada);
         categoriaDAO.adicionar(novaCategoria);
         carregarTabela();
@@ -333,10 +372,14 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_JCBTamanhoActionPerformed
 
-/**
- * @param args the command line arguments
- */
-public static void main(String args[]) {
+    private void jTableCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCategoriaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTableCategoriaMouseClicked
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -354,14 +397,14 @@ public static void main(String args[]) {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBCadastrar;
     private javax.swing.JButton JBLimpar;
-    private javax.swing.JComboBox<EmbalagemProduto> JCBEmbalagem;
-    private JComboBox<TamanhoProduto> JCBTamanho;
+    private javax.swing.JComboBox<String> JCBEmbalagem;
+    private javax.swing.JComboBox<String> JCBTamanho;
     private javax.swing.JTextField JTFNomeCadastro;
     private javax.swing.JButton b_apagar;
     private javax.swing.JButton jBAlterar;
     private javax.swing.JButton jBCancelar;
-    private javax.swing.JComboBox<EmbalagemProduto> jCBEmbalagem2;
-    private javax.swing.JComboBox<TamanhoProduto> jCBTamanho2;
+    private javax.swing.JComboBox<String> jCBEmbalagem2;
+    private javax.swing.JComboBox<String> jCBTamanho2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
