@@ -385,6 +385,34 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
 
     private void b_apagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_apagarActionPerformed
         // TODO add your handling code here:
+    try {
+        int id = 0;
+        if (jTableCategoria.getSelectedRow() == -1) {
+            throw new Exception("Primeiro selecione uma categoria para APAGAR.");
+        } else {
+            id = Integer.parseInt(jTableCategoria.getValueAt(jTableCategoria.getSelectedRow(), 0).toString());
+        }
+
+        int respostaUsuario = JOptionPane.showConfirmDialog(null,
+            "Tem certeza que deseja apagar esta categoria?", "Confirmação", JOptionPane.YES_NO_OPTION);
+
+        if (respostaUsuario == JOptionPane.YES_OPTION) {
+            if (categoriaDAO.deletar(id)) {
+                JOptionPane.showMessageDialog(this, "Categoria apagada com sucesso!");
+                jTFNomeEditar.setText("");
+                jCBTamanho2.setSelectedIndex(-1);
+                jCBEmbalagem2.setSelectedIndex(-1);
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro ao apagar a categoria.");
+            }
+        }
+
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, ex.getMessage());
+    } finally {
+        carregarTabela(); // Atualiza a tabela sempre
+    }
+
     }//GEN-LAST:event_b_apagarActionPerformed
 
 /**

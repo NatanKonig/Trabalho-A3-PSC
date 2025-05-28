@@ -58,5 +58,15 @@ public class CategoriaDAO { // Define a classe p√∫blica 'CategoriaDAO', respons√
         }
         return false;
     }
+    public boolean deletar(int id) {
+    for (Categoria cat : categorias) {
+        if (cat.getId() == id) {
+            categorias.remove(cat);
+            return true;
+        }
+    }
+    return false;
+}
+
 
 }
