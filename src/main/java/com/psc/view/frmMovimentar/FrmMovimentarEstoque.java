@@ -1,9 +1,11 @@
 package com.psc.view.frmMovimentar;
 
 import javax.swing.JOptionPane;
+
 import com.psc.model.Movimentacao;
 import com.psc.model.TipoMovimentacao;
 import com.psc.model.Produto;
+import com.psc.dao.MovimentacaoDAO;
 
 /**
  *
@@ -276,6 +278,8 @@ public class FrmMovimentarEstoque extends javax.swing.JFrame {
     System.out.println("Movimentação registrada: " + movimentacao);
 
     JOptionPane.showMessageDialog(this, "Entrada registrada com sucesso!");
+    
+
 
     }//GEN-LAST:event_JEntradaActionPerformed
 
