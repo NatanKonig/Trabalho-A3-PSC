@@ -14,9 +14,17 @@ public class FrmMovimentarEstoque extends javax.swing.JFrame {
     public FrmMovimentarEstoque() {
         initComponents();
     }
-    private Produto obterProdutoSelecionado() {
-    return (Produto) JComboBox.getSelectedItem();
+private Produto obterProdutoSelecionado() {
+    Object selectedItem = JComboBox.getSelectedItem();
+
+    if (selectedItem == null || !(selectedItem instanceof Produto)) {
+        JOptionPane.showMessageDialog(this, "Nenhum produto selecionado ou seleção inválida.");
+        return null;
+    }
+
+    return (Produto) selectedItem;
 }
+
 
 
     @SuppressWarnings("unchecked")
