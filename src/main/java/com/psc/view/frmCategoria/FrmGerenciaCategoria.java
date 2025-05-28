@@ -6,7 +6,11 @@ package com.psc.view.frmCategoria;
 
 import com.psc.dao.CategoriaDAO;
 import com.psc.model.Categoria;
-import javax.swing.JOptionPane;
+import com.psc.model.EmbalagemProduto;
+import com.psc.model.TamanhoProduto;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -14,11 +18,28 @@ import javax.swing.JOptionPane;
  */
 public class FrmGerenciaCategoria extends javax.swing.JFrame {
 
+    CategoriaDAO categoriaDAO = new CategoriaDAO();
+    
     /**
      * Creates new form FrmCategorias
      */
     public FrmGerenciaCategoria() {
         initComponents();
+        carregarTabela();
+    }
+
+    public void carregarTabela(){
+        DefaultTableModel modelo = (DefaultTableModel) jTableCategoria.getModel();
+        modelo.setRowCount(0);
+
+        for (Categoria cat: categoriaDAO.listar()) {
+            modelo.addRow(new Object[]{
+                    cat.getId(),
+                    cat.getNome(),
+                    cat.getTamanho(),
+                    cat.getEmbalagem(),
+            });
+        }
     }
 
     /**
@@ -35,7 +56,7 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTFNome = new javax.swing.JTextField();
+        jTFNomeEditar = new javax.swing.JTextField();
         jBCancelar = new javax.swing.JButton();
         jBAlterar = new javax.swing.JButton();
         b_apagar = new javax.swing.JButton();
@@ -44,13 +65,13 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        JTFNome = new javax.swing.JTextField();
+        JTFNomeCadastro = new javax.swing.JTextField();
         JBLimpar = new javax.swing.JButton();
         JBCadastrar = new javax.swing.JButton();
-        JCBTamanho = new javax.swing.JComboBox<>();
-        JCBEmbalagem = new javax.swing.JComboBox<>();
-        jCBEmbalagem2 = new javax.swing.JComboBox<>();
-        jCBTamanho2 = new javax.swing.JComboBox<>();
+        JCBTamanho = new javax.swing.JComboBox<TamanhoProduto>();
+        JCBEmbalagem = new javax.swing.JComboBox<EmbalagemProduto>();
+        jCBEmbalagem2 = new javax.swing.JComboBox<EmbalagemProduto>();
+        jCBTamanho2 = new javax.swing.JComboBox<TamanhoProduto>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,9 +107,9 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
         jLabel3.setText("Embalagem");
 
-        jTFNome.addActionListener(new java.awt.event.ActionListener() {
+        jTFNomeEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFNomeActionPerformed(evt);
+                jTFNomeEditarActionPerformed(evt);
             }
         });
 
@@ -138,7 +159,7 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
         });
 
         JCBTamanho.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        JCBTamanho.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Pequeno", "Médio", "Grande" }));
+        JCBTamanho.setModel(new javax.swing.DefaultComboBoxModel<>(TamanhoProduto.values()));
         JCBTamanho.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JCBTamanhoActionPerformed(evt);
@@ -146,13 +167,13 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
         });
 
         JCBEmbalagem.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        JCBEmbalagem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Lata", "Vidro", "Plástico" }));
+        JCBEmbalagem.setModel(new javax.swing.DefaultComboBoxModel<>(EmbalagemProduto.values()));
 
         jCBEmbalagem2.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        jCBEmbalagem2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Lata", "Vidro", "Plástico" }));
+        jCBEmbalagem2.setModel(new javax.swing.DefaultComboBoxModel<>(EmbalagemProduto.values()));
 
         jCBTamanho2.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        jCBTamanho2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Pequeno", "Médio", "Grande", " " }));
+        jCBTamanho2.setModel(new javax.swing.DefaultComboBoxModel<>(TamanhoProduto.values()));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -188,7 +209,7 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
                                                 .addComponent(JBLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(JBCadastrar))
-                                            .addComponent(JTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addComponent(JTFNomeCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(197, 197, 197)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -200,7 +221,7 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
                                 .addComponent(b_apagar)
                                 .addGap(61, 61, 61))
                             .addComponent(jScrollPane1)
-                            .addComponent(jTFNome, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTFNomeEditar, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
@@ -227,7 +248,7 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
                         .addGap(46, 46, 46)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(JTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JTFNomeCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
                         .addComponent(jLabel8)
                         .addGap(8, 8, 8))
@@ -239,7 +260,7 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTFNomeEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -274,9 +295,9 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTFNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNomeActionPerformed
+    private void jTFNomeEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNomeEditarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTFNomeActionPerformed
+    }//GEN-LAST:event_jTFNomeEditarActionPerformed
 
     private void jBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarActionPerformed
         // TODO add your handling code here:
@@ -287,7 +308,7 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
 
     private void JBLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBLimparActionPerformed
         // TODO add your handling code here:
-        JTFNome.setText("");
+        JTFNomeCadastro.setText("");
         JCBTamanho.setSelectedIndex(0); // volta pro primeiro item (ex: "Pequeno")
         JCBEmbalagem.setSelectedIndex(0); // volta pro primeiro item (ex: "Plástico") 
 
@@ -298,7 +319,14 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableCategoriaAncestorAdded
 
     private void JBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCadastrarActionPerformed
-
+        int id = categoriaDAO.maiorID() + 1;
+        String nome = JTFNomeCadastro.getText();
+        TamanhoProduto tamanhoSelecionado = (TamanhoProduto) JCBTamanho.getSelectedItem();
+        EmbalagemProduto embalagemSelecionada = (EmbalagemProduto) JCBEmbalagem.getSelectedItem();
+        
+        Categoria novaCategoria = new Categoria(id, nome, tamanhoSelecionado, embalagemSelecionada);
+        categoriaDAO.adicionar(novaCategoria);
+        carregarTabela();
     }//GEN-LAST:event_JBCadastrarActionPerformed
 
     private void JCBTamanhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBTamanhoActionPerformed
@@ -326,14 +354,14 @@ public static void main(String args[]) {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBCadastrar;
     private javax.swing.JButton JBLimpar;
-    private javax.swing.JComboBox<String> JCBEmbalagem;
-    private javax.swing.JComboBox<String> JCBTamanho;
-    private javax.swing.JTextField JTFNome;
+    private javax.swing.JComboBox<EmbalagemProduto> JCBEmbalagem;
+    private JComboBox<TamanhoProduto> JCBTamanho;
+    private javax.swing.JTextField JTFNomeCadastro;
     private javax.swing.JButton b_apagar;
     private javax.swing.JButton jBAlterar;
     private javax.swing.JButton jBCancelar;
-    private javax.swing.JComboBox<String> jCBEmbalagem2;
-    private javax.swing.JComboBox<String> jCBTamanho2;
+    private javax.swing.JComboBox<EmbalagemProduto> jCBEmbalagem2;
+    private javax.swing.JComboBox<TamanhoProduto> jCBTamanho2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -343,7 +371,7 @@ public static void main(String args[]) {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTFNome;
+    private javax.swing.JTextField jTFNomeEditar;
     private javax.swing.JTable jTableCategoria;
     // End of variables declaration//GEN-END:variables
 }
