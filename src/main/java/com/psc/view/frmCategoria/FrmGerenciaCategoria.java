@@ -18,37 +18,6 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
     public FrmGerenciaCategoria() {
         initComponents();
         carregarTabela();
-        jBAlterar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                int selectedRow = jTableCategoria.getSelectedRow();
-                if (selectedRow == -1) {
-                    JOptionPane.showMessageDialog(null, "Selecione uma categoria para alterar.");
-                    return;
-                }
-
-                // Pegando o ID da linha selecionada
-                int id = Integer.parseInt(jTableCategoria.getValueAt(selectedRow, 0).toString());
-
-                // Pegando os dados dos campos de edição
-                String nome = jTFNomeEditar.getText();
-                TamanhoProduto tamanho = (TamanhoProduto) jCBTamanho2.getSelectedItem();
-                EmbalagemProduto embalagem = (EmbalagemProduto) jCBEmbalagem2.getSelectedItem();
-
-                // Criando nova categoria com os dados atualizados
-                Categoria categoriaAtualizada = new Categoria(id, nome, tamanho, embalagem);
-
-                // Chamando DAO para atualizar
-                boolean sucesso = categoriaDAO.atualizar(categoriaAtualizada);
-
-                if (sucesso) {
-                    JOptionPane.showMessageDialog(null, "Categoria atualizada com sucesso!");
-                    carregarTabela(); // atualiza a tabela
-                } else {
-                    JOptionPane.showMessageDialog(null, "Erro ao atualizar categoria.");
-                }
-            }
-        });
-
     }
 
     public void carregarTabela() {
@@ -150,6 +119,11 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
 
         jBAlterar.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
         jBAlterar.setText("Alterar");
+        jBAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAlterarActionPerformed(evt);
+            }
+        });
 
         b_apagar.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
         b_apagar.setText("Apagar");
@@ -186,7 +160,7 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
         });
 
         JCBTamanho.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        JCBTamanho.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Pequeno", "Médio", "Grande" }));
+        JCBTamanho.setModel(new javax.swing.DefaultComboBoxModel<>(TamanhoProduto.values()));
         JCBTamanho.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JCBTamanhoActionPerformed(evt);
@@ -194,13 +168,13 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
         });
 
         JCBEmbalagem.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        JCBEmbalagem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Lata", "Vidro", "Plástico" }));
+        JCBEmbalagem.setModel(new javax.swing.DefaultComboBoxModel<>(EmbalagemProduto.values()));
 
         jCBEmbalagem2.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        jCBEmbalagem2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Lata", "Vidro", "Plástico" }));
+        jCBEmbalagem2.setModel(new javax.swing.DefaultComboBoxModel<>(EmbalagemProduto.values()));
 
         jCBTamanho2.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        jCBTamanho2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Pequeno", "Médio", "Grande", " " }));
+        jCBTamanho2.setModel(new javax.swing.DefaultComboBoxModel<>(TamanhoProduto.values()));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -375,6 +349,35 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTableCategoriaMouseClicked
 
+    private void jBAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAlterarActionPerformed
+        int selectedRow = jTableCategoria.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(null, "Selecione uma categoria para alterar.");
+            return;
+        }
+
+        // Pegando o ID da linha selecionada
+        int id = Integer.parseInt(jTableCategoria.getValueAt(selectedRow, 0).toString());
+
+        // Pegando os dados dos campos de edição
+        String nome = jTFNomeEditar.getText();
+        TamanhoProduto tamanho = (TamanhoProduto) jCBTamanho2.getSelectedItem();
+        EmbalagemProduto embalagem = (EmbalagemProduto) jCBEmbalagem2.getSelectedItem();
+
+        // Criando nova categoria com os dados atualizados
+        Categoria categoriaAtualizada = new Categoria(id, nome, tamanho, embalagem);
+
+        // Chamando DAO para atualizar
+        boolean sucesso = categoriaDAO.atualizar(categoriaAtualizada);
+
+        if (sucesso) {
+            JOptionPane.showMessageDialog(null, "Categoria atualizada com sucesso!");
+            carregarTabela(); // atualiza a tabela
+        } else {
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar categoria.");
+        }
+    }//GEN-LAST:event_jBAlterarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -396,14 +399,14 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBCadastrar;
     private javax.swing.JButton JBLimpar;
-    private javax.swing.JComboBox<String> JCBEmbalagem;
-    private javax.swing.JComboBox<String> JCBTamanho;
+    private javax.swing.JComboBox<EmbalagemProduto> JCBEmbalagem;
+    private javax.swing.JComboBox<TamanhoProduto> JCBTamanho;
     private javax.swing.JTextField JTFNomeCadastro;
     private javax.swing.JButton b_apagar;
     private javax.swing.JButton jBAlterar;
     private javax.swing.JButton jBCancelar;
-    private javax.swing.JComboBox<String> jCBEmbalagem2;
-    private javax.swing.JComboBox<String> jCBTamanho2;
+    private javax.swing.JComboBox<EmbalagemProduto> jCBEmbalagem2;
+    private javax.swing.JComboBox<TamanhoProduto> jCBTamanho2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
