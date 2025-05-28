@@ -343,18 +343,6 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
 
     private void jTableCategoriaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTableCategoriaAncestorAdded
         // TODO add your handling code here:
-        int linhaSelecionada = jTableCategoria.getSelectedRow();
-
-        if (linhaSelecionada != -1) {
-            String nome = jTableCategoria.getValueAt(linhaSelecionada, 1).toString();
-            TamanhoProduto tamanho = (TamanhoProduto) jTableCategoria.getValueAt(linhaSelecionada, 2);
-            EmbalagemProduto embalagem = (EmbalagemProduto) jTableCategoria.getValueAt(linhaSelecionada, 3);
-
-            jTFNomeEditar.setText(nome);
-            jCBTamanho2.setSelectedItem(tamanho);
-            jCBEmbalagem2.setSelectedItem(embalagem);
-        }
-
     }//GEN-LAST:event_jTableCategoriaAncestorAdded
 
     private void JBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCadastrarActionPerformed
@@ -374,6 +362,17 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
 
     private void jTableCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCategoriaMouseClicked
         // TODO add your handling code here:
+        int linhaSelecionada = jTableCategoria.getSelectedRow();
+
+        if (linhaSelecionada != -1) {
+            String nome = jTableCategoria.getValueAt(linhaSelecionada, 1).toString();
+            TamanhoProduto tamanho = (TamanhoProduto) jTableCategoria.getValueAt(linhaSelecionada, 2);
+            EmbalagemProduto embalagem = (EmbalagemProduto) jTableCategoria.getValueAt(linhaSelecionada, 3);
+
+            jTFNomeEditar.setText(nome);
+            jCBTamanho2.setSelectedItem(tamanho);
+            jCBEmbalagem2.setSelectedItem(embalagem);
+        }
     }//GEN-LAST:event_jTableCategoriaMouseClicked
 
     /**
