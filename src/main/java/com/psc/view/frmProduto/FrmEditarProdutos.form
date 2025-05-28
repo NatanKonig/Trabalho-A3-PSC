@@ -37,7 +37,7 @@
                   <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="JTFpreco" min="-2" pref="328" max="-2" attributes="0"/>
                   <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="JTFUnidade" alignment="0" min="-2" pref="328" max="-2" attributes="0"/>
+                  <Component id="JCBUnidade" alignment="0" min="-2" pref="328" max="-2" attributes="0"/>
                   <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="JTFatual" alignment="0" min="-2" pref="328" max="-2" attributes="0"/>
                   <Component id="JTFminima" alignment="0" min="-2" pref="328" max="-2" attributes="0"/>
@@ -80,7 +80,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="JTFUnidade" min="-2" max="-2" attributes="0"/>
+                      <Component id="JCBUnidade" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
@@ -319,7 +319,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton6ActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JComboBox" name="JTFUnidade">
+    <Component class="javax.swing.JComboBox" name="JCBUnidade">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
@@ -330,6 +330,9 @@
           </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JCBUnidadeActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>

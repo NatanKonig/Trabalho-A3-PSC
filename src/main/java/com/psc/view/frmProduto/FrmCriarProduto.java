@@ -48,7 +48,7 @@ public class FrmCriarProduto extends javax.swing.JFrame {
         JTFminima = new javax.swing.JTextField();
         jToggleButton3 = new javax.swing.JToggleButton();
         JBcriar = new javax.swing.JToggleButton();
-        JTFUnidade = new javax.swing.JComboBox<>();
+        JCBUnidade = new javax.swing.JComboBox<>();
 
         jToggleButton2.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
         jToggleButton2.setText("Sair");
@@ -133,11 +133,11 @@ public class FrmCriarProduto extends javax.swing.JFrame {
             }
         });
 
-        JTFUnidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kg", "g", "L", "ml" }));
-        JTFUnidade.setToolTipText("Kg");
-        JTFUnidade.addActionListener(new java.awt.event.ActionListener() {
+        JCBUnidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kg", "g", "L", "ml" }));
+        JCBUnidade.setToolTipText("Kg");
+        JCBUnidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTFUnidadeActionPerformed(evt);
+                JCBUnidadeActionPerformed(evt);
             }
         });
 
@@ -151,7 +151,7 @@ public class FrmCriarProduto extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(JTFUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(JCBUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,7 +196,7 @@ public class FrmCriarProduto extends javax.swing.JFrame {
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jToggleButton3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(JTFUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(JCBUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -276,6 +276,8 @@ public class FrmCriarProduto extends javax.swing.JFrame {
             }
             precoUnitario = Double.parseDouble(this.JTFpreco.getText());
             
+            unidade = (String) JCBUnidade.getSelectedItem();
+            
             // Verifica quantidade em estoque
             if (this.JTFatual.getText().isBlank()) {
                 throw new Exception("Quantidade em estoque deve ser informada.");
@@ -311,7 +313,7 @@ public class FrmCriarProduto extends javax.swing.JFrame {
             this.JTFNome.setText("");
             this.JTFpreco.setText("");
             this.JTFatual.setText("");
-            this.JTFUnidade.setSelectedItem("");
+            this.JCBUnidade.setSelectedItem("");
             this.JTFminima.setText("");
             this.JTFmaxima.setText("");
             this.JTFCategoria.setText("");
@@ -323,10 +325,9 @@ public class FrmCriarProduto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_JBcriarActionPerformed
 
-    private void JTFUnidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFUnidadeActionPerformed
+    private void JCBUnidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBUnidadeActionPerformed
         // TODO add your handling code here:
-       JTFUnidade.getSelectedItem();
-    }//GEN-LAST:event_JTFUnidadeActionPerformed
+    }//GEN-LAST:event_JCBUnidadeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -366,9 +367,9 @@ public class FrmCriarProduto extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton JBcriar;
+    private javax.swing.JComboBox<String> JCBUnidade;
     private javax.swing.JTextField JTFCategoria;
     private javax.swing.JTextField JTFNome;
-    private javax.swing.JComboBox<String> JTFUnidade;
     private javax.swing.JTextField JTFatual;
     private javax.swing.JTextField JTFmaxima;
     private javax.swing.JTextField JTFminima;

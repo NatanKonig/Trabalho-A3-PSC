@@ -24,7 +24,7 @@ public class FrmEditarProdutos extends javax.swing.JFrame {
     public FrmEditarProdutos() {
         initComponents();
         carregarTabela();
-        JTFUnidade.getSelectedItem();
+        JCBUnidade.getSelectedItem();
     }
 
     /**
@@ -78,7 +78,7 @@ public class FrmEditarProdutos extends javax.swing.JFrame {
         JBAlterar = new javax.swing.JToggleButton();
         JBApagar = new javax.swing.JToggleButton();
         jToggleButton6 = new javax.swing.JToggleButton();
-        JTFUnidade = new javax.swing.JComboBox<>();
+        JCBUnidade = new javax.swing.JComboBox<>();
         JBReajustarPrecos = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -188,7 +188,12 @@ public class FrmEditarProdutos extends javax.swing.JFrame {
             }
         });
 
-        JTFUnidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kg", "g", "L", "ml" }));
+        JCBUnidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kg", "g", "L", "ml" }));
+        JCBUnidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JCBUnidadeActionPerformed(evt);
+            }
+        });
 
         JBReajustarPrecos.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
         JBReajustarPrecos.setText("Alterar o valor de todos os produtos");
@@ -215,7 +220,7 @@ public class FrmEditarProdutos extends javax.swing.JFrame {
                     .addComponent(jLabel10)
                     .addComponent(JTFpreco, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
-                    .addComponent(JTFUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JCBUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
                     .addComponent(JTFatual, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JTFminima, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -252,7 +257,7 @@ public class FrmEditarProdutos extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(JTFUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JCBUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(JBApagar)
@@ -315,7 +320,7 @@ public class FrmEditarProdutos extends javax.swing.JFrame {
         int id = Integer.parseInt(this.JTFId.getText());
         String nome = this.JTFNome.getText();
         double precoUnitario = Double.parseDouble(this.JTFpreco.getText());
-        String unidade = this.JTFUnidade.getSelectedItem().toString();
+        String unidade = (String) this.JCBUnidade.getSelectedItem();
         int quantidadeEstoque = Integer.parseInt(this.JTFatual.getText());
         int quantidadeMinima = Integer.parseInt(this.JTFminima.getText());
         int quantidadeMaxima = Integer.parseInt(this.JTFmaxima.getText());
@@ -336,7 +341,7 @@ public class FrmEditarProdutos extends javax.swing.JFrame {
         }
 
         // Criação do produto
-        Produto p = new Produto(id, nome, precoUnitario,unidade, quantidadeEstoque, quantidadeMinima, quantidadeMaxima, categoria);
+        Produto p = new Produto(id, nome, precoUnitario, unidade, quantidadeEstoque, quantidadeMinima, quantidadeMaxima, categoria);
 
         // Exibe ou salva o produto (exemplo)
         System.out.println(p);
@@ -416,7 +421,7 @@ public class FrmEditarProdutos extends javax.swing.JFrame {
     this.JTFId.setText(id);
     this.JTFNome.setText(nome);
     this.JTFpreco.setText(preco);
-    this.JTFUnidade.setSelectedItem(unidade);
+    this.JCBUnidade.setSelectedItem(unidade);
     this.JTFatual.setText(estoque);
     this.JTFminima.setText(minima);
     this.JTFmaxima.setText(maxima);
@@ -453,6 +458,10 @@ public class FrmEditarProdutos extends javax.swing.JFrame {
     private void JTFIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFIdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JTFIdActionPerformed
+
+    private void JCBUnidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBUnidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JCBUnidadeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -493,10 +502,10 @@ public class FrmEditarProdutos extends javax.swing.JFrame {
     private javax.swing.JToggleButton JBAlterar;
     private javax.swing.JToggleButton JBApagar;
     private javax.swing.JToggleButton JBReajustarPrecos;
+    private javax.swing.JComboBox<String> JCBUnidade;
     private javax.swing.JTextField JTFCategoria;
     private javax.swing.JTextField JTFId;
     private javax.swing.JTextField JTFNome;
-    private javax.swing.JComboBox<String> JTFUnidade;
     private javax.swing.JTextField JTFatual;
     private javax.swing.JTextField JTFmaxima;
     private javax.swing.JTextField JTFminima;
