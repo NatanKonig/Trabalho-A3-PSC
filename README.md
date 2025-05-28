@@ -9,3 +9,6 @@ Evelyn Yasmin Ferreira Leal - 10725115169\
 Natan de Camargo Catapan Ghizzo Konig - 10725110644\
 Mario Gabriel Imperator dos Santos - 10725115250\
 Fabrício Valdemar de Aguiar filho - 10725115451
+
+## Banco de Dados
+Execute o arquivo `banco.sql` para criar o banco de dados e suas tabelas.
