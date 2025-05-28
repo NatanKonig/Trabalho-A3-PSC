@@ -3,6 +3,8 @@ package com.psc.model; // Define o pacote onde essa classe está localizada.
 
 public class Categoria { // Define a classe pública chamada 'Categoria'.
 
+    private int id;
+
     // Atributo privado que armazena o nome da categoria.
     private String nome;
 
@@ -17,15 +19,26 @@ public class Categoria { // Define a classe pública chamada 'Categoria'.
     }
 
     // Construtor com parâmetros para inicializar todos os atributos da classe.
-    public Categoria(String nome, TamanhoProduto tamanho, EmbalagemProduto embalagem) {
+    public Categoria(int id, String nome, TamanhoProduto tamanho, EmbalagemProduto embalagem) {
+        this.id = id;
         this.nome = nome;
         this.tamanho = tamanho;
         this.embalagem = embalagem;
     }
 
+    // Método getter que retorna o valor do atributo 'id'.
+    public int getId() {
+        return id;
+    }
+
     // Método getter que retorna o valor do atributo 'nome'.
     public String getNome() {
         return nome;
+    }
+
+    // Método setter que altera o valor do atributo 'id'.
+    public void setId(int id) {
+        this.id = id;
     }
 
     // Método setter que altera o valor do atributo 'nome'.

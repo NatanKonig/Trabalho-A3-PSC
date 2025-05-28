@@ -15,6 +15,10 @@ public class CategoriaDAO { // Define a classe pública 'CategoriaDAO', respons�
         categorias.add(categoria); // Insere o objeto categoria na lista.
     }
 
+    public List<Categoria> listar() {
+        return categorias;
+    }
+
     // Método público que busca uma categoria pelo nome (ignora maiúsculas/minúsculas).
     public Categoria buscarPorNome(String nome) {
         for (Categoria cat : categorias) { // Percorre todas as categorias da lista.
@@ -33,6 +37,16 @@ public class CategoriaDAO { // Define a classe pública 'CategoriaDAO', respons�
             return true; // Indica que a remoção foi feita com sucesso.
         }
         return false; // Se não encontrou, retorna falso.
+    }
+
+    public int maiorID() {
+        int maiorID = 0;
+        for (int i = 0; i < categorias.size(); i++) {
+            if (categorias.get(i).getId() > maiorID) {
+                maiorID = categorias.get(i).getId();
+            }
+        }
+        return maiorID;
     }
 
 }
