@@ -333,11 +333,21 @@ public class FrmMovimentarEstoque extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Informe uma quantidade válida.");
         return;
        }
-       //Processar movimentação
-       String tipo = JEntrada.isSelected() ? "Entrada" : "Saida";
-       int quantidade = Integer.parseInt(qtdText);
-       
-       JOptionPane.showMessageDialog(this, "Movimentação realizada: \ntipo:" + tipo + "\nquantidade:" + quantidade);
+      // Processar movimentação
+    Produto produto = obterProdutoSelecionado();
+    int produtoId = produto.getId();
+    int quantidade = Integer.parseInt(qtdText);
+    String tipo = JEntrada.isSelected() ? "ENTRADA" : "SAIDA";
+
+    MovimentacaoDAO movimentacaoDAO = new MovimentacaoDAO();
+    boolean sucesso = movimentacaoDAO.movimentarEstoque(produtoId, quantidade, tipo);
+
+    if (sucesso) {
+        JOptionPane.showMessageDialog(this, "Movimentação realizada: \ntipo: " + tipo + "\nquantidade: " + quantidade);
+    } else {
+        JOptionPane.showMessageDialog(this, "Erro ao realizar a movimentação!");
+    }
+
     }//GEN-LAST:event_JBConfirmarActionPerformed
 
     private void JBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCancelarActionPerformed
