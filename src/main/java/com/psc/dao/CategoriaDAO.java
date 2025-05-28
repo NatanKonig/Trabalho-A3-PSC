@@ -50,7 +50,13 @@ public class CategoriaDAO { // Define a classe p√∫blica 'CategoriaDAO', respons√
     }
 
     public boolean atualizar(Categoria categoriaAtualizada) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        for (int i = 0; i < categorias.size(); i++) {
+            if (categorias.get(i).getId() == categoriaAtualizada.getId()) {
+                categorias.set(i, categoriaAtualizada);
+                return true;
+            }
+        }
+        return false;
     }
 
 }
