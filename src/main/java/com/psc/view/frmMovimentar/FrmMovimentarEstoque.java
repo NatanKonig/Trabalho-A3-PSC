@@ -2,20 +2,15 @@ package com.psc.view.frmMovimentar;
 
 import javax.swing.JOptionPane;
 
-import com.psc.model.Movimentacao;
-import com.psc.model.TipoMovimentacao;
+
 import com.psc.model.Produto;
 import com.psc.dao.MovimentacaoDAO;
 
-/**
- *
- * @author vevinha
- */
+
+
 public class FrmMovimentarEstoque extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrmMovimentarEstoque
-     */
+    
     public FrmMovimentarEstoque() {
         initComponents();
     }
@@ -262,25 +257,31 @@ public class FrmMovimentarEstoque extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JEntradaActionPerformed
-     // TODO add your handling code here:                                                                                   
-    Produto produto = obterProdutoSelecionado(); // método que busca o produto no form
-    int quantidade = Integer.parseInt(JTextQtd.getText()); 
+     // TODO add your handling code here:                                                                                                                            
+    Produto produto = obterProdutoSelecionado();
 
-    Movimentacao movimentacao = new Movimentacao();
-    movimentacao.setProduto(produto);
-    movimentacao.setQuantidade(quantidade);
-    movimentacao.setTipo(TipoMovimentacao.ENTRADA);
-    
-    // Atualiza o estoque
-    produto.setQuantidadeEstoque(produto.getQuantidadeEstoque() + quantidade);
+    if (produto == null) {
+        JOptionPane.showMessageDialog(this, "Selecione um produto.");
+        return;
+    }
 
-    // adicionar a movimentação
-    System.out.println("Movimentação registrada: " + movimentacao);
+    String qtdText = JTextQtd.getText().trim();
+    if (qtdText.isEmpty() || !qtdText.matches("\\d+")) {
+        JOptionPane.showMessageDialog(this, "Informe uma quantidade válida.");
+        return;
+    }
 
-    JOptionPane.showMessageDialog(this, "Entrada registrada com sucesso!");
-    
+    int quantidade = Integer.parseInt(qtdText);
+    int produtoId = produto.getId();
 
+    MovimentacaoDAO movimentacaoDAO = new MovimentacaoDAO();
+    boolean sucesso = movimentacaoDAO.movimentarEstoque(produtoId, quantidade, "ENTRADA");
 
+    if (sucesso) {
+        JOptionPane.showMessageDialog(this, "Entrada registrada com sucesso!");
+    } else {
+        JOptionPane.showMessageDialog(this, "Erro ao registrar entrada.");
+    }
     }//GEN-LAST:event_JEntradaActionPerformed
 
     private void JTextQtdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextQtdActionPerformed
@@ -288,27 +289,32 @@ public class FrmMovimentarEstoque extends javax.swing.JFrame {
     }//GEN-LAST:event_JTextQtdActionPerformed
 
     private void JSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JSaidaActionPerformed
-        // TODO add your handling code here:                                        
-    Produto produto = obterProdutoSelecionado(); // método que busca o produto no form
-    int quantidade = Integer.parseInt(JTextQtd.getText()); // campo para quantidade
+        // TODO add your handling code here:                                                                                 
+    Produto produto = obterProdutoSelecionado();
 
-    if (produto.getQuantidadeEstoque() < quantidade) {
-        JOptionPane.showMessageDialog(this, "Estoque insuficiente para a saída.");
+    if (produto == null) {
+        JOptionPane.showMessageDialog(this, "Selecione um produto.");
         return;
     }
 
-    Movimentacao movimentacao = new Movimentacao();
-    movimentacao.setProduto(produto);
-    movimentacao.setQuantidade(quantidade);
-    movimentacao.setTipo(TipoMovimentacao.SAIDA);
+    String qtdText = JTextQtd.getText().trim();
+    if (qtdText.isEmpty() || !qtdText.matches("\\d+")) {
+        JOptionPane.showMessageDialog(this, "Informe uma quantidade válida.");
+        return;
+    }
 
-    
-    produto.setQuantidadeEstoque(produto.getQuantidadeEstoque() - quantidade);
+    int quantidade = Integer.parseInt(qtdText);
+    int produtoId = produto.getId();
 
- 
-    System.out.println("Movimentação registrada: " + movimentacao);
+    MovimentacaoDAO movimentacaoDAO = new MovimentacaoDAO();
+    boolean sucesso = movimentacaoDAO.movimentarEstoque(produtoId, quantidade, "SAIDA");
 
-    JOptionPane.showMessageDialog(this, "Saída registrada com sucesso!");
+    if (sucesso) {
+        JOptionPane.showMessageDialog(this, "Saída registrada com sucesso!");
+    } else {
+        JOptionPane.showMessageDialog(this, "Erro ao registrar saída.");
+    }
+
 
 
     }//GEN-LAST:event_JSaidaActionPerformed
@@ -368,9 +374,7 @@ public class FrmMovimentarEstoque extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_JComboBoxActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
