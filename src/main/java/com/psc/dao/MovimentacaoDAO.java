@@ -7,14 +7,8 @@ import java.sql.SQLException;
 
 public class MovimentacaoDAO {
 
-    /**
-     * Método responsável por movimentar o estoque de um produto.
-     * 
-     * @param produtoId ID do produto a ser movimentado.
-     * @param quantidade Quantidade da movimentação.
-     * @param tipo "ENTRADA" ou "SAIDA".
-     * @return true se a movimentação foi bem sucedida, false caso contrário.
-     */
+
+    //Método responsável por movimentar o estoque de um produto.
     public boolean movimentarEstoque(int produtoId, int quantidade, String tipo) {
         try (Connection conn = ConexaoDAO.getConnection()) {   // ✅ AGORA usa ConexaoDAO
 
