@@ -1,11 +1,10 @@
 package com.psc.model;
 
-import com.psc.model.Categoria;
-
 public class Produto {
     private int id;
     private String nome;
     private double precoUnitario;
+    private double peso;
     private String unidade;
     private int quantidadeEstoque;
     private int quantidadeMinima;
@@ -13,12 +12,13 @@ public class Produto {
     private String categoria;
 
     //Construtores
-    public Produto() {}
+    public Produto(int id, String nome, double precoUnitario, double peso, String categoria, int quantidadeEstoque, int quantidadeMinima, int quantidadeMaxima1) {}
 
-    public Produto(int id, String nome, double precoUnitario, String unidade, int quantidadeEstoque, int quantidadeMinima, int quantidadeMaxima, String categoria) {
+    public Produto(int id, String nome, double precoUnitario, double peso, String unidade, int quantidadeEstoque, int quantidadeMinima, int quantidadeMaxima, String categoria) {
         this.id = id;
         this.nome = nome;
         this.precoUnitario = precoUnitario;
+        this.peso = peso;
         this.unidade = unidade;
         this.quantidadeEstoque = quantidadeEstoque;
         this.quantidadeMinima = quantidadeMinima;
@@ -49,6 +49,14 @@ public class Produto {
 
     public void setPrecoUnitario(double precoUnitario) {
         this.precoUnitario = precoUnitario;
+    }
+
+    public double getPeso() {
+        return peso;
+    }
+
+    public void setPeso(double peso) {
+        this.peso = peso;
     }
 
     public String getUnidade() {
