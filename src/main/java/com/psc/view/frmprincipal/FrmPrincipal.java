@@ -1,9 +1,9 @@
-package com.psc.view.frmPrincipal;
+package com.psc.view.frmprincipal;
 
-import com.psc.view.frmCategoria.FrmGerenciaCategoria;
-import com.psc.view.frmMovimentar.FrmMovimentarEstoque;
-import com.psc.view.frmProduto.FrmGerenciarProdutos;
-import com.psc.view.frmRelatorio.FrmRelatorio;
+import com.psc.view.frmcategoria.FrmGerenciaCategoria;
+import com.psc.view.frmmovimentar.FrmMovimentarEstoque;
+import com.psc.view.frmproduto.FrmGerenciarProdutos;
+import com.psc.view.frmrelatorio.FrmRelatorio;
 
 /**
  *
