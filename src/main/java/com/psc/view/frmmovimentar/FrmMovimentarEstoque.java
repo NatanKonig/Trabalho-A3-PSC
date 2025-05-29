@@ -17,7 +17,24 @@ public class FrmMovimentarEstoque extends javax.swing.JFrame {
     
     public FrmMovimentarEstoque() {
         initComponents();
+  
+    ProdutoDAO produtoDAO = new ProdutoDAO();
+    for (Produto p : produtoDAO.listar()) {
+        JComboBox.addItem(p);
     }
+    }
+    
+    private void carregarProdutosNoComboBox() {
+    ProdutoDAO produtoDAO = new ProdutoDAO();
+    ArrayList<Produto> produtos = produtoDAO.listar();
+
+    JComboBox.removeAllItems(); // Limpa o ComboBox
+
+    for (Produto p : produtos) {
+        JComboBox.addItem(p);
+    }
+}
+
     // Método para obter o produto atualmente selecionado no ComboBox.
 private Produto obterProdutoSelecionado() {
     Object selectedItem = JComboBox.getSelectedItem();
@@ -62,7 +79,6 @@ private Produto obterProdutoSelecionado() {
 
         jLabel1.setText("Selecionar Produto:");
 
-        JComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Produto", "Produto", "Produto", " " }));
         JComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JComboBoxActionPerformed(evt);
@@ -421,7 +437,13 @@ private Produto obterProdutoSelecionado() {
     }//GEN-LAST:event_JProdutosActionPerformed
 
     private void JComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JComboBoxActionPerformed
-        // TODO add your handling code here:
+                                         
+    Produto produtoSelecionado = (Produto) JComboBox.getSelectedItem();
+    if (produtoSelecionado != null) {
+        JOptionPane.showMessageDialog(this, "Produto selecionado: " + produtoSelecionado.getNome());
+    }
+     
+    
     }//GEN-LAST:event_JComboBoxActionPerformed
 
 
@@ -461,7 +483,7 @@ private Produto obterProdutoSelecionado() {
     private javax.swing.JButton JBCancelar;
     private javax.swing.JButton JBConfirmar;
     private javax.swing.JButton JBPesquisar;
-    private javax.swing.JComboBox<String> JComboBox;
+    private javax.swing.JComboBox<Produto> JComboBox;
     private javax.swing.JRadioButton JEntrada;
     private javax.swing.JTextField JProdutos;
     private javax.swing.JRadioButton JSaida;
