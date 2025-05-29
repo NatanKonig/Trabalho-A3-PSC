@@ -13,6 +13,13 @@ Fabrício Valdemar de Aguiar filho - AguiarFabricio 10725115451
 ## Banco de Dados
 Execute o arquivo `banco.sql` para criar o banco de dados e suas tabelas.
 
-## Credenciais do Banco de Dados
-- **Usuário:** root
-- **Senha:** !Mario0712
+## Arquivo config.properties
+Para estabelecer a conexão com o banco de dados, é necessário adicionar o arquivo config.properties na pasta resources (src/main/resources). Esse arquivo deve conter as credenciais e configurações necessárias para se conectar ao banco de dados local.
+
+Antes de utilizar o banco, certifique-se de executar o script banco.sql, localizado na raiz do projeto. Ele criará o schema controle_estoque e suas respectivas tabelas.
+
+### Exemplo de config.properties
+properties
+db.url=jdbc:mysql://localhost:3306/controle_estoque
+db.username=root
+db.password=sua_senha
