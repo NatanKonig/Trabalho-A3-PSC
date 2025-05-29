@@ -33,7 +33,7 @@ public class ProdutoDAO {
 
     // CREATE
     public void inserir(Produto p) {
-        String sql = "INSERT INTO produto (nome, preco_unitario, unidade, quantidade_estoque, quantidade_minima, quantidade_maxima, categoria) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO produto (nome, preco_unitario,peso, unidade, quantidade_estoque, quantidade_minima, quantidade_maxima, categoria) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = conectar();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -41,11 +41,12 @@ public class ProdutoDAO {
             // Preenche os parâmetros
             stmt.setString(1, p.getNome());
             stmt.setDouble(2, p.getPrecoUnitario());
-            stmt.setString(3, p.getUnidade());
-            stmt.setInt(4, p.getQuantidadeEstoque());
-            stmt.setInt(5, p.getQuantidadeMinima());
-            stmt.setInt(6, p.getQuantidadeMaxima());
-            stmt.setString(7, p.getCategoria());
+            stmt.setDouble(3, p.getPeso());
+            stmt.setString(4, p.getUnidade());
+            stmt.setInt(5, p.getQuantidadeEstoque());
+            stmt.setInt(6, p.getQuantidadeMinima());
+            stmt.setInt(7, p.getQuantidadeMaxima());
+            stmt.setString(8, p.getCategoria());
 
             // Executa o INSERT
             stmt.executeUpdate();
@@ -78,6 +79,7 @@ public class ProdutoDAO {
                         rs.getInt("id"),
                         rs.getString("nome"),
                         rs.getDouble("preco_unitario"),
+                        rs.getDouble("peso"),
                         rs.getString("unidade"),
                         rs.getInt("quantidade_estoque"),
                         rs.getInt("quantidade_minima"),
@@ -93,9 +95,42 @@ public class ProdutoDAO {
         return lista;
     }
 
+    public ArrayList<Produto> buscarPorNome(String nome) {
+        ArrayList<Produto> lista = new ArrayList<>();
+        String sql = "SELECT * FROM produto WHERE nome LIKE ?";
+
+        try (Connection conn = conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, "%" + nome + "%");
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Produto p = new Produto(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getDouble("preco_unitario"),
+                        rs.getDouble("peso"),
+                        rs.getString("unidade"),
+                        rs.getInt("quantidade_estoque"),
+                        rs.getInt("quantidade_minima"),
+                        rs.getInt("quantidade_maxima"),
+                        rs.getString("categoria")
+                );
+                lista.add(p);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao buscar por nome: " + e.getMessage());
+        }
+
+        return lista;
+    }
+    
+    
     // UPDATE
     public void atualizar(Produto p) {
-        String sql = "UPDATE produto SET nome=?, preco_unitario=?, unidade=?, quantidade_estoque=?, quantidade_minima=?, quantidade_maxima=?, categoria=? WHERE id=?";
+        String sql = "UPDATE produto SET nome=?, preco_unitario=?,peso=?, unidade=?, quantidade_estoque=?, quantidade_minima=?, quantidade_maxima=?, categoria=? WHERE id=?";
 
         try (Connection conn = conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
