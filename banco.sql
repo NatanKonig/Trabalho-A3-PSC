@@ -1,6 +1,8 @@
-CREATE DATABASE controle_estoque;
+CREATE DATABASE IF NOT EXISTS controle_estoque;
 
-CREATE TABLE categoria (
+USE controle_estoque;
+
+CREATE TABLE IF NOT EXISTS categoria (
     id_categoria INT NOT NULL AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,
     tamanho ENUM('Pequeno', 'Médio', 'Grande') NOT NULL,
@@ -8,7 +10,7 @@ CREATE TABLE categoria (
     PRIMARY KEY (id_categoria)
 );
 
-CREATE TABLE produto (
+CREATE TABLE IF NOT EXISTS produto (
     id_produto INT NOT NULL AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,
     preco_unitario DECIMAL(10,2) NOT NULL,
