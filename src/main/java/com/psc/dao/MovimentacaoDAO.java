@@ -1,18 +1,44 @@
 package com.psc.dao;
 
 import java.sql.*;
+import java.io.InputStream;
+import java.util.Properties;
 
 public class MovimentacaoDAO {
 
-    private final String URL = "jdbc:mysql://localhost:3306/controle_estoque";
-    private final String USER = "root";
-    private final String PASSWORD = "Fibi1518+";
+    private String URL;
+    private String USER;
+    private String PASSWORD;
+
+    public MovimentacaoDAO() {
+        carregarConfiguracoes();
+    }
+
+    private void carregarConfiguracoes() {
+        try {
+            Properties props = new Properties();
+            InputStream input = getClass().getClassLoader().getResourceAsStream("config.properties");
+
+            if (input == null) {
+                throw new RuntimeException("Arquivo config.properties não encontrado no classpath.");
+            }
+
+            props.load(input);
+
+            this.URL = props.getProperty("db.url");
+            this.USER = props.getProperty("db.user");
+            this.PASSWORD = props.getProperty("db.password");
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Erro ao carregar configurações do banco de dados.", e);
+        }
+    }
 
     private Connection conectar() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
-//Movimenta estoque conforme o tipo(Entrada ou Saída)
+    // Movimenta estoque conforme o tipo (Entrada ou Saída)
     public boolean movimentarEstoque(int produtoId, int quantidade, String tipo) {
         try (Connection conn = conectar()) {
             // 1. Buscar a quantidade atual do produto
@@ -66,7 +92,7 @@ public class MovimentacaoDAO {
         }
     }
 
-//Verifica limte de estoque
+    // Verifica limite de estoque
     private void verificarLimites(String nomeProduto, int estoque, int minimo, int maximo) {
         if (estoque < minimo) {
             System.out.println("⚠️ Estoque de \"" + nomeProduto + "\" abaixo do mínimo (" + estoque + "/" + minimo + ")");
@@ -75,5 +101,6 @@ public class MovimentacaoDAO {
         }
     }
 }
+
 
 
