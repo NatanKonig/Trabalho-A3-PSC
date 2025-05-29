@@ -3,19 +3,16 @@ package com.psc.model;
 import java.time.LocalDateTime;
 
 import com.psc.model.Produto;
-        /**
- * Classe responsável por representar uma movimentação de estoque (entrada ou saída).
- * Cada movimentação está ligada a um produto, com quantidade, tipo e data/hora.
- */
+
+//Classe responsável por representar uma movimentação de estoque (entrada ou saída). Cada movimentação está ligada a um produto, com quantidade, tipo e data/hora.
 public class Movimentacao {
     private int id;
     private Produto produto;
     private int quantidade;
     private TipoMovimentacao tipo;
     private LocalDateTime data;
-    /**
-     * Construtor padrão: define a data da movimentação como o momento atual
-     */
+
+    //Construtor padrão: define a data da movimentação como o momento atual
     public Movimentacao(){
         this.data = LocalDateTime.now();
     }
@@ -27,7 +24,7 @@ public class Movimentacao {
        this.tipo = tipo;
        this.data = data;
     }
-      // Getters e Setters (acesso aos atributos privados)
+      // Metodos Getters e Setters 
     
     public int getId(){
         return id;

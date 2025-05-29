@@ -1,48 +1,78 @@
-package com.psc.model;
+package com.psc.model; // Define o pacote onde essa classe está localizada.
+// Isso organiza o código em pastas lógicas no projeto.
 
-public class Categoria {
+public class Categoria { // Define a classe pública chamada 'Categoria'.
 
+    private int id;
+
+    // Atributo privado que armazena o nome da categoria.
     private String nome;
-    private String tamanho;
-    private String embalagem;
 
-    public Categoria(String nome, String tamanho, String embalagem) {
+    // Atributo privado que representa o tamanho do produto (provavelmente um enum ou outra classe).
+    private TamanhoProduto tamanho;
+
+    // Atributo privado que representa a embalagem do produto (também pode ser enum ou classe).
+    private EmbalagemProduto embalagem;
+
+    // Construtor vazio (padrão), necessário para alguns frameworks ou para criar objetos sem inicializar os campos.
+    public Categoria() {
+    }
+
+    // Construtor com parâmetros para inicializar todos os atributos da classe.
+    public Categoria(int id, String nome, TamanhoProduto tamanho, EmbalagemProduto embalagem) {
+        this.id = id;
         this.nome = nome;
         this.tamanho = tamanho;
         this.embalagem = embalagem;
     }
 
-    public String getnome() {
+    // Método getter que retorna o valor do atributo 'id'.
+    public int getId() {
+        return id;
+    }
+
+    // Método getter que retorna o valor do atributo 'nome'.
+    public String getNome() {
         return nome;
     }
 
+    // Método setter que altera o valor do atributo 'id'.
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    // Método setter que altera o valor do atributo 'nome'.
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public String getTamanho() {
+    // Getter para o atributo 'tamanho'.
+    public TamanhoProduto getTamanho() {
         return tamanho;
     }
 
-    public void setTamanho(String tamanho) {
+    // Setter para o atributo 'tamanho'.
+    public void setTamanho(TamanhoProduto tamanho) {
         this.tamanho = tamanho;
     }
 
-    public String getEmbalagem() {
+    // Getter para o atributo 'embalagem'.
+    public EmbalagemProduto getEmbalagem() {
         return embalagem;
     }
 
-    public void setEmbalagem(String embalagem) {
+    // Setter para o atributo 'embalagem'.
+    public void setEmbalagem(EmbalagemProduto embalagem) {
         this.embalagem = embalagem;
     }
 
+    // Método sobrescrito que retorna uma representação em texto (string) do objeto Categoria.
     @Override
     public String toString() {
         return "Categoria{"
                 + "nome='" + nome + '\''
-                + ", tamanho='" + tamanho + '\''
-                + ", embalagem='" + embalagem + '\''
+                + ", tamanho=" + tamanho
+                + ", embalagem=" + embalagem
                 + '}';
     }
-
 }

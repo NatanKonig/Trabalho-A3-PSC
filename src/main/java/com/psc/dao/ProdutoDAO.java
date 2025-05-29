@@ -11,29 +11,55 @@ public class ProdutoDAO {
     private final String URL = "jdbc:mysql://localhost:3306/estoque";
     private final String USER = "root"; // usuário do MySQL
     private final String PASSWORD = "Amarelo007"; // senha do MySQL
+    public  boolean reajustarPrecos(double percentual) {
+    String sql = "UPDATE produto SET preco_unitario = preco_unitario + (preco_unitario * ? / 100)";
 
+    try (Connection conn = conectar();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setDouble(1, percentual);
+        stmt.executeUpdate();
+        return true;
+
+    } catch (SQLException e) {
+        System.out.println("Erro ao reajustar preços: " + e.getMessage());
+        return false;
+    }
+}
+    
     private Connection conectar() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
     // CREATE
     public void inserir(Produto p) {
-        String sql = "INSERT INTO produto (id, nome, preco_unitario, unidade, quantidade_estoque, quantidade_minima, quantidade_maxima, categoria) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO produto (nome, preco_unitario,peso, unidade, quantidade_estoque, quantidade_minima, quantidade_maxima, categoria) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            stmt.setInt(1, p.getId());
-            stmt.setString(2, p.getNome());
-            stmt.setDouble(3, p.getPrecoUnitario());
+            // Preenche os parâmetros
+            stmt.setString(1, p.getNome());
+            stmt.setDouble(2, p.getPrecoUnitario());
+            stmt.setDouble(3, p.getPeso());
             stmt.setString(4, p.getUnidade());
             stmt.setInt(5, p.getQuantidadeEstoque());
             stmt.setInt(6, p.getQuantidadeMinima());
             stmt.setInt(7, p.getQuantidadeMaxima());
             stmt.setString(8, p.getCategoria());
 
+            // Executa o INSERT
             stmt.executeUpdate();
-            System.out.println("Produto inserido com sucesso!");
+
+            // Recupera o ID gerado automaticamente
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                int idGerado = rs.getInt(1);
+                p.setId(idGerado); // atualiza o objeto com o ID do banco
+            }
+
+            System.out.println("Produto inserido com sucesso. ID: " + p.getId());
+
         } catch (SQLException e) {
             System.out.println("Erro ao inserir: " + e.getMessage());
         }
@@ -53,6 +79,7 @@ public class ProdutoDAO {
                         rs.getInt("id"),
                         rs.getString("nome"),
                         rs.getDouble("preco_unitario"),
+                        rs.getDouble("peso"),
                         rs.getString("unidade"),
                         rs.getInt("quantidade_estoque"),
                         rs.getInt("quantidade_minima"),
@@ -68,9 +95,42 @@ public class ProdutoDAO {
         return lista;
     }
 
+    public ArrayList<Produto> buscarPorNome(String nome) {
+        ArrayList<Produto> lista = new ArrayList<>();
+        String sql = "SELECT * FROM produto WHERE nome LIKE ?";
+
+        try (Connection conn = conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, "%" + nome + "%");
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Produto p = new Produto(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getDouble("preco_unitario"),
+                        rs.getDouble("peso"),
+                        rs.getString("unidade"),
+                        rs.getInt("quantidade_estoque"),
+                        rs.getInt("quantidade_minima"),
+                        rs.getInt("quantidade_maxima"),
+                        rs.getString("categoria")
+                );
+                lista.add(p);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao buscar por nome: " + e.getMessage());
+        }
+
+        return lista;
+    }
+    
+    
     // UPDATE
     public void atualizar(Produto p) {
-        String sql = "UPDATE produto SET nome=?, preco_unitario=?, unidade=?, quantidade_estoque=?, quantidade_minima=?, quantidade_maxima=?, categoria=? WHERE id=?";
+        String sql = "UPDATE produto SET nome=?, preco_unitario=?,peso=?, unidade=?, quantidade_estoque=?, quantidade_minima=?, quantidade_maxima=?, categoria=? WHERE id=?";
 
         try (Connection conn = conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
