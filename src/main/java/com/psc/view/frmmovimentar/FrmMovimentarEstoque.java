@@ -5,6 +5,10 @@ import javax.swing.JOptionPane;
 
 import com.psc.model.Produto;
 import com.psc.dao.MovimentacaoDAO;
+import com.psc.dao.ProdutoDAO;
+import com.psc.dao.CategoriaDAO;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 
 
@@ -372,6 +376,43 @@ private Produto obterProdutoSelecionado() {
     }//GEN-LAST:event_JBCancelarActionPerformed
 
     private void JBPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBPesquisarActionPerformed
+                                            
+    String nomePesquisa = JProdutos.getText().trim();
+
+    if (nomePesquisa.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Digite um nome para pesquisar.");
+        return;
+    }
+
+    ProdutoDAO produtoDAO = new ProdutoDAO();
+    ArrayList<Produto> produtos = produtoDAO.buscarPorNome(nomePesquisa);
+
+    if (produtos.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Nenhum produto encontrado.");
+        return;
+    }
+
+    // Preenche a JTableList
+    DefaultTableModel model = (DefaultTableModel) JTableList.getModel();
+    model.setRowCount(0);  // Limpa a tabela antes de adicionar novas linhas
+
+    for (Produto p : produtos) {
+        String status = "OK";
+        if (p.getQuantidadeEstoque() < p.getQuantidadeMinima()) {
+            status = "⚠️ Abaixo do Mínimo";
+        } else if (p.getQuantidadeEstoque() > p.getQuantidadeMaxima()) {
+            status = "⚠️ Acima do Máximo";
+        }
+
+        model.addRow(new Object[]{
+            p.getNome(),
+            p.getPrecoUnitario(),
+            p.getUnidade(),
+            p.getQuantidadeEstoque(),
+            p.getCategoria(), // ou p.getCategoria().getNome() se for um objeto Categoria
+            status
+        });
+    }
         // TODO add your handling code here:
     }//GEN-LAST:event_JBPesquisarActionPerformed
 
