@@ -1,4 +1,4 @@
-package com.psc.view.frmCategoria;
+package com.psc.view.frmcategoria;
 
 import com.psc.dao.CategoriaDAO;
 import com.psc.model.Categoria;

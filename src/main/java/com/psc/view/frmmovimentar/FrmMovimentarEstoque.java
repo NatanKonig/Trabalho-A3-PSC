@@ -1,4 +1,4 @@
-package com.psc.view.frmMovimentar;
+package com.psc.view.frmmovimentar;
 
 import javax.swing.JOptionPane;
 

@@ -1,4 +1,4 @@
-package com.psc.view.frmProduto;
+package com.psc.view.frmproduto;
 
 /**
  *
