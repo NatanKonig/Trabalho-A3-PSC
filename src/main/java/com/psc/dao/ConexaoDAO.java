@@ -1,22 +1,37 @@
 package com.psc.dao;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-/**
- *
- * @author mario
- */
+import java.util.Properties;
+
 public class ConexaoDAO {
-    public Connection conectaBD() {
-        Connection conn = null;
+    private static String URL;
+    private static String USER;
+    private static String PASSWORD;
+
+    static {
         try {
-            String url = "jdbc:mysql://localhost:3306/seu_banco?user=root&password=sua_senha";
-            conn = DriverManager.getConnection(url);
-            System.out.println("Conexão realizada com sucesso.");
-        } catch (SQLException e) {
-            System.out.println("Erro na conexão: " + e.getMessage());
+            Properties props = new Properties();
+            InputStream input = ConexaoDAO.class.getClassLoader().getResourceAsStream("config.properties");
+
+            if (input == null) {
+                throw new RuntimeException("Arquivo config.properties não encontrado.");
+            }
+
+            props.load(input);
+            URL = props.getProperty("db.url");
+            USER = props.getProperty("db.user");
+            PASSWORD = props.getProperty("db.password");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Erro ao carregar configurações do banco.", e);
         }
-        return conn;
+    }
+
+    public static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 }
