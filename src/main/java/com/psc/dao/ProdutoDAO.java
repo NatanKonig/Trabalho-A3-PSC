@@ -14,6 +14,7 @@ public class ProdutoDAO {
     public  boolean reajustarPrecos(double percentual) {
     String sql = "UPDATE produto SET preco_unitario = preco_unitario + (preco_unitario * ? / 100)";
 
+    
     try (Connection conn = conectar();
          PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -33,7 +34,7 @@ public class ProdutoDAO {
 
     // CREATE
     public void inserir(Produto p) {
-        String sql = "INSERT INTO produto (nome, preco_unitario,peso, unidade, quantidade_estoque, quantidade_minima, quantidade_maxima, categoria) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO produto (nome, preco_unitario,peso, unidade, quantidade_estoque, quantidade_minima, quantidade_maxima, categoria) VALUES (?, ?, ?, ?, ?, ?, ?,?)";
 
         try (Connection conn = conectar();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -137,12 +138,13 @@ public class ProdutoDAO {
 
             stmt.setString(1, p.getNome());
             stmt.setDouble(2, p.getPrecoUnitario());
-            stmt.setString(3, p.getUnidade());
-            stmt.setInt(4, p.getQuantidadeEstoque());
-            stmt.setInt(5, p.getQuantidadeMinima());
-            stmt.setInt(6, p.getQuantidadeMaxima());
-            stmt.setString(7, p.getCategoria());
-            stmt.setInt(8, p.getId());
+            stmt.setDouble(3, p.getPeso());
+            stmt.setString(4, p.getUnidade());
+            stmt.setInt(5, p.getQuantidadeEstoque());
+            stmt.setInt(6, p.getQuantidadeMinima());
+            stmt.setInt(7, p.getQuantidadeMaxima());
+            stmt.setString(8, p.getCategoria());
+            stmt.setInt(9, p.getId());
 
             stmt.executeUpdate();
             System.out.println("Produto atualizado com sucesso!");

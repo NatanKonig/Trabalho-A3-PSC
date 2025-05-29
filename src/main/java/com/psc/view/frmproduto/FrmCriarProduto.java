@@ -46,7 +46,7 @@ public class FrmCriarProduto extends javax.swing.JFrame {
         JBcriar = new javax.swing.JToggleButton();
         JCBUnidade = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
-        JTFPesoUnidade = new javax.swing.JTextField();
+        JTFPeso = new javax.swing.JTextField();
 
         jToggleButton2.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
         jToggleButton2.setText("Sair");
@@ -142,9 +142,9 @@ public class FrmCriarProduto extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         jLabel13.setText("Tipo da unidade:");
 
-        JTFPesoUnidade.addActionListener(new java.awt.event.ActionListener() {
+        JTFPeso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTFPesoUnidadeActionPerformed(evt);
+                JTFPesoActionPerformed(evt);
             }
         });
 
@@ -159,7 +159,7 @@ public class FrmCriarProduto extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(JTFPesoUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(JTFPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 208, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(JBcriar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -173,9 +173,8 @@ public class FrmCriarProduto extends javax.swing.JFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(JTFmaxima, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(JTFminima, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(JTFminima, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(JTFCategoria, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(JTFNome, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(JCBUnidade, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -208,7 +207,7 @@ public class FrmCriarProduto extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(JTFPesoUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(JTFPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -294,10 +293,10 @@ public class FrmCriarProduto extends javax.swing.JFrame {
             precoUnitario = Double.parseDouble(this.JTFpreco.getText());
             
             //Verifica o peso
-            if (this.JTFPesoUnidade.getText().isBlank()){
+            if (this.JTFPeso.getText().isBlank()){
                 throw new Exception("O peso deve ser informado.");    
             }
-            peso = Double.parseDouble(this.JTFPesoUnidade.getText());
+            peso = Double.parseDouble(this.JTFPeso.getText());
             
             unidade = (String) JCBUnidade.getSelectedItem();
             
@@ -335,7 +334,7 @@ public class FrmCriarProduto extends javax.swing.JFrame {
             // ✅ Limpar os campos
             this.JTFNome.setText("");
             this.JTFpreco.setText("");
-            this.JTFPesoUnidade.setText("");
+            this.JTFPeso.setText("");
             this.JTFatual.setText("");
             this.JCBUnidade.setSelectedItem("");
             this.JTFminima.setText("");
@@ -353,9 +352,9 @@ public class FrmCriarProduto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_JCBUnidadeActionPerformed
 
-    private void JTFPesoUnidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFPesoUnidadeActionPerformed
+    private void JTFPesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFPesoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_JTFPesoUnidadeActionPerformed
+    }//GEN-LAST:event_JTFPesoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -398,7 +397,7 @@ public class FrmCriarProduto extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> JCBUnidade;
     private javax.swing.JTextField JTFCategoria;
     private javax.swing.JTextField JTFNome;
-    private javax.swing.JTextField JTFPesoUnidade;
+    private javax.swing.JTextField JTFPeso;
     private javax.swing.JTextField JTFatual;
     private javax.swing.JTextField JTFmaxima;
     private javax.swing.JTextField JTFminima;

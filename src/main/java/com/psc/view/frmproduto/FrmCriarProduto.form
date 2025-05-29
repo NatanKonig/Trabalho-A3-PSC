@@ -43,7 +43,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel10" min="-2" pref="282" max="-2" attributes="0"/>
                           <Component id="jLabel8" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                          <Component id="JTFPesoUnidade" min="-2" pref="322" max="-2" attributes="0"/>
+                          <Component id="JTFPeso" min="-2" pref="322" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="208" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -60,10 +60,8 @@
                           <Component id="jLabel5" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
                           <Component id="jLabel13" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                           <Component id="JTFmaxima" alignment="0" max="32767" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="JTFminima" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jLabel11" alignment="0" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="JTFminima" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabel11" alignment="0" max="32767" attributes="0"/>
                           <Component id="JTFCategoria" alignment="0" max="32767" attributes="0"/>
                           <Component id="JTFNome" alignment="0" max="32767" attributes="0"/>
                           <Component id="JCBUnidade" alignment="0" max="32767" attributes="0"/>
@@ -104,7 +102,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel8" min="-2" pref="43" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="JTFPesoUnidade" min="-2" max="-2" attributes="0"/>
+                              <Component id="JTFPeso" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -270,9 +268,9 @@
         <Property name="text" type="java.lang.String" value="Tipo da unidade:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="JTFPesoUnidade">
+    <Component class="javax.swing.JTextField" name="JTFPeso">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JTFPesoUnidadeActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JTFPesoActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

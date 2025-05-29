@@ -19,8 +19,8 @@ public class FrmEditarProdutos extends javax.swing.JFrame {
      */
     public FrmEditarProdutos() {
         initComponents();
-       JCBUnidade.getSelectedItem();
-        this.carregarTabela();
+        carregarTabela();
+        JCBUnidade.getSelectedItem();
     }
 
     /**
@@ -370,8 +370,14 @@ public class FrmEditarProdutos extends javax.swing.JFrame {
         // Criação do produto
         Produto p = new Produto(id, nome, precoUnitario, peso, unidade, quantidadeEstoque, quantidadeMinima, quantidadeMaxima, categoria);
 
+        // Atualiza no banco de dados
+        produtoDAO.atualizar(p);
+        carregarTabela();
+
+        JOptionPane.showMessageDialog(null, "Produto atualizado com sucesso!");
+
         // Exibe ou salva o produto (exemplo)
-        System.out.println(p);
+        System.out.println("Produto atualizado: " + p);
 
         // Limpa os campos após cadastro
         this.JTFId.setText("");
