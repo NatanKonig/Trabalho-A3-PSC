@@ -14,6 +14,7 @@ public class FrmMovimentarEstoque extends javax.swing.JFrame {
     public FrmMovimentarEstoque() {
         initComponents();
     }
+    // Método para obter o produto atualmente selecionado no ComboBox.
 private Produto obterProdutoSelecionado() {
     Object selectedItem = JComboBox.getSelectedItem();
 
@@ -265,12 +266,12 @@ private Produto obterProdutoSelecionado() {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JEntradaActionPerformed
-     // TODO add your handling code here:                                                                                                                            
+                                                                                                                           
     Produto produto = obterProdutoSelecionado();
 
     if (produto == null) {
         JOptionPane.showMessageDialog(this, "Selecione um produto.");
-        return;
+        return; // Se não tiver produto, sai do método.
     }
 
     String qtdText = JTextQtd.getText().trim();
@@ -297,7 +298,7 @@ private Produto obterProdutoSelecionado() {
     }//GEN-LAST:event_JTextQtdActionPerformed
 
     private void JSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JSaidaActionPerformed
-        // TODO add your handling code here:                                                                                 
+        // TODO add your handling code here:                                                                      
     Produto produto = obterProdutoSelecionado();
 
     if (produto == null) {
