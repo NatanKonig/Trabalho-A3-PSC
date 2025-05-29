@@ -3,6 +3,7 @@ package com.psc.view.frmprincipal;
 import com.psc.view.frmcategoria.FrmGerenciaCategoria;
 import com.psc.view.frmmovimentar.FrmMovimentarEstoque;
 import com.psc.view.frmproduto.FrmGerenciarProdutos;
+import com.psc.view.frmrelatorio.FrmRelatorio;
 
 /**
  *
@@ -67,6 +68,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         JBRelatorio.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
         JBRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/h42show_report.png"))); // NOI18N
         JBRelatorio.setText("Vizualizar Relatórios");
+        JBRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBRelatorioActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("DejaVu Sans", 0, 36)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/h15management_stock.png"))); // NOI18N
@@ -125,6 +131,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         FrmMovimentarEstoque janelaMovimentarEstoque = new FrmMovimentarEstoque();
         janelaMovimentarEstoque.setVisible(true);
     }//GEN-LAST:event_JBMovimentarActionPerformed
+
+    private void JBRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBRelatorioActionPerformed
+        FrmRelatorio janelaExibirRelatorios = new FrmRelatorio();
+        janelaExibirRelatorios.setVisible(true);
+    }//GEN-LAST:event_JBRelatorioActionPerformed
 
     /**
      * @param args the command line arguments
