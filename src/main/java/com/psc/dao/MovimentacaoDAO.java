@@ -9,8 +9,8 @@ public class MovimentacaoDAO {
 
 
     //Método responsável por movimentar o estoque de um produto.
-    public boolean movimentarEstoque(int produtoId, int quantidade, String tipo) {
-        try (Connection conn = ConexaoDAO.getConnection()) {   // ✅ AGORA usa ConexaoDAO
+    public boolean movimentarEstoque(int produtoId, int quantidade, String tipo, String data) {
+        try (Connection conn = ConexaoDAO.getConnection()) {   //  usa ConexaoDAO
 
             // Consulta a quantidade atual
             String selectSql = "SELECT quantidade_estoque FROM produto WHERE id = ?";
@@ -53,6 +53,10 @@ public class MovimentacaoDAO {
             System.out.println("Erro ao movimentar estoque: " + e.getMessage());
             return false;
         }
+    }
+
+    public boolean movimentarEstoque(int produtoId, int quantidade, String entrada) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
 

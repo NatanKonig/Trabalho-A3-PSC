@@ -14,6 +14,8 @@ import javax.swing.table.DefaultTableModel;
 
 public class FrmMovimentarEstoque extends javax.swing.JFrame {
 
+
+
     
     public FrmMovimentarEstoque() {
         initComponents();
@@ -305,6 +307,7 @@ private Produto obterProdutoSelecionado() {
     MovimentacaoDAO movimentacaoDAO = new MovimentacaoDAO();
     boolean sucesso = movimentacaoDAO.movimentarEstoque(produtoId, quantidade, "ENTRADA");
 
+    
     if (sucesso) {
         JOptionPane.showMessageDialog(this, "Entrada registrada com sucesso!");
     } else {
@@ -335,7 +338,7 @@ private Produto obterProdutoSelecionado() {
     int produtoId = produto.getId();
 
     MovimentacaoDAO movimentacaoDAO = new MovimentacaoDAO();
-    boolean sucesso = movimentacaoDAO.movimentarEstoque(produtoId, quantidade, "SAIDA");
+    boolean sucesso = movimentacaoDAO.movimentarEstoque(produtoId, quantidade,  "SAIDA");
 
     if (sucesso) {
         JOptionPane.showMessageDialog(this, "Saída registrada com sucesso!");
@@ -352,29 +355,36 @@ private Produto obterProdutoSelecionado() {
     }//GEN-LAST:event_JTxtObsActionPerformed
 
     private void JBConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBConfirmarActionPerformed
-    //Validação dos campos
-        if(JComboBox.getSelectedIndex() == -1){
-           JOptionPane.showMessageDialog(this, "selecione um produto.");
-           return;
-       }
-       if(!JEntrada.isSelected() && !JSaida.isSelected()){
-           JOptionPane.showMessageDialog(this, "Selecionde o tipo de movimentação");
-           return;
-       }       
-               
+                                         
+    // Validação dos campos
+    if (JComboBox.getSelectedIndex() == -1) {
+        JOptionPane.showMessageDialog(this, "Selecione um produto.");
+        return;
+    }
+    if (!JEntrada.isSelected() && !JSaida.isSelected()) {
+        JOptionPane.showMessageDialog(this, "Selecione o tipo de movimentação");
+        return;
+    }
+    
     String qtdText = JTextQtd.getText().trim();
     if (qtdText.isEmpty() || !qtdText.matches("\\d+")) {
         JOptionPane.showMessageDialog(this, "Informe uma quantidade válida.");
         return;
-       }
-      // Processar movimentação
+    }
+
     Produto produto = obterProdutoSelecionado();
     int produtoId = produto.getId();
     int quantidade = Integer.parseInt(qtdText);
     String tipo = JEntrada.isSelected() ? "ENTRADA" : "SAIDA";
 
+    String data = JTextData.getText().trim();
+    if (data.isEmpty()) {
+        data = java.time.LocalDate.now().toString();
+        JTextData.setText(data);
+    }
+
     MovimentacaoDAO movimentacaoDAO = new MovimentacaoDAO();
-    boolean sucesso = movimentacaoDAO.movimentarEstoque(produtoId, quantidade, tipo);
+    boolean sucesso = movimentacaoDAO.movimentarEstoque(produtoId, quantidade, tipo, data);
 
     if (sucesso) {
         JOptionPane.showMessageDialog(this, "Movimentação realizada: \ntipo: " + tipo + "\nquantidade: " + quantidade);
