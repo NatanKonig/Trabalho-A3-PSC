@@ -99,7 +99,7 @@ db.password=sua_senha
 1. Clone o repositório:
 
    ```bash
-   git clone https://github.com/NatanKoni/Trabalho-A3-PSC.git
+   git clone https://github.com/NatanKonig/Trabalho-A3-PSC.git
    ```
 2. Importe o projeto no NetBeans ou outra IDE Java.
 3. Configure o `config.properties` como descrito acima.
