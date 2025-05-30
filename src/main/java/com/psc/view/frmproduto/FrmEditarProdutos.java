@@ -361,7 +361,6 @@ public class FrmEditarProdutos extends javax.swing.JFrame {
         this.JTFId.setText("");
         this.JTFNome.setText("");
         this.JTFpreco.setText("");
-        this.JTFPeso.setText("");
         this.JTFatual.setText("");
         this.JTFminima.setText("");
         this.JTFmaxima.setText("");
