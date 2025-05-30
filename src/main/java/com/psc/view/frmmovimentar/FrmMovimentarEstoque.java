@@ -17,11 +17,8 @@ public class FrmMovimentarEstoque extends javax.swing.JFrame {
     
     public FrmMovimentarEstoque() {
         initComponents();
-  
-    ProdutoDAO produtoDAO = new ProdutoDAO();
-    for (Produto p : produtoDAO.listar()) {
-        JComboBox.addItem(p);
-    }
+      carregarProdutosNoComboBox(); 
+    
     }
     
     private void carregarProdutosNoComboBox() {
@@ -429,7 +426,6 @@ private Produto obterProdutoSelecionado() {
             status
         });
     }
-        // TODO add your handling code here:
     }//GEN-LAST:event_JBPesquisarActionPerformed
 
     private void JProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JProdutosActionPerformed
