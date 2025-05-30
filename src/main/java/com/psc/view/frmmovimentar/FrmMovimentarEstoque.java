@@ -84,6 +84,7 @@ private Produto obterProdutoSelecionado() {
 
         jLabel2.setText("Tipo de Movimentação:");
 
+        buttonGroup1.add(JEntrada);
         JEntrada.setText("Entrada");
         JEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,6 +92,7 @@ private Produto obterProdutoSelecionado() {
             }
         });
 
+        buttonGroup1.add(JSaida);
         JSaida.setText("Saida");
         JSaida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -255,9 +257,9 @@ private Produto obterProdutoSelecionado() {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JSaida)
-                            .addComponent(JEntrada, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(JEntrada)
+                            .addComponent(JSaida))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
