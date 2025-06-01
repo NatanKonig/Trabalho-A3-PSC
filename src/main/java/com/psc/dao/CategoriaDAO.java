@@ -10,7 +10,7 @@ import java.util.List;      // Importa a interface List.
 
 public class CategoriaDAO { // Define a classe pública 'CategoriaDAO', responsável por gerenciar objetos Categoria.
 
-    public void adicionar(Categoria categoria) {
+    public void inserir(Categoria categoria) {
         String sql = "INSERT INTO categoria (nome, tamanho, embalagem) VALUES (?, ?, ?)";
 
         try (Connection conn = ConexaoDAO.getConnection();
