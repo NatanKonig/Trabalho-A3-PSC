@@ -28,7 +28,7 @@ Este sistema simula um controle de estoque para uma empresa comercial, permitind
 
 ---
 
-## ✅ Funcionalidades (Requisitos Funcionais)
+## ✅ Requisitos Funcionais
 
 * Cadastro, consulta, edição e exclusão de **produtos**
 * Cadastro, consulta, edição e exclusão de **categorias**
@@ -44,7 +44,7 @@ Este sistema simula um controle de estoque para uma empresa comercial, permitind
 
 ---
 
-## ❌ Funcionalidades Não Funcionais
+## ❌ Requisitos Não Funcionais
 
 * Interface gráfica intuitiva e de fácil uso (Swing)
 * Padrão de projeto DAO para separação da lógica de acesso a dados
