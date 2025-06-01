@@ -55,15 +55,16 @@ Este sistema simula um controle de estoque para uma empresa comercial, permitind
 
 ## 🛠 Tecnologias e Ferramentas Utilizadas
 
-| Ferramenta / Tecnologia      | Finalidade                                 |
-|------------------------------| ------------------------------------------ |
-| JDK 17                       | Ambiente de desenvolvimento (Java 17)      |
-| Swing                        | Criação da interface gráfica (GUI)         |
-| MySQL Server 8.0             | Banco de dados relacional                  |
-| JDBC - MySQL Connector 8.3.0 | Comunicação entre Java e MySQL             |
-| Apache NetBeans 26           | Ambiente de desenvolvimento (IDE)          |
-| Git                          | Controle de versão local                   |
-| GitHub                       | Repositório remoto e colaboração em equipe |
+| Ferramenta / Tecnologia           | Finalidade                                  |
+|----------------------------------|---------------------------------------------|
+| JDK 17                           | Ambiente de desenvolvimento (Java 17)       |
+| Swing (faz parte do JDK)         | Criação da interface gráfica (GUI)           |
+| MySQL Server 8.0                 | Banco de dados relacional                    |
+| JDBC - MySQL Connector 8.3.0     | Comunicação entre Java e MySQL               |
+| Apache NetBeans 26               | Ambiente de desenvolvimento (IDE)            |
+| Git 2.44.0                      | Controle de versão local                      |
+| GitHub (Interface web)           | Repositório remoto e colaboração em equipe   |
+
 
 ---
 
