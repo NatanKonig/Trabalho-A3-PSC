@@ -30,27 +30,26 @@ Este sistema simula um controle de estoque para uma empresa comercial, permitind
 
 ## ✅ Funcionalidades (Requisitos Funcionais)
 
-* Cadastro, consulta, edição e exclusão de **produtos**
-* Cadastro, consulta, edição e exclusão de **categorias**
-* **Movimentações** de entrada e saída de produtos
-* **Reajuste de preços** em massa com percentual informado
-* Avisos para **estoque abaixo da quantidade mínima** ou **acima da máxima**
-* **Relatórios gerenciais**:
-
-    * Lista de preços
-    * Balanço físico e financeiro
-    * Produtos fora da faixa de quantidade (mínima/máxima)
-    * Quantidade de produtos por categoria
+* **RF001** - Cadastro, consulta, edição e exclusão de **produtos**  
+* **RF002** - Cadastro, consulta, edição e exclusão de **categorias**  
+* **RF003** - **Movimentações** de entrada e saída de produtos  
+* **RF004** - **Reajuste de preços** em massa com percentual informado  
+* **RF005** - Avisos para **estoque abaixo da quantidade mínima** ou **acima da máxima**  
+* **RF006** - **Relatórios gerenciais**:  
+    * Lista de preços  
+    * Balanço físico e financeiro  
+    * Produtos fora da faixa de quantidade (mínima/máxima)  
+    * Quantidade de produtos por categoria  
 
 ---
 
 ## ❌ Funcionalidades Não Funcionais
 
-* Interface gráfica intuitiva e de fácil uso (Swing)
-* Padrão de projeto DAO para separação da lógica de acesso a dados
-* Persistência garantida com banco de dados relacional (MySQL)
-* Estrutura de código limpa, modular e documentada
-* Controle de versão utilizando Git/GitHub de forma colaborativa
+* **RNF001** - Interface gráfica intuitiva e de fácil uso (Swing)  
+* **RNF002** - Padrão de projeto DAO para separação da lógica de acesso a dados  
+* **RNF003** - Persistência garantida com banco de dados relacional (MySQL)  
+* **RNF004** - Estrutura de código limpa, modular e documentada  
+* **RNF005** - Controle de versão utilizando Git/GitHub de forma colaborativa  
 
 ---
 
