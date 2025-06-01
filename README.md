@@ -28,7 +28,7 @@ Este sistema simula um controle de estoque para uma empresa comercial, permitind
 
 ---
 
-## ✅ Funcionalidades (Requisitos Funcionais)
+## ✅ Requisitos Funcionais
 
 * **RF001** - Cadastro, consulta, edição e exclusão de **produtos**  
 * **RF002** - Cadastro, consulta, edição e exclusão de **categorias**  
@@ -43,7 +43,7 @@ Este sistema simula um controle de estoque para uma empresa comercial, permitind
 
 ---
 
-## ❌ Funcionalidades Não Funcionais
+## ❌ Requisitos Não Funcionais
 
 * **RNF001** - Interface gráfica intuitiva e de fácil uso (Swing)  
 * **RNF002** - Padrão de projeto DAO para separação da lógica de acesso a dados  
