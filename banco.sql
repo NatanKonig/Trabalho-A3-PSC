@@ -5,8 +5,8 @@ USE controle_estoque;
 CREATE TABLE IF NOT EXISTS categoria (
     id_categoria INT NOT NULL AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,
-    tamanho ENUM('Pequeno', 'Médio', 'Grande') NOT NULL,
-    embalagem ENUM('Lata', 'Vidro', 'Plástico') NOT NULL,
+    tamanho ENUM('PEQUENO', 'MEDIO', 'GRANDE') NOT NULL,
+    embalagem ENUM('LATA', 'VIDRO', 'PLASTICO') NOT NULL,
     PRIMARY KEY (id_categoria)
 );
 
