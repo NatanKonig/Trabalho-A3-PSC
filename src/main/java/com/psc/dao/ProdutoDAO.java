@@ -14,7 +14,7 @@ public class ProdutoDAO {
 
     // CREATE
     public void inserir(Produto p) {
-        String sql = "INSERT INTO produto (nome, preco_unitario, unidade, quantidade_estoque, quantidade_minima, quantidade_maxima, categoria) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO produto (nome, preco_unitario, unidade, qtd_estoque, qtd_minima, qtd_maxima, categoria) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = ConexaoDAO.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -123,7 +123,7 @@ public class ProdutoDAO {
 
     // UPDATE
     public void atualizar(Produto p) {
-        String sql = "UPDATE produto SET nome=?, preco_unitario=?, unidade=?, quantidade_estoque=?, quantidade_minima=?, quantidade_maxima=?, categoria=? WHERE id=?";
+        String sql = "UPDATE produto SET nome=?, preco_unitario=?, unidade=?, qtd_estoque=?, qtd_minima=?, qtd_maxima=?, categoria=? WHERE id=?";
 
         try (Connection conn = ConexaoDAO.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
