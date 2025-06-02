@@ -4,7 +4,11 @@ import com.psc.model.Categoria; // Importa a classe Categoria para poder usá-la
 import com.psc.model.EmbalagemProduto;
 import com.psc.model.TamanhoProduto;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;      // Importa a interface List.
 

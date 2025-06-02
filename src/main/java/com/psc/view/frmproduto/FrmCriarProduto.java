@@ -1,7 +1,12 @@
 package com.psc.view.frmproduto;
 
+import com.psc.dao.CategoriaDAO;
 import com.psc.dao.ProdutoDAO;
+import com.psc.model.Categoria;
 import com.psc.model.Produto;
+
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 
 import javax.swing.JOptionPane;
 
@@ -11,13 +16,25 @@ import javax.swing.JOptionPane;
 public class FrmCriarProduto extends javax.swing.JFrame {
 
     ProdutoDAO produtoDAO = new ProdutoDAO();
+    CategoriaDAO categoriaDAO = new CategoriaDAO();
 
     /**
      * Creates new form FrmCriarProduto
      */
     public FrmCriarProduto() {
-        initComponents();    
+        initComponents();
+        carregarCategorias();
+    }
+
+    private void carregarCategorias() {
+        List<Categoria> categorias = categoriaDAO.listar();
+
+        DefaultComboBoxModel<String> modelo = new DefaultComboBoxModel<>();
+        for (Categoria cat : categorias) {
+            modelo.addElement(cat.toString());
         }
+        JCBCategoria.setModel(modelo);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,7 +48,6 @@ public class FrmCriarProduto extends javax.swing.JFrame {
         jToggleButton2 = new javax.swing.JToggleButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -40,13 +56,12 @@ public class FrmCriarProduto extends javax.swing.JFrame {
         JTFpreco = new javax.swing.JTextField();
         JTFatual = new javax.swing.JTextField();
         JTFmaxima = new javax.swing.JTextField();
-        JTFCategoria = new javax.swing.JTextField();
         JTFminima = new javax.swing.JTextField();
         jToggleButton3 = new javax.swing.JToggleButton();
         JBcriar = new javax.swing.JToggleButton();
         JCBUnidade = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
-        JTFPesoUnidade = new javax.swing.JTextField();
+        JCBCategoria = new javax.swing.JComboBox<>();
 
         jToggleButton2.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
         jToggleButton2.setText("Sair");
@@ -63,9 +78,6 @@ public class FrmCriarProduto extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         jLabel5.setText("Categoria:");
-
-        jLabel8.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
-        jLabel8.setText("Peso da unidade:");
 
         jLabel9.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         jLabel9.setText("Quantidade atual em estoque:");
@@ -103,12 +115,6 @@ public class FrmCriarProduto extends javax.swing.JFrame {
             }
         });
 
-        JTFCategoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTFCategoriaActionPerformed(evt);
-            }
-        });
-
         JTFminima.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JTFminimaActionPerformed(evt);
@@ -116,7 +122,7 @@ public class FrmCriarProduto extends javax.swing.JFrame {
         });
 
         jToggleButton3.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
-        jToggleButton3.setText("Sair");
+        jToggleButton3.setText("Voltar");
         jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton3ActionPerformed(evt);
@@ -131,7 +137,7 @@ public class FrmCriarProduto extends javax.swing.JFrame {
             }
         });
 
-        JCBUnidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kg", "g", "L", "ml" }));
+        JCBUnidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kg", "G", "L", "ML", "UN" }));
         JCBUnidade.setToolTipText("Kg");
         JCBUnidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,9 +148,10 @@ public class FrmCriarProduto extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         jLabel13.setText("Tipo da unidade:");
 
-        JTFPesoUnidade.addActionListener(new java.awt.event.ActionListener() {
+        JCBCategoria.setToolTipText("Kg");
+        JCBCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTFPesoUnidadeActionPerformed(evt);
+                JCBCategoriaActionPerformed(evt);
             }
         });
 
@@ -158,9 +165,10 @@ public class FrmCriarProduto extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(JTFPesoUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 208, Short.MAX_VALUE)
+                            .addComponent(JCBUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(JTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(JBcriar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jToggleButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -171,17 +179,13 @@ public class FrmCriarProduto extends javax.swing.JFrame {
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(JTFmaxima, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(JTFminima, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(JTFCategoria, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JTFNome, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JCBUnidade, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(JTFminima, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(JCBCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9)
                             .addComponent(JTFatual, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -189,47 +193,42 @@ public class FrmCriarProduto extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addContainerGap(36, Short.MAX_VALUE)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(JBcriar)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JBcriar)
+                        .addGap(94, 94, 94)
+                        .addComponent(jToggleButton3)
+                        .addGap(21, 21, 21))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(JTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(JTFpreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(52, 52, 52)
-                                .addComponent(jToggleButton3))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(JTFPesoUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JCBUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(JCBUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(JTFatual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(JTFminima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(JTFmaxima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JTFCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
+                .addComponent(JCBCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39))
         );
 
         pack();
@@ -251,10 +250,6 @@ public class FrmCriarProduto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_JTFmaximaActionPerformed
 
-    private void JTFCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFCategoriaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JTFCategoriaActionPerformed
-
     private void JTFminimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFminimaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JTFminimaActionPerformed
@@ -274,12 +269,12 @@ public class FrmCriarProduto extends javax.swing.JFrame {
             int id = 0;
             String nome = "";
             double precoUnitario = 0;
-            double peso = 0;
             String unidade = "";
             int quantidadeEstoque = 0;
             int quantidadeMinima = 0;
             int quantidadeMaxima = 0;
-            String categoria = "";
+            int categoriaId = 0;
+            String categoriaNome = "";
 
             // Verifica o nome
             if (this.JTFNome.getText().length() < 2) {
@@ -292,15 +287,9 @@ public class FrmCriarProduto extends javax.swing.JFrame {
                 throw new Exception("Preço unitário deve ser informado.");
             }
             precoUnitario = Double.parseDouble(this.JTFpreco.getText());
-            
-            //Verifica o peso
-            if (this.JTFPesoUnidade.getText().isBlank()){
-                throw new Exception("O peso deve ser informado.");    
-            }
-            peso = Double.parseDouble(this.JTFPesoUnidade.getText());
-            
+
             unidade = (String) JCBUnidade.getSelectedItem();
-            
+
             // Verifica quantidade em estoque
             if (this.JTFatual.getText().isBlank()) {
                 throw new Exception("Quantidade em estoque deve ser informada.");
@@ -319,14 +308,16 @@ public class FrmCriarProduto extends javax.swing.JFrame {
             }
             quantidadeMaxima = Integer.parseInt(this.JTFmaxima.getText());
 
-            // Verifica categoria
-            if (this.JTFCategoria.getText().length() < 2) {
-                throw new Exception("Categoria deve conter ao menos 2 caracteres.");
+            String itemSelecionado = (String) JCBCategoria.getSelectedItem();
+            if (itemSelecionado != null && itemSelecionado.contains(" - ")) {
+                String[] partes = itemSelecionado.split(" - ", 2); // limita a 2 partes
+                categoriaId = Integer.parseInt(partes[0].trim());
+                categoriaNome = partes[1].trim();
             }
-            categoria = this.JTFCategoria.getText();
 
+            Categoria cat = new Categoria(categoriaId, categoriaNome);
             // Envia para DAO
-            Produto novoProduto = new Produto(id, nome, precoUnitario,peso, unidade, quantidadeEstoque, quantidadeMinima, quantidadeMaxima, categoria);
+            Produto novoProduto = new Produto(id, nome, precoUnitario, unidade, quantidadeEstoque, quantidadeMinima, quantidadeMaxima, cat);
 
             this.produtoDAO.inserir(novoProduto);
 
@@ -335,12 +326,11 @@ public class FrmCriarProduto extends javax.swing.JFrame {
             // ✅ Limpar os campos
             this.JTFNome.setText("");
             this.JTFpreco.setText("");
-            this.JTFPesoUnidade.setText("");
             this.JTFatual.setText("");
             this.JCBUnidade.setSelectedItem("");
             this.JTFminima.setText("");
             this.JTFmaxima.setText("");
-            this.JTFCategoria.setText("");
+            this.JCBCategoria.setSelectedItem("");
 
         } catch (NumberFormatException erro) {
             JOptionPane.showMessageDialog(null, "Informe valores numéricos válidos.");
@@ -353,9 +343,9 @@ public class FrmCriarProduto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_JCBUnidadeActionPerformed
 
-    private void JTFPesoUnidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFPesoUnidadeActionPerformed
+    private void JCBCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBCategoriaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_JTFPesoUnidadeActionPerformed
+    }//GEN-LAST:event_JCBCategoriaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -395,10 +385,9 @@ public class FrmCriarProduto extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton JBcriar;
+    private javax.swing.JComboBox<String> JCBCategoria;
     private javax.swing.JComboBox<String> JCBUnidade;
-    private javax.swing.JTextField JTFCategoria;
     private javax.swing.JTextField JTFNome;
-    private javax.swing.JTextField JTFPesoUnidade;
     private javax.swing.JTextField JTFatual;
     private javax.swing.JTextField JTFmaxima;
     private javax.swing.JTextField JTFminima;
@@ -409,7 +398,6 @@ public class FrmCriarProduto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToggleButton jToggleButton3;

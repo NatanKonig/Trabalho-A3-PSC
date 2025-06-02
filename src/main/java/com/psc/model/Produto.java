@@ -4,21 +4,21 @@ public class Produto {
     private int id;
     private String nome;
     private double precoUnitario;
-    private double peso;
     private String unidade;
     private int quantidadeEstoque;
     private int quantidadeMinima;
     private int quantidadeMaxima;
-    private String categoria;
+    private Categoria categoria;
 
     //Construtores
-    public Produto(int id, String nome, double precoUnitario, double peso, String categoria, int quantidadeEstoque, int quantidadeMinima, int quantidadeMaxima1) {}
 
-    public Produto(int id, String nome, double precoUnitario, double peso, String unidade, int quantidadeEstoque, int quantidadeMinima, int quantidadeMaxima, String categoria) {
+    public Produto() {
+    }
+
+    public Produto(int id, String nome, double precoUnitario, String unidade, int quantidadeEstoque, int quantidadeMinima, int quantidadeMaxima, Categoria categoria) {
         this.id = id;
         this.nome = nome;
         this.precoUnitario = precoUnitario;
-        this.peso = peso;
         this.unidade = unidade;
         this.quantidadeEstoque = quantidadeEstoque;
         this.quantidadeMinima = quantidadeMinima;
@@ -49,14 +49,6 @@ public class Produto {
 
     public void setPrecoUnitario(double precoUnitario) {
         this.precoUnitario = precoUnitario;
-    }
-
-    public double getPeso() {
-        return peso;
-    }
-
-    public void setPeso(double peso) {
-        this.peso = peso;
     }
 
     public String getUnidade() {
@@ -91,11 +83,11 @@ public class Produto {
         this.quantidadeMaxima = quantidadeMaxima;
     }
 
-    public String getCategoria() {
+    public Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
 
