@@ -122,7 +122,7 @@ public class FrmCriarProduto extends javax.swing.JFrame {
         });
 
         jToggleButton3.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
-        jToggleButton3.setText("Sair");
+        jToggleButton3.setText("Voltar");
         jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton3ActionPerformed(evt);

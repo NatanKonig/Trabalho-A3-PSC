@@ -37,9 +37,6 @@ public class ProdutoDAO {
                 int idGerado = rs.getInt(1);
                 p.setId(idGerado); // atualiza o objeto com o ID do banco
             }
-
-            System.out.println("Produto inserido com sucesso. ID: " + p.getId());
-
         } catch (SQLException e) {
             System.out.println("Erro ao inserir: " + e.getMessage());
         }
@@ -98,22 +95,21 @@ public class ProdutoDAO {
 
     // UPDATE
     public void atualizar(Produto p) {
-        String sql = "UPDATE produto SET nome=?, preco_unitario=?, unidade=?, qtd_estoque=?, qtd_minima=?, qtd_maxima=?, categoria=? WHERE id=?";
+        String sql = "UPDATE produto SET nome=?, preco_unitario=?, unidade=?, qtd_estoque=?, qtd_minima=?, qtd_maxima=?, id_categoria=? WHERE id_produto=?";
 
         try (Connection conn = ConexaoDAO.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, p.getId());
-            stmt.setString(2, p.getNome());
-            stmt.setDouble(3, p.getPrecoUnitario());
-            stmt.setString(4, p.getUnidade());
-            stmt.setInt(5, p.getQuantidadeEstoque());
-            stmt.setInt(6, p.getQuantidadeMinima());
-            stmt.setInt(7, p.getQuantidadeMaxima());
-            stmt.setInt(8, p.getCategoria().getId());
+            stmt.setString(1, p.getNome());
+            stmt.setDouble(2, p.getPrecoUnitario());
+            stmt.setString(3, p.getUnidade());
+            stmt.setInt(4, p.getQuantidadeEstoque());
+            stmt.setInt(5, p.getQuantidadeMinima());
+            stmt.setInt(6, p.getQuantidadeMaxima());
+            stmt.setInt(7, p.getCategoria().getId());
+            stmt.setInt(8, p.getId());
 
             stmt.executeUpdate();
-            System.out.println("Produto atualizado com sucesso!");
         } catch (SQLException e) {
             System.out.println("Erro ao atualizar: " + e.getMessage());
         }
@@ -128,7 +124,6 @@ public class ProdutoDAO {
 
             stmt.setInt(1, id);
             stmt.executeUpdate();
-            System.out.println("Produto deletado com sucesso!");
             return true;
         } catch (SQLException e) {
             System.out.println("Erro ao deletar: " + e.getMessage());
