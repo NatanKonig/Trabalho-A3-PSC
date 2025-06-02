@@ -47,7 +47,7 @@ public class FrmEditarProdutos extends javax.swing.JFrame {
                     p.getQuantidadeEstoque(),
                     p.getQuantidadeMinima(),
                     p.getQuantidadeMaxima(),
-                    p.getCategoria()
+                    p.getId_categoria()
             });
         }
     }
@@ -328,7 +328,7 @@ public class FrmEditarProdutos extends javax.swing.JFrame {
         int quantidadeEstoque = Integer.parseInt(this.JTFatual.getText());
         int quantidadeMinima = Integer.parseInt(this.JTFminima.getText());
         int quantidadeMaxima = Integer.parseInt(this.JTFmaxima.getText());
-        String categoria = this.JTFCategoria.getText();
+        String id_categoria = this.JTFCategoria.getText();
 
         // Validações simples
         if (nome.length() < 2) {
@@ -341,12 +341,12 @@ public class FrmEditarProdutos extends javax.swing.JFrame {
         if (quantidadeEstoque < 0 || quantidadeMinima < 0 || quantidadeMaxima < 0) {
         throw new IllegalArgumentException("As quantidades não podem ser negativas.");
         }
-        if (categoria.length() < 2) {
+        if (id_categoria.length() < 2) {
         throw new IllegalArgumentException("Categoria deve conter ao menos 2 caracteres.");
         }
 
         // Criação do produto
-        Produto p = new Produto(id, nome, precoUnitario, unidade, quantidadeEstoque, quantidadeMinima, quantidadeMaxima, categoria);
+        Produto p = new Produto(id, nome, precoUnitario, unidade, quantidadeEstoque, quantidadeMinima, quantidadeMaxima, id_categoria);
 
         // Atualiza no banco de dados
         produtoDAO.atualizar(p);
@@ -427,7 +427,7 @@ public class FrmEditarProdutos extends javax.swing.JFrame {
     String estoque = this.TableProdutos.getValueAt(this.TableProdutos.getSelectedRow(), 4).toString();
     String minima = this.TableProdutos.getValueAt(this.TableProdutos.getSelectedRow(), 5).toString();
     String maxima = this.TableProdutos.getValueAt(this.TableProdutos.getSelectedRow(), 6).toString();
-    String categoria = this.TableProdutos.getValueAt(this.TableProdutos.getSelectedRow(), 7).toString();
+    String id_categoria = this.TableProdutos.getValueAt(this.TableProdutos.getSelectedRow(), 7).toString();
 
     this.JTFId.setText(id);
     this.JTFNome.setText(nome);
@@ -436,7 +436,7 @@ public class FrmEditarProdutos extends javax.swing.JFrame {
     this.JTFatual.setText(estoque);
     this.JTFminima.setText(minima);
     this.JTFmaxima.setText(maxima);
-    this.JTFCategoria.setText(categoria);
+    this.JTFCategoria.setText(id_categoria);
        }
     }//GEN-LAST:event_TableProdutosMouseClicked
 

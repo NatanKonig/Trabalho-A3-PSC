@@ -14,7 +14,7 @@ public class ProdutoDAO {
 
     // CREATE
     public void inserir(Produto p) {
-        String sql = "INSERT INTO produto (nome, preco_unitario, unidade, qtd_estoque, qtd_minima, qtd_maxima, categoria) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO produto (nome, preco_unitario, unidade, qtd_estoque, qtd_minima, qtd_maxima, id_categoria) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = ConexaoDAO.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -26,7 +26,7 @@ public class ProdutoDAO {
             stmt.setInt(4, p.getQuantidadeEstoque());
             stmt.setInt(5, p.getQuantidadeMinima());
             stmt.setInt(6, p.getQuantidadeMaxima());
-            stmt.setString(7, p.getCategoria());
+            stmt.setString(7, p.getId_categoria());
 
             // Executa o INSERT
             stmt.executeUpdate();
@@ -60,10 +60,10 @@ public class ProdutoDAO {
                         rs.getString("nome"),
                         rs.getDouble("preco_unitario"),
                         rs.getString("unidade"),
-                        rs.getInt("quantidade_estoque"),
-                        rs.getInt("quantidade_minima"),
-                        rs.getInt("quantidade_maxima"),
-                        rs.getString("categoria")
+                        rs.getInt("qtd_estoque"),
+                        rs.getInt("qtd_minima"),
+                        rs.getInt("qtd_maxima"),
+                        rs.getString("id_categoria")
                 );
                 lista.add(p);
             }
@@ -90,10 +90,10 @@ public class ProdutoDAO {
                         rs.getString("nome"),
                         rs.getDouble("preco_unitario"),
                         rs.getString("unidade"),
-                        rs.getInt("quantidade_estoque"),
-                        rs.getInt("quantidade_minima"),
-                        rs.getInt("quantidade_maxima"),
-                        rs.getString("categoria")
+                        rs.getInt("qtd_estoque"),
+                        rs.getInt("qtd_minima"),
+                        rs.getInt("qtd_maxima"),
+                        rs.getString("id_categoria")
                 );
                 lista.add(p);
             }
@@ -134,7 +134,7 @@ public class ProdutoDAO {
             stmt.setInt(4, p.getQuantidadeEstoque());
             stmt.setInt(5, p.getQuantidadeMinima());
             stmt.setInt(6, p.getQuantidadeMaxima());
-            stmt.setString(7, p.getCategoria());
+            stmt.setString(7, p.getId_categoria());
             stmt.setInt(8, p.getId());
 
             stmt.executeUpdate();
