@@ -53,10 +53,6 @@
                       </Group>
                       <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="JTFCategoria" min="-2" pref="328" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -64,6 +60,7 @@
                           <Component id="JTFatual" alignment="0" min="-2" pref="328" max="-2" attributes="0"/>
                           <Component id="JTFmaxima" alignment="0" min="-2" pref="328" max="-2" attributes="0"/>
                           <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="JCBCategoria" alignment="0" min="-2" pref="328" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -122,8 +119,8 @@
                       <Component id="JTFmaxima" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="JTFCategoria" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="JCBCategoria" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="23" max="32767" attributes="0"/>
@@ -288,11 +285,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JTFprecoActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="JTFCategoria">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JTFCategoriaActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JTextField" name="JTFminima">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JTFminimaActionPerformed"/>
@@ -334,11 +326,12 @@
     <Component class="javax.swing.JComboBox" name="JCBUnidade">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
+          <StringArray count="5">
             <StringItem index="0" value="Kg"/>
-            <StringItem index="1" value="g"/>
+            <StringItem index="1" value="G"/>
             <StringItem index="2" value="L"/>
-            <StringItem index="3" value="ml"/>
+            <StringItem index="3" value="ML"/>
+            <StringItem index="4" value="UN"/>
           </StringArray>
         </Property>
       </Properties>
@@ -359,6 +352,19 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBReajustarPrecosActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="JCBCategoria">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JCBCategoriaActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

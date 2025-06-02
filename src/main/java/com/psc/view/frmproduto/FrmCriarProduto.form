@@ -62,12 +62,12 @@
                           <Component id="JTFmaxima" alignment="0" max="32767" attributes="0"/>
                           <Component id="JTFminima" alignment="0" max="32767" attributes="0"/>
                           <Component id="jLabel11" alignment="0" max="32767" attributes="0"/>
-                          <Component id="JTFCategoria" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="JCBCategoria" min="-2" pref="328" max="-2" attributes="0"/>
                           <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                           <Component id="JTFatual" min="-2" pref="322" max="-2" attributes="0"/>
                       </Group>
@@ -116,9 +116,9 @@
               <Component id="JTFmaxima" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel5" min="-2" pref="43" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="JTFCategoria" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="JCBCategoria" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -192,11 +192,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JTFmaximaActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="JTFCategoria">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JTFCategoriaActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JTextField" name="JTFminima">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JTFminimaActionPerformed"/>
@@ -227,11 +222,12 @@
     <Component class="javax.swing.JComboBox" name="JCBUnidade">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
+          <StringArray count="5">
             <StringItem index="0" value="Kg"/>
-            <StringItem index="1" value="g"/>
+            <StringItem index="1" value="G"/>
             <StringItem index="2" value="L"/>
-            <StringItem index="3" value="ml"/>
+            <StringItem index="3" value="ML"/>
+            <StringItem index="4" value="UN"/>
           </StringArray>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="Kg"/>
@@ -250,6 +246,20 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Tipo da unidade:"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="JCBCategoria">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Kg"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JCBCategoriaActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

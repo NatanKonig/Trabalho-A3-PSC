@@ -1,7 +1,12 @@
 package com.psc.view.frmproduto;
 
+import com.psc.dao.CategoriaDAO;
 import com.psc.dao.ProdutoDAO;
+import com.psc.model.Categoria;
 import com.psc.model.Produto;
+
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 
 import javax.swing.JOptionPane;
 
@@ -11,13 +16,25 @@ import javax.swing.JOptionPane;
 public class FrmCriarProduto extends javax.swing.JFrame {
 
     ProdutoDAO produtoDAO = new ProdutoDAO();
+    CategoriaDAO categoriaDAO = new CategoriaDAO();
 
     /**
      * Creates new form FrmCriarProduto
      */
     public FrmCriarProduto() {
-        initComponents();    
+        initComponents();
+        carregarCategorias();
+    }
+
+    private void carregarCategorias() {
+        List<Categoria> categorias = categoriaDAO.listar();
+
+        DefaultComboBoxModel<String> modelo = new DefaultComboBoxModel<>();
+        for (Categoria cat : categorias) {
+            modelo.addElement(cat.toString());
         }
+        JCBCategoria.setModel(modelo);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,12 +56,12 @@ public class FrmCriarProduto extends javax.swing.JFrame {
         JTFpreco = new javax.swing.JTextField();
         JTFatual = new javax.swing.JTextField();
         JTFmaxima = new javax.swing.JTextField();
-        JTFCategoria = new javax.swing.JTextField();
         JTFminima = new javax.swing.JTextField();
         jToggleButton3 = new javax.swing.JToggleButton();
         JBcriar = new javax.swing.JToggleButton();
         JCBUnidade = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
+        JCBCategoria = new javax.swing.JComboBox<>();
 
         jToggleButton2.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
         jToggleButton2.setText("Sair");
@@ -98,12 +115,6 @@ public class FrmCriarProduto extends javax.swing.JFrame {
             }
         });
 
-        JTFCategoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTFCategoriaActionPerformed(evt);
-            }
-        });
-
         JTFminima.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JTFminimaActionPerformed(evt);
@@ -126,7 +137,7 @@ public class FrmCriarProduto extends javax.swing.JFrame {
             }
         });
 
-        JCBUnidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kg", "g", "L", "ml" }));
+        JCBUnidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kg", "G", "L", "ML", "UN" }));
         JCBUnidade.setToolTipText("Kg");
         JCBUnidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,6 +147,13 @@ public class FrmCriarProduto extends javax.swing.JFrame {
 
         jLabel13.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         jLabel13.setText("Tipo da unidade:");
+
+        JCBCategoria.setToolTipText("Kg");
+        JCBCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JCBCategoriaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -163,11 +181,11 @@ public class FrmCriarProduto extends javax.swing.JFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(JTFmaxima, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(JTFminima, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(JTFCategoria, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(JCBCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9)
                             .addComponent(JTFatual, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -208,9 +226,9 @@ public class FrmCriarProduto extends javax.swing.JFrame {
                 .addComponent(JTFmaxima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(JTFCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(JCBCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39))
         );
 
         pack();
@@ -231,10 +249,6 @@ public class FrmCriarProduto extends javax.swing.JFrame {
     private void JTFmaximaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFmaximaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JTFmaximaActionPerformed
-
-    private void JTFCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFCategoriaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JTFCategoriaActionPerformed
 
     private void JTFminimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFminimaActionPerformed
         // TODO add your handling code here:
@@ -259,7 +273,8 @@ public class FrmCriarProduto extends javax.swing.JFrame {
             int quantidadeEstoque = 0;
             int quantidadeMinima = 0;
             int quantidadeMaxima = 0;
-            String categoria = "";
+            int categoriaId = 0;
+            String categoriaNome = "";
 
             // Verifica o nome
             if (this.JTFNome.getText().length() < 2) {
@@ -274,7 +289,7 @@ public class FrmCriarProduto extends javax.swing.JFrame {
             precoUnitario = Double.parseDouble(this.JTFpreco.getText());
 
             unidade = (String) JCBUnidade.getSelectedItem();
-            
+
             // Verifica quantidade em estoque
             if (this.JTFatual.getText().isBlank()) {
                 throw new Exception("Quantidade em estoque deve ser informada.");
@@ -293,14 +308,16 @@ public class FrmCriarProduto extends javax.swing.JFrame {
             }
             quantidadeMaxima = Integer.parseInt(this.JTFmaxima.getText());
 
-            // Verifica categoria
-            if (this.JTFCategoria.getText().length() < 2) {
-                throw new Exception("Categoria deve conter ao menos 2 caracteres.");
+            String itemSelecionado = (String) JCBCategoria.getSelectedItem();
+            if (itemSelecionado != null && itemSelecionado.contains(" - ")) {
+                String[] partes = itemSelecionado.split(" - ", 2); // limita a 2 partes
+                categoriaId = Integer.parseInt(partes[0].trim());
+                categoriaNome = partes[1].trim();
             }
-            categoria = this.JTFCategoria.getText();
 
+            Categoria cat = new Categoria(categoriaId, categoriaNome);
             // Envia para DAO
-            Produto novoProduto = new Produto(id, nome, precoUnitario, unidade, quantidadeEstoque, quantidadeMinima, quantidadeMaxima, categoria);
+            Produto novoProduto = new Produto(id, nome, precoUnitario, unidade, quantidadeEstoque, quantidadeMinima, quantidadeMaxima, cat);
 
             this.produtoDAO.inserir(novoProduto);
 
@@ -313,7 +330,7 @@ public class FrmCriarProduto extends javax.swing.JFrame {
             this.JCBUnidade.setSelectedItem("");
             this.JTFminima.setText("");
             this.JTFmaxima.setText("");
-            this.JTFCategoria.setText("");
+            this.JCBCategoria.setSelectedItem("");
 
         } catch (NumberFormatException erro) {
             JOptionPane.showMessageDialog(null, "Informe valores numéricos válidos.");
@@ -325,6 +342,10 @@ public class FrmCriarProduto extends javax.swing.JFrame {
     private void JCBUnidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBUnidadeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JCBUnidadeActionPerformed
+
+    private void JCBCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JCBCategoriaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -364,8 +385,8 @@ public class FrmCriarProduto extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton JBcriar;
+    private javax.swing.JComboBox<String> JCBCategoria;
     private javax.swing.JComboBox<String> JCBUnidade;
-    private javax.swing.JTextField JTFCategoria;
     private javax.swing.JTextField JTFNome;
     private javax.swing.JTextField JTFatual;
     private javax.swing.JTextField JTFmaxima;

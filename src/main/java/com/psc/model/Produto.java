@@ -8,12 +8,14 @@ public class Produto {
     private int quantidadeEstoque;
     private int quantidadeMinima;
     private int quantidadeMaxima;
-    private String id_categoria;
+    private Categoria categoria;
 
     //Construtores
-    public Produto(int id, String nome, double precoUnitario,  String id_categoria, int quantidadeEstoque, int quantidadeMinima, int quantidadeMaxima1) {}
 
-    public Produto(int id, String nome, double precoUnitario, String unidade, int quantidadeEstoque, int quantidadeMinima, int quantidadeMaxima, String id_categoria) {
+    public Produto() {
+    }
+
+    public Produto(int id, String nome, double precoUnitario, String unidade, int quantidadeEstoque, int quantidadeMinima, int quantidadeMaxima, Categoria categoria) {
         this.id = id;
         this.nome = nome;
         this.precoUnitario = precoUnitario;
@@ -21,7 +23,7 @@ public class Produto {
         this.quantidadeEstoque = quantidadeEstoque;
         this.quantidadeMinima = quantidadeMinima;
         this.quantidadeMaxima = quantidadeMaxima;
-        this.id_categoria = id_categoria;
+        this.categoria = categoria;
     }
 
     //Getters e Setters
@@ -81,12 +83,12 @@ public class Produto {
         this.quantidadeMaxima = quantidadeMaxima;
     }
 
-    public String getId_categoria() {
-        return id_categoria;
+    public Categoria getCategoria() {
+        return categoria;
     }
 
-    public void setId_categoria(String id_categoria) {
-        this.id_categoria = id_categoria;
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     // Método para imprimir o produto como texto

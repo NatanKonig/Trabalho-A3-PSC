@@ -26,6 +26,11 @@ public class Categoria { // Define a classe pública chamada 'Categoria'.
         this.embalagem = embalagem;
     }
 
+    public Categoria(int idCategoria, String nomeCategoria) {
+        this.id = idCategoria;
+        this.nome = nomeCategoria;
+    }
+
     // Método getter que retorna o valor do atributo 'id'.
     public int getId() {
         return id;
@@ -69,10 +74,6 @@ public class Categoria { // Define a classe pública chamada 'Categoria'.
     // Método sobrescrito que retorna uma representação em texto (string) do objeto Categoria.
     @Override
     public String toString() {
-        return "Categoria{"
-                + "nome='" + nome + '\''
-                + ", tamanho=" + tamanho
-                + ", embalagem=" + embalagem
-                + '}';
+        return id + " - " + nome;
     }
 }

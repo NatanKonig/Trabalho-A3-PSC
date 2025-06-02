@@ -26,7 +26,7 @@ public class ProdutoDAO {
             stmt.setInt(4, p.getQuantidadeEstoque());
             stmt.setInt(5, p.getQuantidadeMinima());
             stmt.setInt(6, p.getQuantidadeMaxima());
-            stmt.setString(7, p.getId_categoria());
+            stmt.setInt(7, p.getCategoria().getId());
 
             // Executa o INSERT
             stmt.executeUpdate();
@@ -48,22 +48,27 @@ public class ProdutoDAO {
     // READ
     public ArrayList<Produto> listar() {
         ArrayList<Produto> lista = new ArrayList<>();
-        String sql = "SELECT * FROM produto";
+        String sql = "SELECT p.*, c.nome AS nome_categoria FROM produto p JOIN categoria c ON p.id_categoria = c.id_categoria";
 
         try (Connection conn = ConexaoDAO.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
+                Categoria cat = new Categoria(
+                        rs.getInt("id_categoria"),
+                        rs.getString("nome_categoria")
+                );
+
                 Produto p = new Produto(
-                        rs.getInt("id"),
+                        rs.getInt("id_produto"),
                         rs.getString("nome"),
                         rs.getDouble("preco_unitario"),
                         rs.getString("unidade"),
                         rs.getInt("qtd_estoque"),
                         rs.getInt("qtd_minima"),
                         rs.getInt("qtd_maxima"),
-                        rs.getString("id_categoria")
+                        cat
                 );
                 lista.add(p);
             }
@@ -74,36 +79,6 @@ public class ProdutoDAO {
         return lista;
     }
 
-    public ArrayList<Produto> buscarPorNome(String nome) {
-        ArrayList<Produto> lista = new ArrayList<>();
-        String sql = "SELECT * FROM produto WHERE nome LIKE ?";
-
-        try (Connection conn = ConexaoDAO.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, "%" + nome + "%");
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                Produto p = new Produto(
-                        rs.getInt("id"),
-                        rs.getString("nome"),
-                        rs.getDouble("preco_unitario"),
-                        rs.getString("unidade"),
-                        rs.getInt("qtd_estoque"),
-                        rs.getInt("qtd_minima"),
-                        rs.getInt("qtd_maxima"),
-                        rs.getString("id_categoria")
-                );
-                lista.add(p);
-            }
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao buscar por nome: " + e.getMessage());
-        }
-
-        return lista;
-    }
 
     public boolean reajustarPrecos(double percentual) {
         String sql = "UPDATE produto SET preco_unitario = preco_unitario + (preco_unitario * ? / 100)";
@@ -128,14 +103,14 @@ public class ProdutoDAO {
         try (Connection conn = ConexaoDAO.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, p.getNome());
-            stmt.setDouble(2, p.getPrecoUnitario());
-            stmt.setString(3, p.getUnidade());
-            stmt.setInt(4, p.getQuantidadeEstoque());
-            stmt.setInt(5, p.getQuantidadeMinima());
-            stmt.setInt(6, p.getQuantidadeMaxima());
-            stmt.setString(7, p.getId_categoria());
-            stmt.setInt(8, p.getId());
+            stmt.setInt(1, p.getId());
+            stmt.setString(2, p.getNome());
+            stmt.setDouble(3, p.getPrecoUnitario());
+            stmt.setString(4, p.getUnidade());
+            stmt.setInt(5, p.getQuantidadeEstoque());
+            stmt.setInt(6, p.getQuantidadeMinima());
+            stmt.setInt(7, p.getQuantidadeMaxima());
+            stmt.setInt(8, p.getCategoria().getId());
 
             stmt.executeUpdate();
             System.out.println("Produto atualizado com sucesso!");
