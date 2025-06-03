@@ -26,13 +26,13 @@ public class FrmMovimentarEstoque extends javax.swing.JFrame {
     private void carregarProdutosNoComboBox() {
     ProdutoDAO produtoDAO = new ProdutoDAO();
     ArrayList<Produto> produtos = produtoDAO.listar();
-
-    JComboBox.removeAllItems(); // Limpa o ComboBox
+   
+    JComboBox.removeAllItems(); //Limpa o JComboBox
 
     for (Produto p : produtos) {
         JComboBox.addItem(p);
     }
-}
+  }
 
     // Método para obter o produto atualmente selecionado no ComboBox.
 private Produto obterProdutoSelecionado() {
@@ -270,8 +270,8 @@ private Produto obterProdutoSelecionado() {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(JTextData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(JTextData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -287,12 +287,12 @@ private Produto obterProdutoSelecionado() {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JEntradaActionPerformed
-                                                                                                                           
+                                       
     Produto produto = obterProdutoSelecionado();
 
     if (produto == null) {
         JOptionPane.showMessageDialog(this, "Selecione um produto.");
-        return; // Se não tiver produto, sai do método.
+        return;
     }
 
     String qtdText = JTextQtd.getText().trim();
@@ -304,15 +304,20 @@ private Produto obterProdutoSelecionado() {
     int quantidade = Integer.parseInt(qtdText);
     int produtoId = produto.getId();
 
-    MovimentacaoDAO movimentacaoDAO = new MovimentacaoDAO();
-    boolean sucesso = movimentacaoDAO.movimentarEstoque(produtoId, quantidade, "ENTRADA");
+    String data = JTextData.getText().trim();
+    if (data.isEmpty()) {
+        data = java.time.LocalDate.now().toString();
+    }
 
-    
+    MovimentacaoDAO movimentacaoDAO = new MovimentacaoDAO();
+    boolean sucesso = movimentacaoDAO.movimentarEstoque(produtoId, quantidade, "ENTRADA", data);
+
     if (sucesso) {
         JOptionPane.showMessageDialog(this, "Entrada registrada com sucesso!");
     } else {
         JOptionPane.showMessageDialog(this, "Erro ao registrar entrada.");
     }
+
     }//GEN-LAST:event_JEntradaActionPerformed
 
     private void JTextQtdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextQtdActionPerformed
@@ -320,7 +325,7 @@ private Produto obterProdutoSelecionado() {
     }//GEN-LAST:event_JTextQtdActionPerformed
 
     private void JSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JSaidaActionPerformed
-        // TODO add your handling code here:                                                                      
+        // TODO add your handling code here:                                                                                                         
     Produto produto = obterProdutoSelecionado();
 
     if (produto == null) {
@@ -337,15 +342,19 @@ private Produto obterProdutoSelecionado() {
     int quantidade = Integer.parseInt(qtdText);
     int produtoId = produto.getId();
 
-    MovimentacaoDAO movimentacaoDAO = new MovimentacaoDAO();
-    boolean sucesso = movimentacaoDAO.movimentarEstoque(produtoId, quantidade,  "SAIDA");
-
-    if (sucesso) {
-        JOptionPane.showMessageDialog(this, "Saída registrada com sucesso!");
-    } else {
-        JOptionPane.showMessageDialog(this, "Erro ao registrar saída.");
+    String data = JTextData.getText().trim();
+    if (data.isEmpty()) {
+        data = java.time.LocalDate.now().toString();
     }
 
+    MovimentacaoDAO movimentacaoDAO = new MovimentacaoDAO();
+    boolean sucesso = movimentacaoDAO.movimentarEstoque(produtoId, quantidade, "SAIDA", data);
+
+    if (sucesso) {
+        JOptionPane.showMessageDialog(this, "Entrada registrada com sucesso!");
+    } else {
+        JOptionPane.showMessageDialog(this, "Erro ao registrar entrada.");
+    }
 
 
     }//GEN-LAST:event_JSaidaActionPerformed
@@ -362,7 +371,7 @@ private Produto obterProdutoSelecionado() {
         return;
     }
     if (!JEntrada.isSelected() && !JSaida.isSelected()) {
-        JOptionPane.showMessageDialog(this, "Selecione o tipo de movimentação");
+        JOptionPane.showMessageDialog(this, "Selecione o tipo de movimentação.");
         return;
     }
     
@@ -371,7 +380,7 @@ private Produto obterProdutoSelecionado() {
         JOptionPane.showMessageDialog(this, "Informe uma quantidade válida.");
         return;
     }
-
+    
     Produto produto = obterProdutoSelecionado();
     int produtoId = produto.getId();
     int quantidade = Integer.parseInt(qtdText);
@@ -397,7 +406,7 @@ private Produto obterProdutoSelecionado() {
     private void JBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCancelarActionPerformed
     //fecha a janela
     this.dispose();
-  // TODO add your handling code here:
+    
     }//GEN-LAST:event_JBCancelarActionPerformed
 
     private void JBPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBPesquisarActionPerformed

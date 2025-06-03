@@ -2,72 +2,38 @@ package com.psc.model;
 
 import java.time.LocalDateTime;
 
-import com.psc.model.Produto;
-
-//Classe responsável por representar uma movimentação de estoque (entrada ou saída). Cada movimentação está ligada a um produto, com quantidade, tipo e data/hora.
+//Classe que representa a movimentação de estoque
 public class Movimentacao {
     private int id;
-    private Produto produto;
+    private int produtoId;
     private int quantidade;
-    private TipoMovimentacao tipo;
+    private String tipo; // ENTRADA ou SAIDA
     private LocalDateTime data;
 
-    //Construtor padrão: define a data da movimentação como o momento atual
-    public Movimentacao(){
+    public Movimentacao() {
         this.data = LocalDateTime.now();
     }
-    
-    public Movimentacao(int id, Produto produto, int quantidade, TipoMovimentacao tipo, LocalDateTime data){
-       this.id = id;
-       this.produto = produto;
-       this.quantidade = quantidade;
-       this.tipo = tipo;
-       this.data = data;
-    }
-      // Metodos Getters e Setters 
-    
-    public int getId(){
-        return id;
-    }
-    
-    public void setId(int id){
-        this.id = id;
-    }
-    public Produto getProduto(){
-        return produto;
-    }
-    public void setProduto(Produto produto){
-        this.produto = produto;
-    }
-    public int getQuantidade(){
-        return quantidade;
-    }
-    public void setQuantidade(int quantidade){
+
+    public Movimentacao(int produtoId, int quantidade, String tipo, LocalDateTime data) {
+        this.produtoId = produtoId;
         this.quantidade = quantidade;
-    }
-    public TipoMovimentacao getTipo(){
-        return tipo;
-    }
-    public void setTipo(TipoMovimentacao tipo){
         this.tipo = tipo;
-    }
-    public  LocalDateTime getData(){
-        return data;
-    }
-    public void setData(LocalDateTime data){
         this.data = data;
     }
-    // Método toString sobrescrito para exibir os dados da movimentação de forma legível
-    
-    
-    @Override
-    public String toString(){
-        return "Movimentacao{" +
-                "id=" + id +
-                ", produto=" + (produto != null ? produto.getNome() : "null") +
-                ", quantidade=" + quantidade +
-                ", tipo=" + tipo +
-                ", data=" + data +
-                '}';
-    }  
-    }
+    // Getters e Setters
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+
+    public int getProdutoId() { return produtoId; }
+    public void setProdutoId(int produtoId) { this.produtoId = produtoId; }
+
+    public int getQuantidade() { return quantidade; }
+    public void setQuantidade(int quantidade) { this.quantidade = quantidade; }
+
+    public String getTipo() { return tipo; }
+    public void setTipo(String tipo) { this.tipo = tipo; }
+
+    public LocalDateTime getData() { return data; }
+    public void setData(LocalDateTime data) { this.data = data; }
+}
+
