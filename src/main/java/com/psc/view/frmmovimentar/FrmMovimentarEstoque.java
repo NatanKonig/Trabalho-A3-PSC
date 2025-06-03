@@ -5,15 +5,35 @@ import javax.swing.JOptionPane;
 
 import com.psc.model.Produto;
 import com.psc.dao.MovimentacaoDAO;
+import com.psc.dao.ProdutoDAO;
+import com.psc.dao.CategoriaDAO;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 
 
 public class FrmMovimentarEstoque extends javax.swing.JFrame {
 
+
+
     
     public FrmMovimentarEstoque() {
         initComponents();
+      carregarProdutosNoComboBox(); 
+    
     }
+    
+    private void carregarProdutosNoComboBox() {
+    ProdutoDAO produtoDAO = new ProdutoDAO();
+    ArrayList<Produto> produtos = produtoDAO.listar();
+
+    JComboBox.removeAllItems(); // Limpa o ComboBox
+
+    for (Produto p : produtos) {
+        JComboBox.addItem(p);
+    }
+}
+
     // Método para obter o produto atualmente selecionado no ComboBox.
 private Produto obterProdutoSelecionado() {
     Object selectedItem = JComboBox.getSelectedItem();
@@ -58,7 +78,6 @@ private Produto obterProdutoSelecionado() {
 
         jLabel1.setText("Selecionar Produto:");
 
-        JComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Produto", "Produto", "Produto", " " }));
         JComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JComboBoxActionPerformed(evt);
@@ -67,6 +86,7 @@ private Produto obterProdutoSelecionado() {
 
         jLabel2.setText("Tipo de Movimentação:");
 
+        buttonGroup1.add(JEntrada);
         JEntrada.setText("Entrada");
         JEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,6 +94,7 @@ private Produto obterProdutoSelecionado() {
             }
         });
 
+        buttonGroup1.add(JSaida);
         JSaida.setText("Saida");
         JSaida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -238,9 +259,9 @@ private Produto obterProdutoSelecionado() {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JSaida)
-                            .addComponent(JEntrada, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(JEntrada)
+                            .addComponent(JSaida))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
@@ -286,6 +307,7 @@ private Produto obterProdutoSelecionado() {
     MovimentacaoDAO movimentacaoDAO = new MovimentacaoDAO();
     boolean sucesso = movimentacaoDAO.movimentarEstoque(produtoId, quantidade, "ENTRADA");
 
+    
     if (sucesso) {
         JOptionPane.showMessageDialog(this, "Entrada registrada com sucesso!");
     } else {
@@ -316,7 +338,7 @@ private Produto obterProdutoSelecionado() {
     int produtoId = produto.getId();
 
     MovimentacaoDAO movimentacaoDAO = new MovimentacaoDAO();
-    boolean sucesso = movimentacaoDAO.movimentarEstoque(produtoId, quantidade, "SAIDA");
+    boolean sucesso = movimentacaoDAO.movimentarEstoque(produtoId, quantidade,  "SAIDA");
 
     if (sucesso) {
         JOptionPane.showMessageDialog(this, "Saída registrada com sucesso!");
@@ -333,29 +355,36 @@ private Produto obterProdutoSelecionado() {
     }//GEN-LAST:event_JTxtObsActionPerformed
 
     private void JBConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBConfirmarActionPerformed
-    //Validação dos campos
-        if(JComboBox.getSelectedIndex() == -1){
-           JOptionPane.showMessageDialog(this, "selecione um produto.");
-           return;
-       }
-       if(!JEntrada.isSelected() && !JSaida.isSelected()){
-           JOptionPane.showMessageDialog(this, "Selecionde o tipo de movimentação");
-           return;
-       }       
-               
+                                         
+    // Validação dos campos
+    if (JComboBox.getSelectedIndex() == -1) {
+        JOptionPane.showMessageDialog(this, "Selecione um produto.");
+        return;
+    }
+    if (!JEntrada.isSelected() && !JSaida.isSelected()) {
+        JOptionPane.showMessageDialog(this, "Selecione o tipo de movimentação");
+        return;
+    }
+    
     String qtdText = JTextQtd.getText().trim();
     if (qtdText.isEmpty() || !qtdText.matches("\\d+")) {
         JOptionPane.showMessageDialog(this, "Informe uma quantidade válida.");
         return;
-       }
-      // Processar movimentação
+    }
+
     Produto produto = obterProdutoSelecionado();
     int produtoId = produto.getId();
     int quantidade = Integer.parseInt(qtdText);
     String tipo = JEntrada.isSelected() ? "ENTRADA" : "SAIDA";
 
+    String data = JTextData.getText().trim();
+    if (data.isEmpty()) {
+        data = java.time.LocalDate.now().toString();
+        JTextData.setText(data);
+    }
+
     MovimentacaoDAO movimentacaoDAO = new MovimentacaoDAO();
-    boolean sucesso = movimentacaoDAO.movimentarEstoque(produtoId, quantidade, tipo);
+    boolean sucesso = movimentacaoDAO.movimentarEstoque(produtoId, quantidade, tipo, data);
 
     if (sucesso) {
         JOptionPane.showMessageDialog(this, "Movimentação realizada: \ntipo: " + tipo + "\nquantidade: " + quantidade);
@@ -372,7 +401,43 @@ private Produto obterProdutoSelecionado() {
     }//GEN-LAST:event_JBCancelarActionPerformed
 
     private void JBPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBPesquisarActionPerformed
-        // TODO add your handling code here:
+                                            
+    String nomePesquisa = JProdutos.getText().trim();
+
+    if (nomePesquisa.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Digite um nome para pesquisar.");
+        return;
+    }
+
+    ProdutoDAO produtoDAO = new ProdutoDAO();
+    ArrayList<Produto> produtos = produtoDAO.buscarPorNome(nomePesquisa);
+
+    if (produtos.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Nenhum produto encontrado.");
+        return;
+    }
+
+    // Preenche a JTableList
+    DefaultTableModel model = (DefaultTableModel) JTableList.getModel();
+    model.setRowCount(0);  // Limpa a tabela antes de adicionar novas linhas
+
+    for (Produto p : produtos) {
+        String status = "OK";
+        if (p.getQuantidadeEstoque() < p.getQuantidadeMinima()) {
+            status = "⚠️ Abaixo do Mínimo";
+        } else if (p.getQuantidadeEstoque() > p.getQuantidadeMaxima()) {
+            status = "⚠️ Acima do Máximo";
+        }
+
+        model.addRow(new Object[]{
+            p.getNome(),
+            p.getPrecoUnitario(),
+            p.getUnidade(),
+            p.getQuantidadeEstoque(),
+            p.getCategoria(), // ou p.getCategoria().getNome() se for um objeto Categoria
+            status
+        });
+    }
     }//GEN-LAST:event_JBPesquisarActionPerformed
 
     private void JProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JProdutosActionPerformed
@@ -380,7 +445,13 @@ private Produto obterProdutoSelecionado() {
     }//GEN-LAST:event_JProdutosActionPerformed
 
     private void JComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JComboBoxActionPerformed
-        // TODO add your handling code here:
+                                         
+    Produto produtoSelecionado = (Produto) JComboBox.getSelectedItem();
+    if (produtoSelecionado != null) {
+        JOptionPane.showMessageDialog(this, "Produto selecionado: " + produtoSelecionado.getNome());
+    }
+     
+    
     }//GEN-LAST:event_JComboBoxActionPerformed
 
 
@@ -420,7 +491,7 @@ private Produto obterProdutoSelecionado() {
     private javax.swing.JButton JBCancelar;
     private javax.swing.JButton JBConfirmar;
     private javax.swing.JButton JBPesquisar;
-    private javax.swing.JComboBox<String> JComboBox;
+    private javax.swing.JComboBox<Produto> JComboBox;
     private javax.swing.JRadioButton JEntrada;
     private javax.swing.JTextField JProdutos;
     private javax.swing.JRadioButton JSaida;

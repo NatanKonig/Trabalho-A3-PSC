@@ -57,9 +57,8 @@ public class Movimentacao {
     public void setData(LocalDateTime data){
         this.data = data;
     }
-    /**
-     * Método toString sobrescrito para exibir os dados da movimentação de forma legível
-     */
+    // Método toString sobrescrito para exibir os dados da movimentação de forma legível
+    
     
     @Override
     public String toString(){
