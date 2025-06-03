@@ -16,7 +16,7 @@ public class FrmMovimentarEstoque extends javax.swing.JFrame {
 
 
 
-    
+
     public FrmMovimentarEstoque() {
         initComponents();
       carregarProdutosNoComboBox(); 
@@ -410,7 +410,7 @@ private Produto obterProdutoSelecionado() {
     }
 
     ProdutoDAO produtoDAO = new ProdutoDAO();
-    ArrayList<Produto> produtos = produtoDAO.buscarPorNome(nomePesquisa);
+    ArrayList<Produto> produtos = produtoDAO.listar();
 
     if (produtos.isEmpty()) {
         JOptionPane.showMessageDialog(this, "Nenhum produto encontrado.");

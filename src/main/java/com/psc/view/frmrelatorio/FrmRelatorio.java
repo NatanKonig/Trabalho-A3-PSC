@@ -1,7 +1,18 @@
 package com.psc.view.frmrelatorio;
 
+import com.psc.dao.CategoriaDAO;
+import com.psc.dao.ProdutoDAO;
+import com.psc.model.Categoria;
+import com.psc.model.Produto;
+
 import java.awt.Color;
 import java.awt.Component;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -16,6 +27,9 @@ import javax.swing.table.DefaultTableModel;
 public class FrmRelatorio extends javax.swing.JFrame {
 
     DefaultTableModel modeloTabela;
+    ProdutoDAO produtoDAO = new ProdutoDAO();
+    CategoriaDAO categoriaDAO = new CategoriaDAO();
+    List<Produto> produtos = new ArrayList<>();
 
     /**
      * Creates new form FrmRelatorio
@@ -38,6 +52,8 @@ public class FrmRelatorio extends javax.swing.JFrame {
         JBGerar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelaRelatorio = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        JLValorTotalEstoque = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Relatorio do Estoque");
@@ -74,6 +90,16 @@ public class FrmRelatorio extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(TabelaRelatorio);
 
+        jButton1.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
+        jButton1.setText("Voltar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        JLValorTotalEstoque.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -81,26 +107,40 @@ public class FrmRelatorio extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(51, 51, 51)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel1)
                                         .addGroup(layout.createSequentialGroup()
-                                                .addComponent(JCSeletor, javax.swing.GroupLayout.PREFERRED_SIZE, 734, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(55, 55, 55)
-                                                .addComponent(JBGerar, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(51, Short.MAX_VALUE))
+                                                .addGap(6, 6, 6)
+                                                .addComponent(JLValorTotalEstoque)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(JCSeletor, javax.swing.GroupLayout.PREFERRED_SIZE, 734, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(55, 55, 55)
+                                                                .addComponent(JBGerar, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addContainerGap(51, Short.MAX_VALUE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel1)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(230, 230, 230))))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(40, 40, 40)
-                                .addComponent(jLabel1)
-                                .addGap(65, 65, 65)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel1)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(60, 60, 60)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(JCSeletor, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(JBGerar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(34, 34, 34)
+                                .addGap(35, 35, 35)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(40, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(JLValorTotalEstoque)
+                                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -110,24 +150,56 @@ public class FrmRelatorio extends javax.swing.JFrame {
         int tipoRelatorio = JCSeletor.getSelectedIndex();
         switch (tipoRelatorio) {
             case 0: /* Relatorio de lista de precos */
+                produtos = produtoDAO.listar();
+                Collections.sort(produtos, Comparator.comparing(Produto::getNome));
+
                 modeloTabela = new DefaultTableModel();
                 modeloTabela.setColumnIdentifiers(new String[]{"ID", "Nome", "Preço", "Unidade de medida", "Categoria"});
-                modeloTabela.addRow(new Object[]{"001", "Produto A", "R$ 10,00", "KG", "Alimentos"});
-                modeloTabela.addRow(new Object[]{"002", "Produto B", "R$ 25,50", "Litros", "Limpeza"});
+                for (Produto p : produtos) {
+                    modeloTabela.addRow(new Object[]{
+                            p.getId(),
+                            p.getNome(),
+                            "R$ " + p.getPrecoUnitario(),
+                            p.getUnidade(),
+                            p.getCategoria()});
+                }
                 TabelaRelatorio.setModel(modeloTabela);
+                JLValorTotalEstoque.setText("");
                 break;
-            case 1: /* Relatorio de balanco fisico e financeiro*/
+            case 1: /* Relatorio de balanco fisco e financeiro*/
+                double valorTotalEstoque = 0.0;
+                produtos = produtoDAO.listar();
+                Collections.sort(produtos, Comparator.comparing(Produto::getNome));
+
                 modeloTabela = new DefaultTableModel();
                 modeloTabela.setColumnIdentifiers(new String[]{"ID", "Nome", "Quantidade", "Valor Unitario", "Valor Total"});
-                modeloTabela.addRow(new Object[]{"001", "Produto A", "10", "R$ 5,00", "R$ 50,00"});
-                modeloTabela.addRow(new Object[]{"002", "Produto B", "25", "R$ 10", "R$ 250"});
+                for (Produto p : produtos) {
+                    valorTotalEstoque += p.getQuantidadeEstoque() * p.getPrecoUnitario();
+                    modeloTabela.addRow(new Object[]{
+                            p.getId(),
+                            p.getNome(),
+                            p.getQuantidadeEstoque(),
+                            "R$ " + p.getPrecoUnitario(),
+                            "R$ " + (p.getPrecoUnitario() * p.getQuantidadeEstoque())});
+                }
                 TabelaRelatorio.setModel(modeloTabela);
+
+                JLValorTotalEstoque.setText("Valor total de todo o estoque: R$ " + valorTotalEstoque);
                 break;
             case 2: /* Relatorio de produtos abaixo da quantidade minima*/
+                produtos = produtoDAO.listar();
+
                 modeloTabela = new DefaultTableModel();
                 modeloTabela.setColumnIdentifiers(new String[]{"ID", "Nome", "Quantidade Minima", "Quantidade Atual", "Status"});
-                modeloTabela.addRow(new Object[]{"001", "Produto A", "5", "1", "Baixo"});
-                modeloTabela.addRow(new Object[]{"002", "Produto B", "20", "25", "Normal"});
+                for (Produto p : produtos) {
+                    modeloTabela.addRow(new Object[]{
+                            p.getId(),
+                            p.getNome(),
+                            p.getQuantidadeMinima(),
+                            p.getQuantidadeEstoque(),
+                            p.getQuantidadeEstoque() < p.getQuantidadeMinima() ? "Baixo" : "Normal"
+                    });
+                }
                 TabelaRelatorio.setModel(modeloTabela);
 
                 DefaultTableCellRenderer rendererStatus = new DefaultTableCellRenderer() {
@@ -174,22 +246,96 @@ public class FrmRelatorio extends javax.swing.JFrame {
 
                 // Aplica o renderizador à coluna "Status"
                 TabelaRelatorio.getColumnModel().getColumn(4).setCellRenderer(rendererStatus);
+                JLValorTotalEstoque.setText("");
                 break;
-            case 3: /* Relatorio de produtos acima da quantidade maxima*/
+            case 3: /* Relatorio de produtos acima da quantidade maxima */
+                produtos = produtoDAO.listar();
+
                 modeloTabela = new DefaultTableModel();
-                modeloTabela.setColumnIdentifiers(new String[]{"ID", "Nome", "Quantidade Maxima", "Quantidade Atual"});
-                modeloTabela.addRow(new Object[]{"001", "Produto A", "100", "10"});
-                modeloTabela.addRow(new Object[]{"002", "Produto B", "80", "25"});
+                modeloTabela.setColumnIdentifiers(new String[]{"ID", "Nome", "Quantidade Maxima", "Quantidade Atual", "Status"});
+
+                for (Produto p : produtos) {
+                    modeloTabela.addRow(new Object[]{
+                            p.getId(),
+                            p.getNome(),
+                            p.getQuantidadeMaxima(),
+                            p.getQuantidadeEstoque(),
+                            p.getQuantidadeEstoque() > p.getQuantidadeMaxima() ? "Alto" : "Normal"
+                    });
+                }
+
                 TabelaRelatorio.setModel(modeloTabela);
+
+                DefaultTableCellRenderer rendererStatusMax = new DefaultTableCellRenderer() {
+                    private final Icon iconeAlto = new ImageIcon(getClass().getResource("/FRAMEestoque_alto.png"));
+                    private final Icon iconeNormal = new ImageIcon(getClass().getResource("/FRAMEestoque_normal.png"));
+
+                    @Override
+                    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+                                                                   boolean hasFocus, int row, int column) {
+                        JLabel label = new JLabel();
+                        label.setOpaque(true);
+
+                        String status = value.toString();
+
+                        if (status.equalsIgnoreCase("Alto")) {
+                            label.setText("Alto");
+                            label.setIcon(iconeAlto);
+                            label.setForeground(new Color(202, 138, 4));
+                        } else if (status.equalsIgnoreCase("Normal")) {
+                            label.setText("Normal");
+                            label.setIcon(iconeNormal);
+                            label.setForeground(new Color(0, 128, 0));
+                        } else {
+                            label.setText(status);
+                            label.setForeground(Color.BLACK);
+                        }
+
+                        label.setHorizontalTextPosition(SwingConstants.RIGHT);
+                        label.setIconTextGap(8);
+
+                        if (isSelected) {
+                            label.setBackground(table.getSelectionBackground());
+                        } else {
+                            label.setBackground(Color.WHITE);
+                        }
+
+                        return label;
+                    }
+                };
+
+                TabelaRelatorio.getColumnModel().getColumn(4).setCellRenderer(rendererStatusMax);
+                JLValorTotalEstoque.setText("");
                 break;
             case 4: /* Relatorio de relacao de produto categoria */
-                modeloTabela = new DefaultTableModel();
-                modeloTabela.setColumnIdentifiers(new String[]{"Categoria", "Quantidade Produtos"});
-                modeloTabela.addRow(new Object[]{"Autopecas", "10"});
-                modeloTabela.addRow(new Object[]{"Eletrodomestico", "5"});
-                TabelaRelatorio.setModel(modeloTabela);
-                break;
+                List<Produto> produtos = produtoDAO.listar();
+                List<Categoria> categorias = categoriaDAO.listar();
+                Map<String, Integer> contagemPorCategoria = new HashMap<>();
 
+                for (Categoria c : categorias) {
+                    contagemPorCategoria.put(c.getNome(), 0);
+                }
+
+                for (Produto p : produtos) {
+                    Categoria categoria = p.getCategoria();
+                    if (categoria != null) {
+                        String nomeCategoria = categoria.getNome();
+                        contagemPorCategoria.put(nomeCategoria, contagemPorCategoria.get(nomeCategoria) + 1);
+                    }
+                }
+
+                modeloTabela = new DefaultTableModel();
+                modeloTabela.setColumnIdentifiers(new String[]{"Categoria", "Quantidade Produtos Distintos"});
+
+                for (Categoria c : categorias) {
+                    String nomeCategoria = c.getNome();
+                    int quantidade = contagemPorCategoria.getOrDefault(nomeCategoria, 0);
+                    modeloTabela.addRow(new Object[]{nomeCategoria, quantidade});
+                }
+
+                TabelaRelatorio.setModel(modeloTabela);
+                JLValorTotalEstoque.setText("");
+                break;
             default:
                 throw new AssertionError();
         }
@@ -198,6 +344,10 @@ public class FrmRelatorio extends javax.swing.JFrame {
     private void JCSeletorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCSeletorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JCSeletorActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -237,7 +387,9 @@ public class FrmRelatorio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBGerar;
     private javax.swing.JComboBox<String> JCSeletor;
+    private javax.swing.JLabel JLValorTotalEstoque;
     private javax.swing.JTable TabelaRelatorio;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
