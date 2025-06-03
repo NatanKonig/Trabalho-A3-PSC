@@ -1,63 +1,89 @@
 package com.psc.dao;
 
+import com.psc.model.Movimentacao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class MovimentacaoDAO {
 
+    // Método que movimenta o estoque e registra a movimentação
+    public boolean movimentarEstoque(int produtoId, int quantidade, String tipo, String dataStr) {
+        // 1. Atualizar estoque
+        boolean estoqueAtualizado = atualizarEstoque(produtoId, quantidade, tipo);
 
-    //Método responsável por movimentar o estoque de um produto.
-    public boolean movimentarEstoque(int produtoId, int quantidade, String tipo, String data) {
-        try (Connection conn = ConexaoDAO.getConnection()) {   //  usa ConexaoDAO
+        if (!estoqueAtualizado) {
+            System.out.println("Erro ao atualizar o estoque.");
+            return false;
+        }
 
-            // Consulta a quantidade atual
-            String selectSql = "SELECT quantidade_estoque FROM produto WHERE id = ?";
-            PreparedStatement selectStmt = conn.prepareStatement(selectSql);
-            selectStmt.setInt(1, produtoId);
-            ResultSet rs = selectStmt.executeQuery();
+        // 2. Criar objeto Movimentacao
+        Movimentacao movimentacao = new Movimentacao();
+        movimentacao.setProdutoId(produtoId);
+        movimentacao.setQuantidade(quantidade);
+        movimentacao.setTipo(tipo);
 
-            if (!rs.next()) {
-                System.out.println("Produto não encontrado.");
-                return false;
-            }
+        // Definir data
+        LocalDateTime data;
+        if (dataStr != null && !dataStr.isEmpty()) {
+            data = LocalDateTime.parse(dataStr);
+        } else {
+            data = LocalDateTime.now();
+        }
+        movimentacao.setData(data);
 
-            int quantidadeAtual = rs.getInt("quantidade_estoque");
-            int novaQuantidade;
+        // 3. Inserir movimentação
+        return inserir(movimentacao);
+    }
 
-            if (tipo.equalsIgnoreCase("ENTRADA")) {
-                novaQuantidade = quantidadeAtual + quantidade;
-            } else if (tipo.equalsIgnoreCase("SAIDA")) {
-                novaQuantidade = quantidadeAtual - quantidade;
-                if (novaQuantidade < 0) {
-                    System.out.println("Estoque insuficiente para a saída.");
-                    return false;
-                }
-            } else {
-                System.out.println("Tipo de movimentação inválido.");
-                return false;
-            }
+    // Método privado para atualizar a quantidade de estoque
+    private boolean atualizarEstoque(int produtoId, int quantidade, String tipo) {
+        String sql = "";
 
-            // Atualiza o estoque
-            String updateSql = "UPDATE produto SET quantidade_estoque = ? WHERE id = ?";
-            PreparedStatement updateStmt = conn.prepareStatement(updateSql);
-            updateStmt.setInt(1, novaQuantidade);
-            updateStmt.setInt(2, produtoId);
-            updateStmt.executeUpdate();
+        if ("ENTRADA".equalsIgnoreCase(tipo)) {
+            sql = "UPDATE produto SET quantidade_estoque = quantidade_estoque + ? WHERE id = ?";
+        } else if ("SAIDA".equalsIgnoreCase(tipo)) {
+            sql = "UPDATE produto SET quantidade_estoque = quantidade_estoque - ? WHERE id = ?";
+        } else {
+            System.out.println("Tipo inválido: " + tipo);
+            return false;
+        }
 
-            System.out.println("Estoque atualizado com sucesso. Nova quantidade: " + novaQuantidade);
-            return true;
+        try (Connection conn = ConexaoDAO.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, quantidade);
+            stmt.setInt(2, produtoId);
+
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
 
         } catch (SQLException e) {
-            System.out.println("Erro ao movimentar estoque: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
     }
 
-    public boolean movimentarEstoque(int produtoId, int quantidade, String entrada) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    // Método para inserir a movimentação no banco de dados
+    public boolean inserir(Movimentacao movimentacao) {
+        String sql = "INSERT INTO movimentacao (produto_id, quantidade, tipo, data) VALUES (?, ?, ?, ?)";
+
+        try (Connection conn = ConexaoDAO.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, movimentacao.getProdutoId());
+            stmt.setInt(2, movimentacao.getQuantidade());
+            stmt.setString(3, movimentacao.getTipo());
+            stmt.setTimestamp(4, Timestamp.valueOf(movimentacao.getData()));
+
+            stmt.executeUpdate();
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
-
-
