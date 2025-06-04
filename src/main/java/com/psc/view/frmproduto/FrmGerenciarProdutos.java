@@ -1,13 +1,20 @@
 package com.psc.view.frmproduto;
 
 /**
+ * Janela principal para gerenciamento de produtos.
  *
- * @author Gabriel
+ * <p>Permite acesso às funcionalidades de criação e edição de produtos,
+ * bem como o fechamento da janela atual.</p>
+ *
+ * <p>Esta interface é uma ponte entre a navegação do sistema e as
+ * janelas {@link FrmCriarProduto} e {@link FrmEditarProdutos}.</p>
+ *
+ * @author Machadox18
  */
 public class FrmGerenciarProdutos extends javax.swing.JFrame {
 
     /**
-     * Creates new form FrmGerenciarProdutos
+     * Construtor padrão que inicializa os componentes da interface gráfica.
      */
     public FrmGerenciarProdutos() {
         initComponents();
@@ -58,48 +65,66 @@ public class FrmGerenciarProdutos extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addComponent(JBCriarproduto, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
-                .addComponent(JBEditarprodutos, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(100, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(283, 283, 283))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(100, 100, 100)
+                                .addComponent(JBCriarproduto, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(60, 60, 60)
+                                .addComponent(JBEditarprodutos, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(100, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(283, 283, 283))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(206, 206, 206)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JBCriarproduto, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JBEditarprodutos, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
-                .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(206, 206, 206)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(JBCriarproduto, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(JBEditarprodutos, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
+                                .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(35, 35, 35))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Ação executada ao clicar no botão "Criar Produto".
+     *
+     * <p>Abre a janela {@link FrmCriarProduto} para cadastrar um novo produto.</p>
+     *
+     * @param evt Evento de clique do botão
+     */
     private void JBCriarprodutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCriarprodutoActionPerformed
-        // TODO add your handling code here:
         FrmCriarProduto janelaCriarProduto = new FrmCriarProduto();
         janelaCriarProduto.setVisible(true);
     }//GEN-LAST:event_JBCriarprodutoActionPerformed
 
+    /**
+     * Ação executada ao clicar no botão "Editar Produtos".
+     *
+     * <p>Abre a janela {@link FrmEditarProdutos} para editar produtos já existentes.</p>
+     *
+     * @param evt Evento de clique do botão
+     */
     private void JBEditarprodutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBEditarprodutosActionPerformed
-        // TODO add your handling code here:
         FrmEditarProdutos janelaEditarProdutos = new FrmEditarProdutos();
         janelaEditarProdutos.setVisible(true);
     }//GEN-LAST:event_JBEditarprodutosActionPerformed
 
+    /**
+     * Ação executada ao clicar no botão "Fechar" (jToggleButton2).
+     *
+     * <p>Fecha a janela atual de gerenciamento de produtos.</p>
+     *
+     * @param evt Evento de clique do botão
+     */
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
+        this.dispose(); // Fecha a janela
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     /**
@@ -109,7 +134,7 @@ public class FrmGerenciarProdutos extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
