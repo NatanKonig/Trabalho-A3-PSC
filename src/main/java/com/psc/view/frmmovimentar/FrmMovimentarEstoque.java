@@ -15,11 +15,33 @@ import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 
+/**
+ * Janela para gerenciar movimentações de estoque.
+ *
+ * <p>Permite visualizar o histórico de movimentações, selecionar um produto,
+ * escolher o tipo de movimentação (entrada ou saída), informar a quantidade
+ * e registrar essa movimentação no banco de dados.</p>
+ *
+ * @author EvelynYs2
+ * @version 1.0
+ */
 public class FrmMovimentarEstoque extends javax.swing.JFrame {
 
+    /**
+     * DAO para manipulação das movimentações no banco de dados.
+     */
     MovimentacaoDAO movimentacaoDAO = new MovimentacaoDAO();
+
+    /**
+     * DAO para manipulação dos produtos no banco de dados.
+     */
     ProdutoDAO produtoDAO = new ProdutoDAO();
 
+    /**
+     * Construtor padrão que inicializa os componentes gráficos,
+     * carrega os produtos no comboBox e o histórico de movimentações,
+     * além de definir a data/hora atual no campo de data.
+     */
     public FrmMovimentarEstoque() {
         initComponents();
         carregarProdutosNoComboBox();
@@ -27,17 +49,23 @@ public class FrmMovimentarEstoque extends javax.swing.JFrame {
         JTextData.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yy HH:mm:ss")));
     }
 
+    /**
+     * Carrega a lista de produtos disponíveis no banco de dados e
+     * os adiciona ao comboBox de seleção de produtos.
+     */
     private void carregarProdutosNoComboBox() {
-
         ArrayList<Produto> produtos = produtoDAO.listar();
-
-        comboProdutos.removeAllItems(); //Limpa o comboProdutos
-
+        comboProdutos.removeAllItems(); // Limpa o comboProdutos
         for (Produto p : produtos) {
             comboProdutos.addItem(p);
         }
     }
 
+    /**
+     * Atualiza a tabela exibindo o histórico das movimentações realizadas,
+     * buscando as movimentações no banco de dados e exibindo seus dados
+     * formatados.
+     */
     private void carregarTabelaMovimentacao() {
         DefaultTableModel modelo = (DefaultTableModel) JTableHistoricoMovimentacoes.getModel();
         modelo.setRowCount(0);
@@ -161,7 +189,7 @@ public class FrmMovimentarEstoque extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nome produto", "Quantidade movimentada", "Tipo movimentacao", "Data"
+                "ID movimentação", "Nome produto", "Quantidade movimentada", "Tipo movimentacao", "Data"
             }
         ));
         jScrollPane2.setViewportView(JTableHistoricoMovimentacoes);
