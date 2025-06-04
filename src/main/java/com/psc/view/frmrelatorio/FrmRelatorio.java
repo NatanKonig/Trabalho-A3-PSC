@@ -22,17 +22,46 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
- * @author natan
+ * Janela para geração de diversos relatórios de produtos e categorias.
+ *
+ * <p>Dependendo da opção selecionada em {@code JCSeletor}, exibe:
+ * <ul>
+ *   <li>Lista de preços ordenada por nome.</li>
+ *   <li>Balanço físico e financeiro do estoque.</li>
+ *   <li>Produtos abaixo da quantidade mínima (com ícone e cor).</li>
+ *   <li>Produtos acima da quantidade máxima (com ícone e cor).</li>
+ *   <li>Relação de quantidade de produtos por categoria.</li>
+ * </ul>
+ * Os dados são obtidos através de {@link ProdutoDAO} e {@link CategoriaDAO}.</p>
+ *
+ * @author NatanKonig
+ * @version 1.0
  */
 public class FrmRelatorio extends javax.swing.JFrame {
 
-    DefaultTableModel modeloTabela;
-    ProdutoDAO produtoDAO = new ProdutoDAO();
-    CategoriaDAO categoriaDAO = new CategoriaDAO();
-    List<Produto> produtos = new ArrayList<>();
+    /**
+     * Modelo de tabela utilizado para exibição dos relatórios.
+     */
+    private DefaultTableModel modeloTabela;
 
     /**
-     * Creates new form FrmRelatorio
+     * DAO para operações relacionadas a produtos.
+     */
+    private ProdutoDAO produtoDAO = new ProdutoDAO();
+
+    /**
+     * DAO para operações relacionadas a categorias.
+     */
+    private CategoriaDAO categoriaDAO = new CategoriaDAO();
+
+    /**
+     * Lista de produtos obtida do banco de dados.
+     */
+    private List<Produto> produtos = new ArrayList<>();
+
+    /**
+     * Construtor padrão da janela de relatórios.
+     * <p>Inicializa componentes gráficos.</p>
      */
     public FrmRelatorio() {
         initComponents();
@@ -62,7 +91,7 @@ public class FrmRelatorio extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("DejaVu Sans", 0, 36)); // NOI18N
         jLabel1.setText("Relatórios de Estoque");
 
-        JCSeletor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lista de Preços dos produtos", "Balanço Físico e Financeiro dos produtos", "Produtos abaixo da quantidade minima", "Produto acima da quantidade maxima", "Relação de produtos por categoria" }));
+        JCSeletor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Lista de Preços dos produtos", "Balanço Físico e Financeiro dos produtos", "Produtos abaixo da quantidade minima", "Produto acima da quantidade maxima", "Relação de produtos por categoria"}));
         JCSeletor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JCSeletorActionPerformed(evt);
@@ -78,12 +107,12 @@ public class FrmRelatorio extends javax.swing.JFrame {
         });
 
         TabelaRelatorio.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+                new Object[][]{
 
-            },
-            new String [] {
-                "Gere um relatório para visualizá-lo"
-            }
+                },
+                new String[]{
+                        "Gere um relatório para visualizá-lo"
+                }
         ));
         jScrollPane1.setViewportView(TabelaRelatorio);
 
@@ -100,49 +129,102 @@ public class FrmRelatorio extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(JLValorTotalEstoque)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(JCSeletor, javax.swing.GroupLayout.PREFERRED_SIZE, 734, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(55, 55, 55)
-                                .addComponent(JBGerar, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(51, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(230, 230, 230))))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(51, 51, 51)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(6, 6, 6)
+                                                .addComponent(JLValorTotalEstoque)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(JCSeletor, javax.swing.GroupLayout.PREFERRED_SIZE, 734, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(55, 55, 55)
+                                                                .addComponent(JBGerar, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addContainerGap(51, Short.MAX_VALUE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel1)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(230, 230, 230))))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(60, 60, 60)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JCSeletor, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JBGerar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(JLValorTotalEstoque)
-                .addContainerGap(19, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel1)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(60, 60, 60)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(JCSeletor, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(JBGerar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(35, 35, 35)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(JLValorTotalEstoque)
+                                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Ação executada ao clicar no botão "Gerar" ({@code JBGerar}).
+     * <p>Dependendo do índice selecionado em {@code JCSeletor}, gera e exibe
+     * o relatório correspondente na tabela {@code TabelaRelatorio}:</p>
+     * <ol>
+     *   <li>
+     *     Relatório de lista de preços:
+     *     <ul>
+     *       <li>Obtém todos os produtos via {@link ProdutoDAO#listar()}.</li>
+     *       <li>Ordena por nome.</li>
+     *       <li>Preenche colunas: ID, Nome, Preço, Unidade de medida, Categoria.</li>
+     *     </ul>
+     *   </li>
+     *   <li>
+     *     Relatório de balanço físico e financeiro:
+     *     <ul>
+     *       <li>Obtém todos os produtos via {@link ProdutoDAO#listar()}.</li>
+     *       <li>Ordena por nome.</li>
+     *       <li>Calcula valor total do estoque (quantidade * preço unitário).</li>
+     *       <li>Preenche colunas: ID, Nome, Quantidade, Valor Unitário, Valor Total.</li>
+     *       <li>Exibe o valor total do estoque em {@code JLValorTotalEstoque}.</li>
+     *     </ul>
+     *   </li>
+     *   <li>
+     *     Relatório de produtos abaixo da quantidade mínima:
+     *     <ul>
+     *       <li>Obtém todos os produtos via {@link ProdutoDAO#listar()}.</li>
+     *       <li>Preenche colunas: ID, Nome, Quantidade Mínima, Quantidade Atual, Status.</li>
+     *       <li>Define "Baixo" se quantidade < quantidade mínima, caso contrário "Normal".</li>
+     *       <li>Aplica ícone e cor ao status através de {@link DefaultTableCellRenderer}.</li>
+     *     </ul>
+     *   </li>
+     *   <li>
+     *     Relatório de produtos acima da quantidade máxima:
+     *     <ul>
+     *       <li>Obtém todos os produtos via {@link ProdutoDAO#listar()}.</li>
+     *       <li>Preenche colunas: ID, Nome, Quantidade Máxima, Quantidade Atual, Status.</li>
+     *       <li>Define "Alto" se quantidade > quantidade máxima, caso contrário "Normal".</li>
+     *       <li>Aplica ícone e cor ao status através de {@link DefaultTableCellRenderer}.</li>
+     *     </ul>
+     *   </li>
+     *   <li>
+     *     Relatório de relação de produtos por categoria:
+     *     <ul>
+     *       <li>Obtém todos os produtos ({@link ProdutoDAO#listar()}) e categorias ({@link CategoriaDAO#listar()}).</li>
+     *       <li>Conta quantos produtos existem em cada categoria.</li>
+     *       <li>Preenche colunas: Categoria, Quantidade de Produtos Distintos.</li>
+     *     </ul>
+     *   </li>
+     * </ol>
+     *
+     * @param evt evento de ação disparado ao clicar no botão Gerar
+     */
     private void JBGerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBGerarActionPerformed
         int tipoRelatorio = JCSeletor.getSelectedIndex();
         switch (tipoRelatorio) {

@@ -6,13 +6,20 @@ import com.psc.view.frmproduto.FrmGerenciarProdutos;
 import com.psc.view.frmrelatorio.FrmRelatorio;
 
 /**
+ * Janela principal da aplicação, que serve como ponto de entrada para acessar
+ * as funcionalidades de gerenciamento de produtos, categorias, movimentação de estoque
+ * e geração de relatórios.
  *
- * @author natan
+ * <p>A partir desta janela, o usuário pode navegar para outras telas específicas
+ * clicando nos botões correspondentes.</p>
+ *
+ * @author NatanKonig
+ * @version 1.0
  */
 public class FrmPrincipal extends javax.swing.JFrame {
 
     /**
-     * Creates new form FrmPrincipal
+     * Construtor padrão que inicializa os componentes da interface.
      */
     public FrmPrincipal() {
         initComponents();
@@ -117,21 +124,45 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Ação executada ao clicar no botão "Produto".
+     * <p>Abre a janela de gerenciamento de produtos {@link FrmGerenciarProdutos}.</p>
+     *
+     * @param evt evento de ação disparado ao clicar no botão Produto
+     */
     private void JBProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBProdutoActionPerformed
         FrmGerenciarProdutos janelaGerenciarProdutos = new FrmGerenciarProdutos();
         janelaGerenciarProdutos.setVisible(true);
     }//GEN-LAST:event_JBProdutoActionPerformed
 
+    /**
+     * Ação executada ao clicar no botão "Categoria".
+     * <p>Abre a janela de gerenciamento de categorias {@link FrmGerenciaCategoria}.</p>
+     *
+     * @param evt evento de ação disparado ao clicar no botão Categoria
+     */
     private void JBCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCategoriaActionPerformed
         FrmGerenciaCategoria janelaGerenciarCategorias = new FrmGerenciaCategoria();
         janelaGerenciarCategorias.setVisible(true);
     }//GEN-LAST:event_JBCategoriaActionPerformed
 
+    /**
+     * Ação executada ao clicar no botão "Movimentar".
+     * <p>Abre a janela de movimentação de estoque {@link FrmMovimentarEstoque}.</p>
+     *
+     * @param evt evento de ação disparado ao clicar no botão Movimentar
+     */
     private void JBMovimentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBMovimentarActionPerformed
         FrmMovimentarEstoque janelaMovimentarEstoque = new FrmMovimentarEstoque();
         janelaMovimentarEstoque.setVisible(true);
     }//GEN-LAST:event_JBMovimentarActionPerformed
 
+    /**
+     * Ação executada ao clicar no botão "Relatório".
+     * <p>Abre a janela de relatórios {@link FrmRelatorio}.</p>
+     *
+     * @param evt evento de ação disparado ao clicar no botão Relatório
+     */
     private void JBRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBRelatorioActionPerformed
         FrmRelatorio janelaExibirRelatorios = new FrmRelatorio();
         janelaExibirRelatorios.setVisible(true);

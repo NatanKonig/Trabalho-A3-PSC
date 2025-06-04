@@ -5,7 +5,8 @@ import com.psc.dao.ProdutoDAO;
 import com.psc.model.Categoria;
 import com.psc.model.Produto;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 
