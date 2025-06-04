@@ -72,7 +72,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jBAlterar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="b_apagar" min="-2" max="-2" attributes="0"/>
+                              <Component id="JBApagar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
@@ -154,7 +154,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jBCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jBAlterar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="b_apagar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="JBApagar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   </Group>
@@ -275,7 +275,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBAlterarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="b_apagar">
+    <Component class="javax.swing.JButton" name="JBApagar">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="DejaVu Sans" size="18" style="0"/>
@@ -283,7 +283,7 @@
         <Property name="text" type="java.lang.String" value="Apagar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b_apagarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBApagarActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">

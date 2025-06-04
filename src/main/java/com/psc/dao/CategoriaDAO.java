@@ -1,6 +1,6 @@
-package com.psc.dao; // Define o pacote onde essa classe está localizada (Data Access Object - DAO).
+package com.psc.dao;
 
-import com.psc.model.Categoria; // Importa a classe Categoria para poder usá-la aqui.
+import com.psc.model.Categoria;
 import com.psc.model.EmbalagemProduto;
 import com.psc.model.TamanhoProduto;
 
@@ -10,10 +10,25 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.List;      // Importa a interface List.
+import java.util.List;
 
-public class CategoriaDAO { // Define a classe pública 'CategoriaDAO', responsável por gerenciar objetos Categoria.
+/**
+ * Classe responsável pelo acesso e manipulação dos dados da entidade {@link Categoria}
+ * no banco de dados. Implementa as operações de inserção, listagem, atualização e exclusão.
+ *
+ * <p>Utiliza a classe {@code ConexaoDAO} para obter conexões com o banco de dados.</p>
+ *
+ * <p>Esta classe segue o padrão DAO (Data Access Object).</p>
+ *
+ * @author AguiarFabricio
+ */
+public class CategoriaDAO {
 
+    /**
+     * Insere uma nova categoria no banco de dados.
+     *
+     * @param categoria A categoria a ser inserida.
+     */
     public void inserir(Categoria categoria) {
         String sql = "INSERT INTO categoria (nome, tamanho, embalagem) VALUES (?, ?, ?)";
 
@@ -31,6 +46,11 @@ public class CategoriaDAO { // Define a classe pública 'CategoriaDAO', respons�
         }
     }
 
+    /**
+     * Recupera todas as categorias cadastradas no banco de dados.
+     *
+     * @return Uma lista com todas as categorias encontradas.
+     */
     public List<Categoria> listar() {
         List<Categoria> categorias = new ArrayList<>();
         String sql = "SELECT * FROM categoria";
@@ -56,6 +76,12 @@ public class CategoriaDAO { // Define a classe pública 'CategoriaDAO', respons�
         return categorias;
     }
 
+    /**
+     * Atualiza uma categoria existente no banco de dados.
+     *
+     * @param categoriaAtualizada A categoria com os novos dados a serem atualizados.
+     * @return {@code true} se a atualização foi realizada com sucesso, {@code false} caso contrário.
+     */
     public boolean atualizar(Categoria categoriaAtualizada) {
         String sql = "UPDATE categoria SET nome = ?, tamanho = ?, embalagem = ? WHERE id_categoria = ?";
 
@@ -76,6 +102,12 @@ public class CategoriaDAO { // Define a classe pública 'CategoriaDAO', respons�
         }
     }
 
+    /**
+     * Remove uma categoria do banco de dados com base no seu ID.
+     *
+     * @param id O ID da categoria a ser removida.
+     * @return {@code true} se a exclusão foi realizada com sucesso, {@code false} caso contrário.
+     */
     public boolean deletar(int id) {
         String sql = "DELETE FROM categoria WHERE id_categoria = ?";
 
