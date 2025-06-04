@@ -59,25 +59,14 @@ public class MovimentacaoDAO {
 
 
     // Método que movimenta o estoque e registra a movimentação
-    public boolean movimentarEstoque(Produto produto, int quantidade, TipoMovimentacao tipo, String dataStr) {
-        boolean estoqueAtualizado = atualizarEstoque(produto, quantidade, tipo);
+    public boolean movimentarEstoque(Movimentacao movimentacao) {
+        boolean estoqueAtualizado = atualizarEstoque(movimentacao.getProduto(), movimentacao.getQuantidade(), movimentacao.getTipo());
 
         if (!estoqueAtualizado) {
             System.out.println("Erro ao atualizar o estoque.");
             return false;
         }
 
-        // Definir data
-        LocalDateTime data;
-        if (dataStr != null && !dataStr.isEmpty()) {
-            data = LocalDateTime.parse(dataStr);
-        } else {
-            data = LocalDateTime.now();
-        }
-
-        Movimentacao movimentacao = new Movimentacao(0, quantidade, tipo, data, produto);
-
-        // 3. Inserir movimentação
         return inserir(movimentacao);
     }
 

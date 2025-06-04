@@ -7,7 +7,10 @@ import com.psc.model.Movimentacao;
 import com.psc.model.Produto;
 import com.psc.dao.MovimentacaoDAO;
 import com.psc.dao.ProdutoDAO;
+import com.psc.model.TipoMovimentacao;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,15 +18,17 @@ import javax.swing.table.DefaultTableModel;
 public class FrmMovimentarEstoque extends javax.swing.JFrame {
 
     MovimentacaoDAO movimentacaoDAO = new MovimentacaoDAO();
+    ProdutoDAO produtoDAO = new ProdutoDAO();
 
     public FrmMovimentarEstoque() {
         initComponents();
         carregarProdutosNoComboBox();
         carregarTabelaMovimentacao();
+        JTextData.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yy HH:mm:ss")));
     }
 
     private void carregarProdutosNoComboBox() {
-        ProdutoDAO produtoDAO = new ProdutoDAO();
+
         ArrayList<Produto> produtos = produtoDAO.listar();
 
         comboProdutos.removeAllItems(); //Limpa o comboProdutos
@@ -43,7 +48,7 @@ public class FrmMovimentarEstoque extends javax.swing.JFrame {
                     movimentacao.getProduto().getNome(),
                     movimentacao.getQuantidade(),
                     movimentacao.getTipo(),
-                    movimentacao.getData()
+                    DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss").format(movimentacao.getData())
             });
         }
     }
@@ -185,21 +190,22 @@ public class FrmMovimentarEstoque extends javax.swing.JFrame {
                                     .addComponent(JEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(JSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(JTextQtd, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(JTextData, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(comboProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jLabel5)
-                                .addComponent(JBConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(JBConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(JTextData, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(JTextQtd, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGroup(layout.createSequentialGroup()
                             .addContainerGap()
                             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 898, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -263,43 +269,60 @@ public class FrmMovimentarEstoque extends javax.swing.JFrame {
     }//GEN-LAST:event_JSaidaActionPerformed
 
     private void JBConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBConfirmarActionPerformed
+        Produto produtoSelecionado = (Produto) comboProdutos.getSelectedItem();
+        TipoMovimentacao tipoMovimentacao = JEntrada.isSelected() ? TipoMovimentacao.ENTRADA : JSaida.isSelected() ? TipoMovimentacao.SAIDA : null;
+        String qtdStr = JTextQtd.getText().trim();
 
-        // Validação dos campos
-        if (comboProdutos.getSelectedIndex() == -1) {
-            JOptionPane.showMessageDialog(this, "Selecione um produto.");
-            return;
+        try {
+            if (produtoSelecionado == null || tipoMovimentacao == null || qtdStr.isEmpty() || JTextData.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Preencha todos os campos.");
+                return;
+            }
+            LocalDateTime data = LocalDateTime.parse(JTextData.getText().trim(), DateTimeFormatter.ofPattern("dd/MM/yy HH:mm:ss"));
+            int quantidade = Integer.parseInt(qtdStr);
+
+            if (quantidade <= 0) {
+                JOptionPane.showMessageDialog(this, "A quantidade deve ser maior que zero.");
+                return;
+            }
+
+            int estoqueAtual = produtoSelecionado.getQuantidadeEstoque();
+            int novaQuantidade;
+
+            if (tipoMovimentacao == TipoMovimentacao.SAIDA) {
+                if (quantidade > estoqueAtual) {
+                    JOptionPane.showMessageDialog(this, "Quantidade de saída excede o estoque atual (" + estoqueAtual + ").");
+                    return;
+                }
+                novaQuantidade = estoqueAtual - quantidade;
+            } else {
+                novaQuantidade = estoqueAtual + quantidade;
+                if (novaQuantidade > produtoSelecionado.getQuantidadeMaxima()) {
+                    JOptionPane.showMessageDialog(this, "Quantidade total após entrada excede o limite máximo (" + produtoSelecionado.getQuantidadeMaxima() + ").");
+                    return;
+                }
+            }
+
+            Movimentacao m = new Movimentacao(0, quantidade, tipoMovimentacao, data, produtoSelecionado);
+
+            boolean retorno = movimentacaoDAO.movimentarEstoque(m);
+
+            if (retorno) {
+                JOptionPane.showMessageDialog(this, "Movimentação registrada com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro ao realizar a movimentação!");
+            }
+
+            carregarTabelaMovimentacao();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Quantidade inválida.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Erro ao registrar movimentação.");
+        } finally {
+            JTextData.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yy HH:mm:ss")));
+            carregarProdutosNoComboBox();
         }
-        if (!JEntrada.isSelected() && !JSaida.isSelected()) {
-            JOptionPane.showMessageDialog(this, "Selecione o tipo de movimentação.");
-            return;
-        }
-
-        String qtdText = JTextQtd.getText().trim();
-        if (qtdText.isEmpty() || !qtdText.matches("\\d+")) {
-            JOptionPane.showMessageDialog(this, "Informe uma quantidade válida.");
-            return;
-        }
-
-//        Produto produto = obterProdutoSelecionado();
-//        int produtoId = produto.getId();
-//        int quantidade = Integer.parseInt(qtdText);
-//        TipoMovimentacao tipo = JEntrada.isSelected() ? "ENTRADA" : "SAIDA";
-//
-//        String data = JTextData.getText().trim();
-//        if (data.isEmpty()) {
-//            data = java.time.LocalDate.now().toString();
-//            JTextData.setText(data);
-//        }
-
-//        MovimentacaoDAO movimentacaoDAO = new MovimentacaoDAO();
-//        boolean sucesso = movimentacaoDAO.movimentarEstoque(produtoId, quantidade, tipo, data);
-//
-//        if (sucesso) {
-//            JOptionPane.showMessageDialog(this, "Movimentação realizada: \ntipo: " + tipo + "\nquantidade: " + quantidade);
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Erro ao realizar a movimentação!");
-//        }
-
     }//GEN-LAST:event_JBConfirmarActionPerformed
 
     private void JBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCancelarActionPerformed
