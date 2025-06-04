@@ -88,6 +88,7 @@ public class FrmEditarProdutos extends javax.swing.JFrame {
         JCBCategoria = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Gerenciamento de Produtos");
 
         TableProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

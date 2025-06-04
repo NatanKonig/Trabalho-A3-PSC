@@ -75,6 +75,7 @@ private Produto obterProdutoSelecionado() {
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Gerenciamento de Movimentações do Estoque");
 
         jLabel1.setText("Selecionar Produto:");
 
