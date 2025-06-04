@@ -3,49 +3,83 @@ package com.psc.view.frmmovimentar;
 import javax.swing.JOptionPane;
 
 
+import com.psc.model.Movimentacao;
 import com.psc.model.Produto;
 import com.psc.dao.MovimentacaoDAO;
 import com.psc.dao.ProdutoDAO;
-import com.psc.dao.CategoriaDAO;
+import com.psc.model.TipoMovimentacao;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 
-
+/**
+ * Janela para gerenciar movimentações de estoque.
+ *
+ * <p>Permite visualizar o histórico de movimentações, selecionar um produto,
+ * escolher o tipo de movimentação (entrada ou saída), informar a quantidade
+ * e registrar essa movimentação no banco de dados.</p>
+ *
+ * @author EvelynYs2
+ * @version 1.0
+ */
 public class FrmMovimentarEstoque extends javax.swing.JFrame {
 
+    /**
+     * DAO para manipulação das movimentações no banco de dados.
+     */
+    MovimentacaoDAO movimentacaoDAO = new MovimentacaoDAO();
 
+    /**
+     * DAO para manipulação dos produtos no banco de dados.
+     */
+    ProdutoDAO produtoDAO = new ProdutoDAO();
 
-
+    /**
+     * Construtor padrão que inicializa os componentes gráficos,
+     * carrega os produtos no comboBox e o histórico de movimentações,
+     * além de definir a data/hora atual no campo de data.
+     */
     public FrmMovimentarEstoque() {
         initComponents();
-      carregarProdutosNoComboBox(); 
-    
+        carregarProdutosNoComboBox();
+        carregarTabelaMovimentacao();
+        JTextData.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yy HH:mm:ss")));
     }
-    
+
+    /**
+     * Carrega a lista de produtos disponíveis no banco de dados e
+     * os adiciona ao comboBox de seleção de produtos.
+     */
     private void carregarProdutosNoComboBox() {
-    ProdutoDAO produtoDAO = new ProdutoDAO();
-    ArrayList<Produto> produtos = produtoDAO.listar();
-   
-    comboProdutos.removeAllItems(); //Limpa o comboProdutos
-
-    for (Produto p : produtos) {
-        comboProdutos.addItem(p);
-    }
-  }
-
-    // Método para obter o produto atualmente selecionado no ComboBox.
-private Produto obterProdutoSelecionado() {
-    Object selectedItem = comboProdutos.getSelectedItem();
-
-    if (selectedItem == null || !(selectedItem instanceof Produto)) {
-        JOptionPane.showMessageDialog(this, "Nenhum produto selecionado ou seleção inválida.");
-        return null;
+        ArrayList<Produto> produtos = produtoDAO.listar();
+        comboProdutos.removeAllItems(); // Limpa o comboProdutos
+        for (Produto p : produtos) {
+            comboProdutos.addItem(p);
+        }
     }
 
-    return (Produto) selectedItem;
-}
+    /**
+     * Atualiza a tabela exibindo o histórico das movimentações realizadas,
+     * buscando as movimentações no banco de dados e exibindo seus dados
+     * formatados.
+     */
+    private void carregarTabelaMovimentacao() {
+        DefaultTableModel modelo = (DefaultTableModel) JTableHistoricoMovimentacoes.getModel();
+        modelo.setRowCount(0);
 
+        for (Movimentacao movimentacao : movimentacaoDAO.listar()) {
+            modelo.addRow(new Object[]{
+                    movimentacao.getId(),
+                    movimentacao.getProduto().getNome(),
+                    movimentacao.getQuantidade(),
+                    movimentacao.getTipo(),
+                    DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss").format(movimentacao.getData())
+            });
+        }
+    }
 
 
     @SuppressWarnings("unchecked")
@@ -53,6 +87,8 @@ private Produto obterProdutoSelecionado() {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        jToggleButton1 = new javax.swing.JToggleButton();
+        jPasswordField1 = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
         comboProdutos = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
@@ -61,32 +97,37 @@ private Produto obterProdutoSelecionado() {
         jLabel3 = new javax.swing.JLabel();
         JTextQtd = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        JTxtObs = new javax.swing.JTextField();
         JBConfirmar = new javax.swing.JButton();
         JBCancelar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         JTextData = new javax.swing.JTextField();
-        JProdutos = new javax.swing.JTextField();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        JTableList = new javax.swing.JTable();
-        JBPesquisar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        JTableHistoricoMovimentacoes = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+
+        jToggleButton1.setText("jToggleButton1");
+
+        jPasswordField1.setText("jPasswordField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
         jLabel1.setText("Selecionar Produto:");
 
+        comboProdutos.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
         comboProdutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboProdutosActionPerformed(evt);
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
         jLabel2.setText("Tipo de Movimentação:");
 
         buttonGroup1.add(JEntrada);
+        JEntrada.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
         JEntrada.setText("Entrada");
         JEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,6 +136,7 @@ private Produto obterProdutoSelecionado() {
         });
 
         buttonGroup1.add(JSaida);
+        JSaida.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
         JSaida.setText("Saida");
         JSaida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,24 +144,20 @@ private Produto obterProdutoSelecionado() {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
         jLabel3.setText("Quantidade a movimentar:");
 
+        JTextQtd.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
         JTextQtd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JTextQtdActionPerformed(evt);
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("DejaVu Sans", 0, 24)); // NOI18N
         jLabel4.setText("Movimentar estoque:");
 
-        jLabel5.setText("Obeservação:");
-
-        JTxtObs.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTxtObsActionPerformed(evt);
-            }
-        });
-
+        JBConfirmar.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
         JBConfirmar.setText("Confirmar");
         JBConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,197 +165,125 @@ private Produto obterProdutoSelecionado() {
             }
         });
 
-        JBCancelar.setText("Cancelar");
+        JBCancelar.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
+        JBCancelar.setText("Voltar");
         JBCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JBCancelarActionPerformed(evt);
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
         jLabel6.setText("Data:");
 
-        JProdutos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JProdutosActionPerformed(evt);
-            }
-        });
+        JTextData.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
 
-        JTableList.setModel(new javax.swing.table.DefaultTableModel(
+        jLabel7.setFont(new java.awt.Font("DejaVu Sans", 0, 36)); // NOI18N
+        jLabel7.setText("Gerenciamento de movimentações");
+
+        JTableHistoricoMovimentacoes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Nome", "Preço", "Unidade", "Qtd. Atual", "Categoria", "Status"
+                "ID movimentação", "Nome produto", "Quantidade movimentada", "Tipo movimentacao", "Data"
             }
         ));
-        jScrollPane1.setViewportView(JTableList);
+        jScrollPane2.setViewportView(JTableHistoricoMovimentacoes);
 
-        jScrollPane3.setViewportView(jScrollPane1);
-
-        JBPesquisar.setText("Pesquisar");
-        JBPesquisar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JBPesquisarActionPerformed(evt);
-            }
-        });
-
-        jLabel7.setText("Produtos:");
+        jLabel5.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
+        jLabel5.setText("Historico de movimentações:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(JBCancelar)
+                .addGap(34, 34, 34))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(66, 66, 66)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(JEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(JSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel3)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(JTextQtd, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(comboProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(184, 184, 184)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel5)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(JTextData, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(JTxtObs, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(130, 130, 130)
-                                        .addComponent(JBCancelar)
-                                        .addGap(101, 101, 101)
-                                        .addComponent(JBConfirmar))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(JProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(JBPesquisar)))))
-                        .addGap(0, 28, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 889, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(15, 15, 15)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 661, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(JEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(JSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(comboProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel5)
+                                .addComponent(JBConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(JTextData, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(JTextQtd, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 898, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(8, 8, 8)
+                .addGap(15, 15, 15)
                 .addComponent(jLabel7)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(JBPesquisar, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(JProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4)
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(comboProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(JEntrada)
-                            .addComponent(JSaida))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(JTextQtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(JTextData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(JTxtObs, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(85, 85, 85)))
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JBConfirmar)
-                    .addComponent(JBCancelar))
-                .addGap(43, 43, 43))
+                    .addComponent(comboProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JSaida)
+                    .addComponent(JEntrada))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(JTextQtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(JTextData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(JBConfirmar)
+                .addGap(33, 33, 33)
+                .addComponent(JBCancelar)
+                .addGap(29, 29, 29))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void JEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JEntradaActionPerformed
-                                       
-    Produto produto = obterProdutoSelecionado();
-
-    if (produto == null) {
-        JOptionPane.showMessageDialog(this, "Selecione um produto.");
-        return;
-    }
-
-    String qtdText = JTextQtd.getText().trim();
-    if (qtdText.isEmpty() || !qtdText.matches("\\d+")) {
-        JOptionPane.showMessageDialog(this, "Informe uma quantidade válida.");
-        return;
-    }
-
-    int quantidade = Integer.parseInt(qtdText);
-    int produtoId = produto.getId();
-
-    String data = JTextData.getText().trim();
-    if (data.isEmpty()) {
-        data = java.time.LocalDate.now().toString();
-    }
-
-    MovimentacaoDAO movimentacaoDAO = new MovimentacaoDAO();
-    boolean sucesso = movimentacaoDAO.movimentarEstoque(produtoId, quantidade, "ENTRADA", data);
-
-    if (sucesso) {
-        JOptionPane.showMessageDialog(this, "Entrada registrada com sucesso!");
-    } else {
-        JOptionPane.showMessageDialog(this, "Erro ao registrar entrada.");
-    }
-
+        if (JSaida.isSelected()) {
+            JSaida.setSelected(false);
+        }
     }//GEN-LAST:event_JEntradaActionPerformed
 
     private void JTextQtdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextQtdActionPerformed
@@ -325,142 +291,74 @@ private Produto obterProdutoSelecionado() {
     }//GEN-LAST:event_JTextQtdActionPerformed
 
     private void JSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JSaidaActionPerformed
-        // TODO add your handling code here:                                                                                                         
-    Produto produto = obterProdutoSelecionado();
-
-    if (produto == null) {
-        JOptionPane.showMessageDialog(this, "Selecione um produto.");
-        return;
-    }
-
-    String qtdText = JTextQtd.getText().trim();
-    if (qtdText.isEmpty() || !qtdText.matches("\\d+")) {
-        JOptionPane.showMessageDialog(this, "Informe uma quantidade válida.");
-        return;
-    }
-
-    int quantidade = Integer.parseInt(qtdText);
-    int produtoId = produto.getId();
-
-    String data = JTextData.getText().trim();
-    if (data.isEmpty()) {
-        data = java.time.LocalDate.now().toString();
-    }
-
-    MovimentacaoDAO movimentacaoDAO = new MovimentacaoDAO();
-    boolean sucesso = movimentacaoDAO.movimentarEstoque(produtoId, quantidade, "SAIDA", data);
-
-    if (sucesso) {
-        JOptionPane.showMessageDialog(this, "Entrada registrada com sucesso!");
-    } else {
-        JOptionPane.showMessageDialog(this, "Erro ao registrar entrada.");
-    }
-
-
+        if (JEntrada.isSelected()) {
+            JEntrada.setSelected(false);
+        }
     }//GEN-LAST:event_JSaidaActionPerformed
 
-    private void JTxtObsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTxtObsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JTxtObsActionPerformed
-
     private void JBConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBConfirmarActionPerformed
-                                         
-    // Validação dos campos
-    if (comboProdutos.getSelectedIndex() == -1) {
-        JOptionPane.showMessageDialog(this, "Selecione um produto.");
-        return;
-    }
-    if (!JEntrada.isSelected() && !JSaida.isSelected()) {
-        JOptionPane.showMessageDialog(this, "Selecione o tipo de movimentação.");
-        return;
-    }
-    
-    String qtdText = JTextQtd.getText().trim();
-    if (qtdText.isEmpty() || !qtdText.matches("\\d+")) {
-        JOptionPane.showMessageDialog(this, "Informe uma quantidade válida.");
-        return;
-    }
-    
-    Produto produto = obterProdutoSelecionado();
-    int produtoId = produto.getId();
-    int quantidade = Integer.parseInt(qtdText);
-    String tipo = JEntrada.isSelected() ? "ENTRADA" : "SAIDA";
+        Produto produtoSelecionado = (Produto) comboProdutos.getSelectedItem();
+        TipoMovimentacao tipoMovimentacao = JEntrada.isSelected() ? TipoMovimentacao.ENTRADA : JSaida.isSelected() ? TipoMovimentacao.SAIDA : null;
+        String qtdStr = JTextQtd.getText().trim();
 
-    String data = JTextData.getText().trim();
-    if (data.isEmpty()) {
-        data = java.time.LocalDate.now().toString();
-        JTextData.setText(data);
-    }
+        try {
+            if (produtoSelecionado == null || tipoMovimentacao == null || qtdStr.isEmpty() || JTextData.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Preencha todos os campos.");
+                return;
+            }
+            LocalDateTime data = LocalDateTime.parse(JTextData.getText().trim(), DateTimeFormatter.ofPattern("dd/MM/yy HH:mm:ss"));
+            int quantidade = Integer.parseInt(qtdStr);
 
-    MovimentacaoDAO movimentacaoDAO = new MovimentacaoDAO();
-    boolean sucesso = movimentacaoDAO.movimentarEstoque(produtoId, quantidade, tipo, data);
+            if (quantidade <= 0) {
+                JOptionPane.showMessageDialog(this, "A quantidade deve ser maior que zero.");
+                return;
+            }
 
-    if (sucesso) {
-        JOptionPane.showMessageDialog(this, "Movimentação realizada: \ntipo: " + tipo + "\nquantidade: " + quantidade);
-    } else {
-        JOptionPane.showMessageDialog(this, "Erro ao realizar a movimentação!");
-    }
+            int estoqueAtual = produtoSelecionado.getQuantidadeEstoque();
+            int novaQuantidade;
 
+            if (tipoMovimentacao == TipoMovimentacao.SAIDA) {
+                if (quantidade > estoqueAtual) {
+                    JOptionPane.showMessageDialog(this, "Quantidade de saída excede o estoque atual (" + estoqueAtual + ").");
+                    return;
+                }
+                novaQuantidade = estoqueAtual - quantidade;
+            } else {
+                novaQuantidade = estoqueAtual + quantidade;
+                if (novaQuantidade > produtoSelecionado.getQuantidadeMaxima()) {
+                    JOptionPane.showMessageDialog(this, "Quantidade total após entrada excede o limite máximo (" + produtoSelecionado.getQuantidadeMaxima() + ").");
+                    return;
+                }
+            }
+
+            Movimentacao m = new Movimentacao(0, quantidade, tipoMovimentacao, data, produtoSelecionado);
+
+            boolean retorno = movimentacaoDAO.movimentarEstoque(m);
+
+            if (retorno) {
+                JOptionPane.showMessageDialog(this, "Movimentação registrada com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro ao realizar a movimentação!");
+            }
+
+            carregarTabelaMovimentacao();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Quantidade inválida.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Erro ao registrar movimentação.");
+        } finally {
+            JTextData.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yy HH:mm:ss")));
+            carregarProdutosNoComboBox();
+        }
     }//GEN-LAST:event_JBConfirmarActionPerformed
 
     private void JBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCancelarActionPerformed
-    //fecha a janela
-    this.dispose();
-    
+        //fecha a janela
+        this.dispose();
     }//GEN-LAST:event_JBCancelarActionPerformed
 
-    private void JBPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBPesquisarActionPerformed
-                                            
-    String nomePesquisa = JProdutos.getText().trim();
-
-    if (nomePesquisa.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Digite um nome para pesquisar.");
-        return;
-    }
-
-    ProdutoDAO produtoDAO = new ProdutoDAO();
-    ArrayList<Produto> produtos = produtoDAO.listar();
-
-    if (produtos.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Nenhum produto encontrado.");
-        return;
-    }
-
-    // Preenche a JTableList
-    DefaultTableModel model = (DefaultTableModel) JTableList.getModel();
-    model.setRowCount(0);  // Limpa a tabela antes de adicionar novas linhas
-
-    for (Produto p : produtos) {
-        String status = "OK";
-        if (p.getQuantidadeEstoque() < p.getQuantidadeMinima()) {
-            status = "⚠️ Abaixo do Mínimo";
-        } else if (p.getQuantidadeEstoque() > p.getQuantidadeMaxima()) {
-            status = "⚠️ Acima do Máximo";
-        }
-
-        model.addRow(new Object[]{
-            p.getNome(),
-            p.getPrecoUnitario(),
-            p.getUnidade(),
-            p.getQuantidadeEstoque(),
-            p.getCategoria(), // ou p.getCategoria().getNome() se for um objeto Categoria
-            status
-        });
-    }
-    }//GEN-LAST:event_JBPesquisarActionPerformed
-
-    private void JProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JProdutosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JProdutosActionPerformed
-
     private void comboProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboProdutosActionPerformed
-                                         
-    Produto produtoSelecionado = (Produto) comboProdutos.getSelectedItem();
-    if (produtoSelecionado != null) {
-        JOptionPane.showMessageDialog(this, "Produto selecionado: " + produtoSelecionado.getNome());
-    }
-     
-    
     }//GEN-LAST:event_comboProdutosActionPerformed
 
 
@@ -468,7 +366,7 @@ private Produto obterProdutoSelecionado() {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -499,14 +397,11 @@ private Produto obterProdutoSelecionado() {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBCancelar;
     private javax.swing.JButton JBConfirmar;
-    private javax.swing.JButton JBPesquisar;
     private javax.swing.JRadioButton JEntrada;
-    private javax.swing.JTextField JProdutos;
     private javax.swing.JRadioButton JSaida;
-    private javax.swing.JTable JTableList;
+    private javax.swing.JTable JTableHistoricoMovimentacoes;
     private javax.swing.JTextField JTextData;
     private javax.swing.JTextField JTextQtd;
-    private javax.swing.JTextField JTxtObs;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<Produto> comboProdutos;
     private javax.swing.JLabel jLabel1;
@@ -516,7 +411,9 @@ private Produto obterProdutoSelecionado() {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }

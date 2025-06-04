@@ -117,7 +117,7 @@ public class ProdutoDAO {
 
     // DELETE
     public boolean deletar(int id) {
-        String sql = "DELETE FROM produto WHERE id=?";
+        String sql = "DELETE FROM produto WHERE id_produto=?";
 
         try (Connection conn = ConexaoDAO.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
