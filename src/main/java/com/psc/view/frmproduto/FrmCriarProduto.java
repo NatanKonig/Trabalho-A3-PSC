@@ -92,7 +92,7 @@ public class FrmCriarProduto extends javax.swing.JFrame {
         });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Cadastramento de produtos");
+        setTitle("Cadastramento de Produtos");
 
         jLabel4.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
         jLabel4.setText("Nome:");
