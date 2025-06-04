@@ -1,16 +1,62 @@
 package com.psc.dao;
 
+
 import com.psc.model.Movimentacao;
 import com.psc.model.Produto;
 import com.psc.model.TipoMovimentacao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.sql.PreparedStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MovimentacaoDAO {
+
+    public List<Movimentacao> listar() {
+        List<Movimentacao> movimentacoes = new ArrayList<>();
+        String sql = """
+                    SELECT 
+                        m.id_movimentacao,
+                        m.quantidade_movimentada,
+                        m.tipo_movimentacao,
+                        m.data,
+                        p.id_produto,
+                        p.nome AS nome_produto
+                    FROM movimentacao m
+                    JOIN produto p ON m.id_produto = p.id_produto
+                """;
+
+        try (Connection conn = ConexaoDAO.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                Movimentacao movimentacao = new Movimentacao();
+                movimentacao.setId(rs.getInt("id_movimentacao"));
+                movimentacao.setQuantidade(rs.getInt("quantidade_movimentada"));
+                movimentacao.setTipo(TipoMovimentacao.valueOf(rs.getString("tipo_movimentacao")));
+                movimentacao.setData(rs.getTimestamp("data").toLocalDateTime());
+
+                Produto produto = new Produto();
+                produto.setId(rs.getInt("id_produto"));
+                produto.setNome(rs.getString("nome_produto"));
+                movimentacao.setProduto(produto);
+
+                movimentacoes.add(movimentacao);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return movimentacoes;
+    }
+
 
     // Método que movimenta o estoque e registra a movimentação
     public boolean movimentarEstoque(Produto produto, int quantidade, TipoMovimentacao tipo, String dataStr) {
