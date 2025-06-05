@@ -18,13 +18,13 @@ Este sistema simula um controle de estoque para uma empresa comercial, permitind
 
 ## 👨‍💻 Alunos
 
-| Nome Completo                         | GitHub          | RA          |
-| ------------------------------------- | --------------- | ----------- |
-| Evelyn Yasmin Ferreira Leal           | @EvelynYs2      | 10725115169 |
-| Fabrício Valdemar de Aguiar Filho     | @AguiarFabricio | 10725115451 |
-| Gabriel Machado da Fonseca            | @Machadox18     | 10725115066 |
-| Mario Gabriel Imperator dos Santos    | @mariooimp      | 10725115250 |
-| Natan de Camargo Catapan Ghizzo Konig | @NatanKonig     | 10725110644 |
+| Nome Completo                         | GitHub                               | RA          |
+| ------------------------------------- |--------------------------------------| ----------- |
+| Evelyn Yasmin Ferreira Leal           | @EvelynYs2                           | 10725115169 |
+| Fabrício Valdemar de Aguiar Filho     | @AguiarFabricio & Fabricio de Aguiar | 10725115451 |
+| Gabriel Machado da Fonseca            | @Machadox18                          | 10725115066 |
+| Mario Gabriel Imperator dos Santos    | @mariooimp                           | 10725115250 |
+| Natan de Camargo Catapan Ghizzo Konig | @NatanKonig & Natan Konig            | 10725110644 |
 
 ---
 
