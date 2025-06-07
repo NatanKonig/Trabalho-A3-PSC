@@ -32,7 +32,7 @@ Este sistema simula um controle de estoque para uma empresa comercial, permitind
 
 * *RF001* – O sistema deve permitir o *cadastro, consulta, edição e exclusão de produtos*, contendo as seguintes informações: nome, preço unitário, unidade de medida, quantidade em estoque, quantidade mínima e máxima permitida e categoria associada.
 * *RF002* – O sistema deve possibilitar o *cadastro, consulta, edição e exclusão de categorias*, incluindo as informações de nome, tamanho (Pequeno, Médio, Grande) e tipo de embalagem (Lata, Vidro, Plástico).
-* *RF003* – O sistema deve permitir *registrar movimentações de entrada e saída de produtos*, atualizando automaticamente a quantidade em estoque conforme a operação realizada.
+* *RF003* – O sistema deve permitir *registrar e visualizar movimentações de entrada e saída de produtos*, atualizando automaticamente a quantidade em estoque conforme a operação realizada.
 * *RF004* – O sistema deve permitir *reajustar os preços de todos os produtos* cadastrados com base em um percentual informado pelo usuário, de forma automática.
 * *RF005* – O sistema deve emitir *avisos automáticos* nos seguintes casos:
   
