@@ -42,6 +42,7 @@ public class MovimentacaoDAO {
                         p.nome AS nome_produto
                     FROM movimentacao m
                     JOIN produto p ON m.id_produto = p.id_produto
+                    ORDER BY m.id_movimentacao
                 """;
 
         try (Connection conn = ConexaoDAO.getConnection();
