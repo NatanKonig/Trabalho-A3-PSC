@@ -198,7 +198,7 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
         });
 
         JCBTamanho.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        JCBTamanho.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pequeno", "Médio", "Grande" }));
+        JCBTamanho.setModel(new javax.swing.DefaultComboBoxModel<>(TamanhoProduto.values()));
         JCBTamanho.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JCBTamanhoActionPerformed(evt);
@@ -206,13 +206,13 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
         });
 
         JCBEmbalagem.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        JCBEmbalagem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lata", "Vidro", "Plástico" }));
+        JCBEmbalagem.setModel(new javax.swing.DefaultComboBoxModel<>(EmbalagemProduto.values()));
 
         jCBEmbalagem2.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        jCBEmbalagem2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Lata", "Vidro", "Plástico" }));
+        jCBEmbalagem2.setModel(new javax.swing.DefaultComboBoxModel<>(EmbalagemProduto.values()));
 
         jCBTamanho2.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        jCBTamanho2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Pequeno", "Médio", "Grande", " " }));
+        jCBTamanho2.setModel(new javax.swing.DefaultComboBoxModel<>(TamanhoProduto.values()));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -531,13 +531,13 @@ public class FrmGerenciaCategoria extends javax.swing.JFrame {
     private javax.swing.JButton JBApagar;
     private javax.swing.JButton JBCadastrar;
     private javax.swing.JButton JBLimpar;
-    private javax.swing.JComboBox<String> JCBEmbalagem;
-    private javax.swing.JComboBox<String> JCBTamanho;
+    private javax.swing.JComboBox<EmbalagemProduto> JCBEmbalagem;
+    private javax.swing.JComboBox<TamanhoProduto> JCBTamanho;
     private javax.swing.JTextField JTFNomeCadastro;
     private javax.swing.JButton jBAlterar;
     private javax.swing.JButton jBCancelar;
-    private javax.swing.JComboBox<String> jCBEmbalagem2;
-    private javax.swing.JComboBox<String> jCBTamanho2;
+    private javax.swing.JComboBox<EmbalagemProduto> jCBEmbalagem2;
+    private javax.swing.JComboBox<TamanhoProduto> jCBTamanho2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
